@@ -9,6 +9,73 @@ const user = {
         'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
+    {
+        name: 'Home',
+        href: '#',
+        current: true
+    },
+    {
+        name: 'Department ↓',
+        href: '#',
+        current: false,
+        list: [
+            {
+                name: 'CSE',
+                href: '#'
+            },
+            {
+                name: 'EEE',
+                href: '#'
+            },
+            {
+                name: 'Cvil E. ↓',
+                href: '#',
+                list: [
+                    {
+                        name: 'CSE',
+                        href: '#'
+                    },
+                    {
+                        name: 'EEE ↓',
+                        href: '#',
+                        list: [
+                            {
+                                name: 'CSE',
+                                href: '#'
+                            },
+                            {
+                                name: 'EEE',
+                                href: '#'
+                            },
+                            {
+                                name: 'Cvil E.',
+                                href: '#',
+
+                            },
+                            {
+                                name: 'MATH',
+                                href: '#'
+                            }
+                        ]
+                    },
+                    {
+                        name: 'Cvil E.',
+                        href: '#'
+                    },
+                    {
+                        name: 'MATH',
+                        href: '#'
+                    }
+                ]
+            },
+            {
+                name: 'MATH',
+                href: '#'
+            }
+        ]
+    }
+]
+const tmp_navigation = [
     { name: 'Home', href: '#', current: true },
     { name: 'Department ↓', href: '#', current: false }
 ]
@@ -30,6 +97,7 @@ const LinkTitle = (prop) => {
             href={prop.href}
             className={classNames(
                 prop.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                prop.list ? 'text-blue-400' : 'text-gray-300',
                 'px-3 py-2 rounded-md text-sm font-medium block'
             )}
             aria-current={prop.current ? 'page' : undefined}
@@ -57,21 +125,28 @@ const DrowdownList = (prop) => {
                 leaveTo="transform opacity-0 scale-95"
             >
                 <Menu.Items className="origin-top-right absolute z-50 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    {userNavigation.map((item) => (
-                        <Menu.Item key={item.name}>
-                            {({ active }) => (
-                                <a
-                                    href={item.href}
-                                    className={classNames(
-                                        active ? 'bg-gray-100' : '',
-                                        'block px-4 py-2 text-sm text-gray-700'
+                    {prop?.list?.map((item) => {
+                        if (item?.list?.length) {
+                            return DrowdownList(item)
+                        }
+                        else {
+                            return (
+                                <Menu.Item key={item.name}>
+                                    {({ active }) => (
+                                        <a
+                                            href={item.href}
+                                            className={classNames(
+                                                active ? 'bg-gray-100' : '',
+                                                'block px-4 py-2 text-sm text-gray-700'
+                                            )}
+                                        >
+                                            {item.name}
+                                        </a>
                                     )}
-                                >
-                                    {item.name}
-                                </a>
-                            )}
-                        </Menu.Item>
-                    ))}
+                                </Menu.Item>
+                            )
+                        }
+                    })}
                 </Menu.Items>
             </Transition>
         </Menu>
@@ -105,10 +180,13 @@ export default function Navigation() {
                                         </div>
                                         <div className="hidden md:block">
                                             <div className="ml-10 flex items-baseline space-x-4">
-                                                {/* {navigation.map((item) => ( */}
-                                                {LinkTitle(navigation[0])}
-                                                {DrowdownList(navigation[1])}
-                                                {/* ))} */}
+                                                {navigation.map((item) => {
+                                                    if (item?.list?.length) {
+                                                        return DrowdownList(item)
+                                                    }
+                                                    else
+                                                        return LinkTitle(item)
+                                                })}
                                             </div>
                                         </div>
                                     </div>
