@@ -9,10 +9,12 @@ import MAT from './pages/MAT/MAT';
 
 const theme = createTheme({
   typography: {
-    fontFamily: "'Encode Sans SC', sans-serif",
-    fontWeightLight: 300,
-    fontWeightRegular: 400,
-    fontWeightMedium: 500
+    fontFamily: [
+      "'Encode Sans SC'",
+      "sans-serif",
+      "'Secular One'",
+      "'Poppins'"
+    ].join(',')
   },
 });
 
