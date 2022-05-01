@@ -8,7 +8,7 @@ export const Banner = styled.section`
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    filter: contrast(0.95);
+    filter: contrast(0.9);
     font-family: 'Tourney', cursive;
     &:after{
         content: "${(props) => props.title}";
@@ -29,6 +29,6 @@ export const Banner = styled.section`
         content: "";
         position: absolute;
         inset: 0 0 0 0;
-        background: rgba(16, 22, 50,.6);
+        background: rgba(16, 22, 50,.7);
     }
 `

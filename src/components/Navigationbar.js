@@ -6,71 +6,26 @@ import { NavLink } from 'react-router-dom'
 const navigation = [
     {
         name: 'Home',
-        to: '/',
-        current: false
+        to: '/'
     },
     {
         name: 'Contact',
-        to: '/contact',
-        current: false
+        to: '/contact'
     },
     {
         name: 'Department ↓',
-        to: '#',
-        current: false,
         list: [
             {
                 name: 'CSE',
-                to: 'cse'
+                to: '/cse'
             },
             {
                 name: 'EEE',
-                to: 'eee'
-            },
-            {
-                name: 'Cvil E. ↓',
-                to: '#',
-                list: [
-                    {
-                        name: 'CSE',
-                        to: '#'
-                    },
-                    {
-                        name: 'EEE ↓',
-                        to: '#',
-                        list: [
-                            {
-                                name: 'CSE',
-                                to: '#'
-                            },
-                            {
-                                name: 'EEE',
-                                to: '#'
-                            },
-                            {
-                                name: 'Cvil E.',
-                                to: '#',
-
-                            },
-                            {
-                                name: 'MATH',
-                                to: '#'
-                            }
-                        ]
-                    },
-                    {
-                        name: 'Cvil E.',
-                        to: '#'
-                    },
-                    {
-                        name: 'MATH',
-                        to: '#'
-                    }
-                ]
+                to: '/eee'
             },
             {
                 name: 'MATH',
-                to: 'math'
+                to: '/math'
             }
         ]
     }
