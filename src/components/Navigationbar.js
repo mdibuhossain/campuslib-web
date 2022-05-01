@@ -85,11 +85,12 @@ const LinkTitle = (prop) => {
         <NavLink
             key={prop.name}
             to={prop.to}
-            className={classNames(
-                prop.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                prop.list ? 'text-blue-400' : 'text-gray-300',
-                'px-3 py-2 rounded-md text-sm font-medium block text-center'
-            )}
+            className={
+                ({ isActive }) => isActive ? `bg-gray-900 text-white ${classNames(prop.list ? 'text-blue-400' : 'text-gray-300',
+                    'px-3 py-2 rounded-md text-sm font-medium block text-center')}` :
+                    `text-gray-300 hover:bg-gray-700 hover:text-white ${classNames(prop.list ? 'text-blue-400' : 'text-gray-300',
+                        'px-3 py-2 rounded-md text-sm font-medium block text-center')}`
+            }
             aria-current={prop.current ? 'page' : undefined}
         >
             {prop.name}
@@ -109,7 +110,6 @@ const DrowdownList = (prop) => {
                     )}
                 >
                     {prop.name}
-                    {/* {LinkTitle(prop)} */}
                 </Menu.Button>
             </div>
             <Transition
@@ -132,8 +132,7 @@ const DrowdownList = (prop) => {
                                     {({ active }) => (
                                         <NavLink
                                             to={item.to}
-                                            className={classNames(
-                                                active ? 'bg-gray-100' : '',
+                                            className={classNames(active ? 'bg-gray-100' : '',
                                                 'block px-4 py-2 text-sm text-gray-700 text-center'
                                             )}
                                         >
