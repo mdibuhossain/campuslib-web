@@ -9,7 +9,9 @@ export const Banner = styled.section`
     background-position: center;
     background-attachment: fixed;
     filter: contrast(0.9);
-    font-family: 'Tourney', cursive;
+    -webkit-filter: contrast(0.9);
+    -moz-filter: contrast(0.9);
+    font-family: 'Secular One', sans-serif;
     &:after{
         content: "${(props) => props.title}";
         color: #bfff00;

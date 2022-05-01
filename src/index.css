@@ -2,15 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@100;200;300;400;500;600;700;800;900&family=Fascinate+Inline&family=Maven+Pro:wght@400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;0,800;0,900;1,100;1,200;1,300;1,700;1,900&family=Tourney:wght@100;300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;0,800;0,900;1,100;1,200;1,300;1,700;1,900&family=Secular+One&display=swap');
 
 body {
   margin: 0;
-  /* font-family: 'Fascinate Inline', cursive; */
-  /* font-family: 'Maven Pro', sans-serif; */
   font-family: 'Encode Sans SC', sans-serif;
   /* font-family: 'Poppins', sans-serif; */
-  /* font-family: 'Tourney', cursive; */
+  /* font-family: 'Secular One', sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

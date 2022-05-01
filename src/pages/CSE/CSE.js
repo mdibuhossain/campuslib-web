@@ -4,7 +4,7 @@ import { Banner } from '../Home/Home.style';
 const CSE = () => {
     return (
         <>
-            <Banner title="CSE" src="assets/images/cse.jpg" />
+            <Banner title="Computer Science & Engineering" src="assets/images/cse.jpg" />
         </>
     );
 };

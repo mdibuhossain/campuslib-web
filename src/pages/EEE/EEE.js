@@ -4,7 +4,7 @@ import { Banner } from '../Home/Home.style';
 const EEE = () => {
     return (
         <>
-            <Banner title="EEE" src="assets/images/eee.jpg" />
+            <Banner title="Electrical & Electronics Engineering" src="assets/images/eee.jpg" />
         </>
     );
 };
