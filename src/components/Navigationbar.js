@@ -124,7 +124,7 @@ const DrowdownList = (prop) => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="origin-top-right absolute z-50 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="origin-top-right absolute right-0 z-50 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                     {prop?.list?.map((item) => {
                         if (item?.list?.length) {
                             return DrowdownList(item)
@@ -170,7 +170,7 @@ export default function Navigation() {
                         <>
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                                 <div className="flex items-center justify-between h-16">
-                                    <div className="flex items-center">
+                                    <div className="flex items-center flex-grow">
                                         <div className="flex-shrink-0">
                                             <img
                                                 className="w-14"
@@ -178,7 +178,7 @@ export default function Navigation() {
                                                 alt="campuslib logo"
                                             />
                                         </div>
-                                        <div className="hidden md:block">
+                                        <div className="hidden md:block ml-auto">
                                             <div className="ml-10 flex items-baseline space-x-4">
                                                 {navigation.map((item) => {
                                                     if (item?.list?.length) {
@@ -207,8 +207,13 @@ export default function Navigation() {
 
                             <Disclosure.Panel className="md:hidden">
                                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                                    {LinkTitle(navigation[0])}
-                                    {DrowdownList(navigation[1])}
+                                    {navigation.map((item) => {
+                                        if (item?.list?.length) {
+                                            return DrowdownList(item)
+                                        }
+                                        else
+                                            return LinkTitle(item)
+                                    })}
                                 </div>
                             </Disclosure.Panel>
                         </>
