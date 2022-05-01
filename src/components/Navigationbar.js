@@ -105,7 +105,7 @@ const DrowdownList = (prop) => {
                 <Menu.Button
                     className={classNames(
                         prop.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                        prop.list ? 'text-blue-400' : 'text-gray-300',
+                        prop.list ? 'text-blue-500' : 'text-gray-300',
                         'px-3 py-2 rounded-md text-sm font-medium block text-center  w-full'
                     )}
                 >

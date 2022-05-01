@@ -9,13 +9,24 @@ export const Banner = styled.section`
     background-position: center;
     background-attachment: fixed;
     filter: contrast(0.95);
-    &:before{
+    font-family: 'Tourney', cursive;
+    &:after{
         content: "${(props) => props.title}";
         color: #bfff00;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 4rem;
+        font-size: min(11vw, 5rem);
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        border: 2px solid white;
+        padding: 1rem 2rem;
+    }
+    &:before{
+        content: "";
         position: absolute;
         inset: 0 0 0 0;
         background: rgba(16, 22, 50,.6);
