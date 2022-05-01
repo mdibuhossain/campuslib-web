@@ -8,11 +8,16 @@ export const Banner = styled.section`
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    filter: contrast(0.95) blur(1px);
+    filter: contrast(0.95);
     &:before{
-        content: "";
+        content: "${(props) => props.title}";
+        color: #bfff00;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4rem;
         position: absolute;
         inset: 0 0 0 0;
-        background: rgba(40, 100, 255,.25);
+        background: rgba(16, 22, 50,.6);
     }
 `

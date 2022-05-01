@@ -1,94 +1,79 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, DownloadIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { NavLink } from 'react-router-dom'
 
-const user = {
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-    imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
 const navigation = [
     {
         name: 'Home',
-        href: '/',
-        current: true
+        to: '/',
+        current: false
     },
     {
         name: 'Contact',
-        href: '/contact',
+        to: '/contact',
         current: false
     },
     {
         name: 'Department ↓',
-        // href: '#',
+        to: '#',
         current: false,
         list: [
             {
                 name: 'CSE',
-                href: 'cse'
+                to: 'cse'
             },
             {
                 name: 'EEE',
-                href: 'eee'
+                to: 'eee'
             },
             {
                 name: 'Cvil E. ↓',
-                href: '#',
+                to: '#',
                 list: [
                     {
                         name: 'CSE',
-                        href: '#'
+                        to: '#'
                     },
                     {
                         name: 'EEE ↓',
-                        href: '#',
+                        to: '#',
                         list: [
                             {
                                 name: 'CSE',
-                                href: '#'
+                                to: '#'
                             },
                             {
                                 name: 'EEE',
-                                href: '#'
+                                to: '#'
                             },
                             {
                                 name: 'Cvil E.',
-                                href: '#',
+                                to: '#',
 
                             },
                             {
                                 name: 'MATH',
-                                href: '#'
+                                to: '#'
                             }
                         ]
                     },
                     {
                         name: 'Cvil E.',
-                        href: '#'
+                        to: '#'
                     },
                     {
                         name: 'MATH',
-                        href: '#'
+                        to: '#'
                     }
                 ]
             },
             {
                 name: 'MATH',
-                href: 'math'
+                to: 'math'
             }
         ]
     }
-]
-const tmp_navigation = [
-    { name: 'Home', href: '#', current: true },
-    { name: 'Department ↓', href: '#', current: false }
-]
-const userNavigation = [
-    { name: 'CSE', href: '#' },
-    { name: 'EEE', href: '#' },
-    { name: 'Cvil E.', href: '#' },
-    { name: 'MATH', href: '#' }
 ]
 
 function classNames(...classes) {
@@ -97,9 +82,9 @@ function classNames(...classes) {
 
 const LinkTitle = (prop) => {
     return (
-        <a
+        <NavLink
             key={prop.name}
-            href={prop.href}
+            to={prop.to}
             className={classNames(
                 prop.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                 prop.list ? 'text-blue-400' : 'text-gray-300',
@@ -108,7 +93,7 @@ const LinkTitle = (prop) => {
             aria-current={prop.current ? 'page' : undefined}
         >
             {prop.name}
-        </a>
+        </NavLink>
     )
 }
 
@@ -116,8 +101,15 @@ const DrowdownList = (prop) => {
     return (
         <Menu key={prop.name} as="div" className="relative">
             <div>
-                <Menu.Button className="block w-full">
-                    {LinkTitle(prop)}
+                <Menu.Button
+                    className={classNames(
+                        prop.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        prop.list ? 'text-blue-400' : 'text-gray-300',
+                        'px-3 py-2 rounded-md text-sm font-medium block text-center  w-full'
+                    )}
+                >
+                    {prop.name}
+                    {/* {LinkTitle(prop)} */}
                 </Menu.Button>
             </div>
             <Transition
@@ -138,15 +130,15 @@ const DrowdownList = (prop) => {
                             return (
                                 <Menu.Item key={item.name}>
                                     {({ active }) => (
-                                        <a
-                                            href={item.href}
+                                        <NavLink
+                                            to={item.to}
                                             className={classNames(
                                                 active ? 'bg-gray-100' : '',
                                                 'block px-4 py-2 text-sm text-gray-700 text-center'
                                             )}
                                         >
                                             {item.name}
-                                        </a>
+                                        </NavLink>
                                     )}
                                 </Menu.Item>
                             )
