@@ -11,21 +11,26 @@ const user = {
 const navigation = [
     {
         name: 'Home',
-        href: '#',
+        href: '/',
         current: true
     },
     {
+        name: 'Contact',
+        href: '/contact',
+        current: false
+    },
+    {
         name: 'Department ↓',
-        href: '#',
+        // href: '#',
         current: false,
         list: [
             {
                 name: 'CSE',
-                href: '#'
+                href: 'cse'
             },
             {
                 name: 'EEE',
-                href: '#'
+                href: 'eee'
             },
             {
                 name: 'Cvil E. ↓',
@@ -70,7 +75,7 @@ const navigation = [
             },
             {
                 name: 'MATH',
-                href: '#'
+                href: 'math'
             }
         ]
     }
@@ -98,7 +103,7 @@ const LinkTitle = (prop) => {
             className={classNames(
                 prop.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                 prop.list ? 'text-blue-400' : 'text-gray-300',
-                'px-3 py-2 rounded-md text-sm font-medium block'
+                'px-3 py-2 rounded-md text-sm font-medium block text-center'
             )}
             aria-current={prop.current ? 'page' : undefined}
         >
@@ -137,7 +142,7 @@ const DrowdownList = (prop) => {
                                             href={item.href}
                                             className={classNames(
                                                 active ? 'bg-gray-100' : '',
-                                                'block px-4 py-2 text-sm text-gray-700'
+                                                'block px-4 py-2 text-sm text-gray-700 text-center'
                                             )}
                                         >
                                             {item.name}
@@ -164,7 +169,7 @@ export default function Navigation() {
         <body class="h-full">
         ```
       */}
-            <div className="min-h-full">
+            <div className="absolute w-full z-50">
                 <Disclosure as="nav" className="bg-gray-800">
                     {({ open }) => (
                         <>
@@ -219,21 +224,6 @@ export default function Navigation() {
                         </>
                     )}
                 </Disclosure>
-
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-                    </div>
-                </header>
-                <main>
-                    <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                        {/* Replace with your content */}
-                        <div className="px-4 py-6 sm:px-0">
-                            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96" />
-                        </div>
-                        {/* /End replace */}
-                    </div>
-                </main>
             </div>
         </>
     )
