@@ -173,9 +173,9 @@ export default function Navigation() {
                                     <div className="flex items-center">
                                         <div className="flex-shrink-0">
                                             <img
-                                                className="h-8 w-8"
-                                                src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                                                alt="Workflow"
+                                                className="w-14"
+                                                src="assets/images/logo.png"
+                                                alt="campuslib logo"
                                             />
                                         </div>
                                         <div className="hidden md:block">
