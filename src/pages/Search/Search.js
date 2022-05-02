@@ -58,7 +58,7 @@ const Search = () => {
                     <Box sx={{ p: 2, mt: 2, border: 1, borderRadius: 2, borderColor: 'rgba(0, 0, 0, 0.15)' }}>
                         {
                             searchData.map((item, index) => (
-                                <a href={item?.download_link} key={index}>
+                                <a href={item?.download_link} key={index} target="_blank" rel="noreferrer">
                                     <Paper sx={{ my: 2, p: 2, color: 'rgba(0, 0, 0, 0.7)' }}>
                                         <strong>{item?.book_name}</strong>
                                         <p className='text-blue-500 font-semibold text-sm'>{item?.edition ? item?.edition + 'E' : ''} <em>{item?.author ? ' - ' + item?.author : ''}</em> <span style={{ color: 'rgba(0, 0, 0, 0.7)' }}>({item?.categories[0]})</span></p>
