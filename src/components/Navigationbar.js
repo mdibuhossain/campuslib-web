@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { NavLink } from 'react-router-dom'
+import Button from '@mui/material/Button';
 
 const navigation = [
     {
@@ -88,10 +89,12 @@ const DrowdownList = (prop) => {
                                         <NavLink
                                             to={item.to}
                                             className={classNames(active ? 'bg-gray-100' : '',
-                                                'block px-4 py-2 text-sm text-gray-700 text-center'
+                                                'block text-sm text-gray-700 text-center'
                                             )}
                                         >
-                                            {item.name}
+                                            <Button variant="text" sx={{ display: 'block', width: '100%', color: 'inherit' }}>
+                                                {item.name}
+                                            </Button>
                                         </NavLink>
                                     )}
                                 </Menu.Item>
@@ -107,15 +110,7 @@ const DrowdownList = (prop) => {
 export default function Navigation() {
     return (
         <>
-            {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
-            <div className="absolute w-full z-50">
+            <div className="fixed w-full z-50">
                 <Disclosure as="nav" className="bg-gray-800">
                     {({ open }) => (
                         <>
