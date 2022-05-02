@@ -5,6 +5,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import { NavLink } from 'react-router-dom';
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -42,7 +43,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function Accordionlist(props) {
+export default function Accordionlist({ title, contents }) {
     const [expanded, setExpanded] = React.useState(null);
 
     const handleChange = (panel) => (event, newExpanded) => {
@@ -52,15 +53,20 @@ export default function Accordionlist(props) {
     return (
         <Accordion onChange={handleChange('panel1')}>
             <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                <Typography sx={{ fontWeight: 600 }}>{props.title}</Typography>
+                <Typography sx={{ fontWeight: 600 }}>{title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                    malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                    sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                    sit amet blandit leo lobortis eget.
-                </Typography>
+                <ol>
+                    {
+                        contents?.map((item, index) => (
+                            <li key={index} className="list-decimal ml-6 my-5">
+                                <a href={item?.download_link} target="_blank" rel="noreferrer">
+                                    <strong>{item?.book_name} {item?.edition ? item?.edition + 'E' : ''}</strong> {item?.author ? ' - ' + item?.author : ''}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ol>
             </AccordionDetails>
         </Accordion>
     );
