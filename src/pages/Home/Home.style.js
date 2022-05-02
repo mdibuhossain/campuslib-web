@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 
 
 export const Banner = styled.section`
-    height: 100vh;
+    height: calc(100vh - 64px);
     background-image: url(${(props) => props.src});
     background-repeat: no-repeat;
     background-size: cover;

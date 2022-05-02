@@ -6,6 +6,7 @@ import CSE from './pages/CSE/CSE';
 import EEE from './pages/EEE/EEE';
 import Home from './pages/Home/Home';
 import MAT from './pages/MAT/MAT';
+import Search from './pages/Search/Search';
 
 const theme = createTheme({
   typography: {
@@ -24,11 +25,12 @@ function App() {
       <BrowserRouter>
         <Navigation />
         <Routes>
-          <Route path='' element={<Home />} />
-          <Route path='/' element={<Home />} />
-          <Route path='/cse' element={<CSE />} />
-          <Route path='/eee' element={<EEE />} />
-          <Route path='/math' element={<MAT />} />
+          <Route exact path='' element={<Home />} />
+          <Route exact path='/' element={<Home />} />
+          <Route exact path='/search' element={<Search />} />
+          <Route exact path='/cse' element={<CSE />} />
+          <Route exact path='/eee' element={<EEE />} />
+          <Route exact path='/math' element={<MAT />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

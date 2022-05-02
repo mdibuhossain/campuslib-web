@@ -3,15 +3,12 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { NavLink } from 'react-router-dom'
 import Button from '@mui/material/Button';
+import SearchIcon from '@mui/icons-material/Search';
 
 const navigation = [
     {
         name: 'Home',
         to: '/'
-    },
-    {
-        name: 'Contact',
-        to: '/contact'
     },
     {
         name: 'Department ↓',
@@ -29,6 +26,11 @@ const navigation = [
                 to: '/math'
             }
         ]
+    },
+    {
+        name: '',
+        icon: <SearchIcon />,
+        to: '/search'
     }
 ]
 
@@ -49,7 +51,7 @@ const LinkTitle = (prop) => {
             }
             aria-current={prop.current ? 'page' : undefined}
         >
-            {prop.name}
+            {prop.name} {prop.icon ? prop.icon : ''}
         </NavLink>
     )
 }
@@ -110,7 +112,7 @@ const DrowdownList = (prop) => {
 export default function Navigation() {
     return (
         <>
-            <div className="fixed w-full z-50">
+            <div className="w-full z-50">
                 <Disclosure as="nav" className="bg-gray-800">
                     {({ open }) => (
                         <>
