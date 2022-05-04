@@ -198,5 +198,61 @@
         "download_link":"https://drive.google.com/file/d/1uyncVks2Ii_G6Utwcb-zcflAOzbD-olP/view?usp=sharing",
         "categories":["math", "academic"],
         "subcategories":["academic"]
+    },
+    {
+        "book_name":"1-2 Semester Final - 2017",
+        "author":"",
+        "edition":"",
+        "download_link":"https://drive.google.com/file/d/1vHfnCz4mzMW_lL3FY7RsszAcpxlSIoN5/view?usp=sharing",
+        "categories":["cse", "questions"],
+        "subcategories":["questions"]
+    },
+    {
+        "book_name":"1-2 Semester Final - 2018",
+        "author":"",
+        "edition":"",
+        "download_link":"https://drive.google.com/file/d/1xrRJBVvE_WSzxXLsB5OCiU1brOX0--z0/view?usp=sharing",
+        "categories":["cse", "questions"],
+        "subcategories":["questions"]
+    },
+    {
+        "book_name":"1-2 Semester Final - 2019",
+        "author":"",
+        "edition":"",
+        "download_link":"https://drive.google.com/file/d/11AHQtXQyVRqHbaFwRKyLf27hQ8F9AV4V/view?usp=sharing",
+        "categories":["cse", "questions"],
+        "subcategories":["questions"]
+    },
+    {
+        "book_name":"1-2 midTerm and Semester Final - 2018",
+        "author":"",
+        "edition":"",
+        "download_link":"https://drive.google.com/file/d/145Sn8nPxLha5zHIaGm_dPShgJ24_3kBL/view?usp=sharing",
+        "categories":["cse", "questions"],
+        "subcategories":["questions"]
+    },
+    {
+        "book_name":"1-1 Semester Final - 2018",
+        "author":"",
+        "edition":"",
+        "download_link":"https://drive.google.com/file/d/142Pq9IQX3q0N2qOoIawZbWRDhbs9-oVj/view?usp=sharing",
+        "categories":["cse", "questions"],
+        "subcategories":["questions"]
+    },
+    {
+        "book_name":"1-1 midTerm and Semester Final - 2019",
+        "author":"",
+        "edition":"",
+        "download_link":"https://drive.google.com/file/d/1552R4FpJ7Xb_ykIiiv89jwLoH396DDeI/view?usp=sharing",
+        "categories":["cse", "questions"],
+        "subcategories":["questions"]
+    },
+    {
+        "book_name":"MAT111 1-1 semester final question",
+        "author":"",
+        "edition":"",
+        "download_link":"https://drive.google.com/file/d/1RZeyvRJ-zU5jkQBDObZOLNItdoZY1cQI/view?usp=sharing",
+        "categories":["math", "questions"],
+        "subcategories":["questions"]
     }
 ]

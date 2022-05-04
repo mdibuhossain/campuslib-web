@@ -10,6 +10,7 @@ const CSE = () => {
     const [questions, setQuestions] = useState([]);
 
     useBooks(setAcademic, setOthers, "cse", "academic", "others");
+    useBooks(setQuestions, null, "cse", "questions", null);
 
     return (
         <>
@@ -18,7 +19,7 @@ const CSE = () => {
                 <Accordionlist title="Syllabus ↓" />
                 <Accordionlist title="Academic Books ↓" contents={academic} />
                 <Accordionlist title="Others Books ↓" contents={others} />
-                <Accordionlist title="Previous Year Questions ↓" />
+                <Accordionlist title="Previous Year Questions ↓" contents={questions} />
             </div>
 
         </>
