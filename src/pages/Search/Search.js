@@ -13,12 +13,23 @@ const Search = () => {
     const [totalData, setTotalData] = useState([])
     const [search_text, setSearch_Text] = useState('')
     const [searchData, setSearchData] = useState([])
+    let tmp = []
 
     useEffect(() => {
         fetch('assets/data/books.json')
             .then(res => res.json())
-            .then(data => setTotalData(data))
+            .then(data => {
+                for (const info in data) {
+                    if (data[info].length) {
+                        tmp.push(...data[info])
+                    }
+                }
+                setTotalData(tmp)
+            }
+            )
     }, [])
+
+    console.log(totalData)
 
     useEffect(() => {
         const tmp_res = totalData?.filter(info => (
@@ -61,7 +72,7 @@ const Search = () => {
                                 <a href={item?.download_link} key={index} target="_blank" rel="noreferrer">
                                     <Paper sx={{ my: 2, p: 2, color: 'rgba(0, 0, 0, 0.7)' }}>
                                         <strong>{item?.book_name}</strong>
-                                        <p className='text-blue-500 font-semibold text-sm'>{item?.edition ? item?.edition + 'E' : ''} <em>{item?.author ? ' - ' + item?.author : ''}</em> <span style={{ color: 'rgba(0, 0, 0, 0.7)' }}>({item?.categories[0]})</span></p>
+                                        <p className='text-blue-500 font-semibold text-sm'>{item?.edition ? item?.edition + 'E' : ''} <em>{item?.author ? ' - ' + item?.author : ''}</em> <span style={{ color: 'rgba(0, 0, 0, 0.7)' }}>({item?.categories})</span></p>
                                     </Paper>
                                 </a>
                             ))
