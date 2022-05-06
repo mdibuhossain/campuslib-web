@@ -35,8 +35,9 @@ const Search = () => {
         const tmp_res = totalData?.filter(info => (
             (info?.book_name?.toLowerCase()?.includes(search_text.toLowerCase()) ||
                 info?.author?.toLowerCase()?.includes(search_text.toLowerCase()) ||
-                info?.categories?.includes(search_text.toLowerCase())) && (search_text.length > 0)
-        ))
+                info?.categories?.includes(search_text.toLowerCase()) ||
+                info?.subcategories?.includes(search_text.toLowerCase())) && (search_text.length > 0)
+        ))  
         setSearchData(tmp_res);
     }, [search_text, totalData])
 
