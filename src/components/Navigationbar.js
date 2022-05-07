@@ -28,6 +28,14 @@ const navigation = [
         ]
     },
     {
+        name: 'Request',
+        to: '/request'
+    },
+    {
+        name: 'Login',
+        to: 'login'
+    },
+    {
         name: '',
         icon: <SearchIcon />,
         to: '/search'

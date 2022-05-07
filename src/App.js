@@ -7,6 +7,8 @@ import EEE from './pages/EEE/EEE';
 import Home from './pages/Home/Home';
 import MAT from './pages/MAT/MAT';
 import Search from './pages/Search/Search';
+import Request from './pages/Request/Request';
+import Login from './pages/Login/Login';
 
 const theme = createTheme({
   typography: {
@@ -28,6 +30,8 @@ function App() {
           <Route exact path='' element={<Home />} />
           <Route exact path='/' element={<Home />} />
           <Route exact path='/search' element={<Search />} />
+          <Route exact path='/request' element={<Request />} />
+          <Route exact path='/login' element={<Login />} />
           <Route exact path='/cse' element={<CSE />} />
           <Route exact path='/eee' element={<EEE />} />
           <Route exact path='/math' element={<MAT />} />
