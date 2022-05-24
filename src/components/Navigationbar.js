@@ -31,10 +31,10 @@ const navigation = [
         name: 'Request',
         to: '/request'
     },
-    {
-        name: 'Login',
-        to: 'login'
-    },
+    // {
+    //     name: 'Login',
+    //     to: 'login'
+    // },
     {
         name: '',
         icon: <SearchIcon />,
@@ -207,6 +207,7 @@ export default function Navigation() {
                                                     else
                                                         return LinkTitle(item)
                                                 })}
+                                                {LinkTitle({ name: "Login", to: "/login" })}
                                                 {ProfileButton()}
                                             </div>
                                         </div>

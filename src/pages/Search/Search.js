@@ -16,7 +16,7 @@ const Search = () => {
     let tmp = []
 
     useEffect(() => {
-        fetch('assets/data/books.json')
+        fetch(process.env.REACT_APP_JSON_URL)
             .then(res => res.json())
             .then(data => {
                 for (const info in data) {
