@@ -1,3 +1,4 @@
+import { logEvent } from 'firebase/analytics'
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -5,7 +6,7 @@ import initAuth from "../firebase/initAuth"
 
 
 
-initAuth()
+const { analytics } = initAuth()
 
 const useFirebase = () => {
     const [user, setUser] = useState({});
@@ -16,6 +17,13 @@ const useFirebase = () => {
 
     const location = useLocation();
     const history = useNavigate();
+
+    useEffect(() => {
+        if (location?.pathname === '/')
+            logEvent(analytics, `Homepage_visited`)
+        else
+            logEvent(analytics, `${location?.pathname?.split("/")[1]}_visited`)
+    }, [location?.pathname])
 
     const redirect = () => {
         const { state } = location;

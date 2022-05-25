@@ -11,6 +11,7 @@ import Request from './pages/Request/Request';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import { AuthProvider } from './context/AuthProvider';
+import RequireAuth from './PrivateRoute/RequireAuth';
 
 const theme = createTheme({
   typography: {
@@ -33,7 +34,11 @@ function App() {
             <Route exact path='' element={<Home />} />
             <Route exact path='/' element={<Home />} />
             <Route exact path='/search' element={<Search />} />
-            <Route exact path='/request' element={<Request />} />
+            <Route exact path='/request' element={
+              <RequireAuth>
+                <Request />
+              </RequireAuth>
+            } />
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/signup' element={<Register />} />
             <Route exact path='/cse' element={<CSE />} />

@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -83,9 +82,9 @@ const Login = () => {
                     <Grid container>
                         <Grid item>
                             <NavLink to="/signup">
-                                <Link variant="body2" sx={{ "textDecoration": "none" }}>
+                                <Typography variant="body2" sx={{ "textDecoration": "none", color: "rgb(104, 104, 255)" }}>
                                     Don't have an account? Sign Up
-                                </Link>
+                                </Typography>
                             </NavLink>
                         </Grid>
                     </Grid>

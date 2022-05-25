@@ -9,7 +9,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { NavLink } from 'react-router-dom';
-import { Link } from '@mui/material';
 import { useAuth } from '../../Hooks/useAuth';
 
 const Register = () => {
@@ -83,9 +82,9 @@ const Register = () => {
                     <Grid container>
                         <Grid item>
                             <NavLink to="/login">
-                                <Link variant="body2" sx={{ "textDecoration": "none" }}>
+                                <Typography variant="body2" sx={{ "textDecoration": "none", color: "rgb(104, 104, 255)" }}>
                                     Already have an account?
-                                </Link>
+                                </Typography>
                             </NavLink>
                         </Grid>
                     </Grid>

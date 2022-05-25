@@ -29,7 +29,7 @@ const Search = () => {
             )
     }, [])
 
-    console.log(totalData)
+    // console.log(totalData)
 
     useEffect(() => {
         const tmp_res = totalData?.filter(info => (
@@ -37,11 +37,11 @@ const Search = () => {
                 info?.author?.toLowerCase()?.includes(search_text.toLowerCase()) ||
                 info?.categories?.includes(search_text.toLowerCase()) ||
                 info?.subcategories?.includes(search_text.toLowerCase())) && (search_text.length > 0)
-        ))  
+        ))
         setSearchData(tmp_res);
     }, [search_text, totalData])
 
-    console.log(searchData);
+    // console.log(searchData);
 
     return (
         <Box sx={{ width: 'min(90vw, 50rem)', m: 'auto', mt: 2 }}>
