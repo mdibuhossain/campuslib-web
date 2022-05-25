@@ -195,7 +195,7 @@ export default function Navigation() {
                         <>
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                                 <div className="flex items-center justify-between h-16">
-                                    <div className="flex items-center flex-grow">
+                                    <div className="relative flex items-center flex-grow">
                                         <div className="flex-shrink-0">
                                             <NavLink to="/">
                                                 <img
@@ -205,7 +205,9 @@ export default function Navigation() {
                                                 />
                                             </NavLink>
                                         </div>
-                                        <div className="xs:block md:hidden" style={{ "marginLeft": "calc(50% - 3.5rem" }}>
+                                        <div className="xs:block md:hidden absolute z-50" style={{
+                                            "left": "50%", "transform": "translate(-50%, 0)"
+                                        }}>
                                             {ProfileButton()}
                                         </div>
                                         <div className="hidden md:block ml-auto">
