@@ -53,13 +53,13 @@ const ProfileButton = () => {
         return (
             <Menu as="div" className="ml-3 relative z-50">
                 <div>
-                    <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                        <span className="sr-only">Open user menu</span>
+                    <Menu.Button className="bg-gray-800 flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                         <img
                             className="h-8 w-8 rounded-full"
-                            src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/8e/8e3e84e269e147be00e24085704eb125b4aad826.jpg"
+                            src={user?.photoURL}
                             alt=""
                         />
+                        <span className="mx-2 font-semibold text-gray-100">{user?.displayName.split(' ')[0]}</span>
                     </Menu.Button>
                 </div>
                 <Transition
@@ -246,6 +246,7 @@ export default function Navigation() {
                                         else
                                             return LinkTitle(item)
                                     })}
+                                    {!user?.email && LinkTitle({ name: "Login", to: "/login" })}
                                 </div>
                             </Disclosure.Panel>
                         </>
