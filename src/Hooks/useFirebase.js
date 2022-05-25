@@ -24,7 +24,7 @@ const useFirebase = () => {
 
     const saveUser = (email, displayName, method) => {
         const tmpUser = { email, displayName }
-        fetch('http://localhost:5000/user_post', {
+        fetch(`${process.env.REACT_APP_BACKEND}/user_post`, {
             method: method,
             headers: {
                 'content-type': 'application/json'
@@ -42,7 +42,7 @@ const useFirebase = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 setUser(result.user)
-                fetch('http://localhost:5000/users')
+                fetch(`${process.env.REACT_APP_BACKEND}/users`)
                     .then(res => res.json())
                     .then(data => {
                         const tmpData = data.find(item => item?.email === result?.user?.email)
