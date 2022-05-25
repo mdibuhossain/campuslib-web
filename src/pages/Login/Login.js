@@ -10,8 +10,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../Hooks/useAuth';
 
 const Login = () => {
+    const { signWithGoogle } = useAuth();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -73,6 +76,7 @@ const Login = () => {
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2, bgcolor: 'red' }}
+                        onClick={signWithGoogle}
                     >
                         Sign In with Google
                     </Button>

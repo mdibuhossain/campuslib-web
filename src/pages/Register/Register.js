@@ -10,8 +10,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { NavLink } from 'react-router-dom';
 import { Link } from '@mui/material';
+import { useAuth } from '../../Hooks/useAuth';
 
 const Register = () => {
+    const { signWithGoogle } = useAuth();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -73,6 +76,7 @@ const Register = () => {
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2, bgcolor: 'red' }}
+                        onClick={signWithGoogle}
                     >
                         SIGN UP WITH GOOGLE
                     </Button>

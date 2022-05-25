@@ -4,6 +4,7 @@ import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { NavLink } from 'react-router-dom'
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
+import { useAuth } from '../Hooks/useAuth';
 
 const navigation = [
     {
@@ -47,62 +48,54 @@ function classNames(...classes) {
 }
 
 const ProfileButton = () => {
-    return (
-        <Menu as="div" className="ml-3 relative z-50">
-            <div>
-                <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                    <span className="sr-only">Open user menu</span>
-                    <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/8e/8e3e84e269e147be00e24085704eb125b4aad826.jpg"
-                        alt=""
-                    />
-                </Menu.Button>
-            </div>
-            <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-            >
-                <Menu.Items className="origin-top-right absolute md:right-0 -right-20 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <Menu.Item>
-                        {({ active }) => (
-                            <a
-                                href="#"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >
-                                Your Profile
-                            </a>
-                        )}
-                    </Menu.Item>
-                    <Menu.Item>
-                        {({ active }) => (
-                            <a
-                                href="#"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >
-                                Settings
-                            </a>
-                        )}
-                    </Menu.Item>
-                    <Menu.Item>
-                        {({ active }) => (
-                            <a
-                                href="#"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >
-                                Sign out
-                            </a>
-                        )}
-                    </Menu.Item>
-                </Menu.Items>
-            </Transition>
-        </Menu>
-    )
+    const { user, logOut } = useAuth();
+    if (user?.email)
+        return (
+            <Menu as="div" className="ml-3 relative z-50">
+                <div>
+                    <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <span className="sr-only">Open user menu</span>
+                        <img
+                            className="h-8 w-8 rounded-full"
+                            src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/8e/8e3e84e269e147be00e24085704eb125b4aad826.jpg"
+                            alt=""
+                        />
+                    </Menu.Button>
+                </div>
+                <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                >
+                    <Menu.Items className="origin-top-right absolute md:right-0 -right-20 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        {/* Admin and normal user features */}
+                        <Menu.Item>
+                            {({ active }) => (
+                                <NavLink to="#" className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                >
+                                    Your Profile
+                                </NavLink>
+                            )}
+                        </Menu.Item>
+                        <Menu.Item>
+                            {({ active }) => (
+                                <NavLink to="#"
+                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                    onClick={logOut}
+                                >
+                                    Sign out
+                                </NavLink>
+                            )}
+                        </Menu.Item>
+                    </Menu.Items>
+                </Transition>
+            </Menu>
+        )
+    return null
 }
 
 const LinkTitle = (prop) => {
@@ -119,6 +112,21 @@ const LinkTitle = (prop) => {
             aria-current={prop.current ? 'page' : undefined}
         >
             {prop.name} {prop.icon ? prop.icon : ''}
+        </NavLink>
+    )
+}
+
+const DropdownItem = (prop, active) => {
+    return (
+        <NavLink
+            to={prop.to}
+            className={classNames(active ? 'bg-gray-100' : '',
+                'block text-sm text-gray-700 text-center'
+            )}
+        >
+            <Button variant="text" sx={{ display: 'block', width: '100%', color: 'inherit' }}>
+                {prop.name}
+            </Button>
         </NavLink>
     )
 }
@@ -155,16 +163,17 @@ const DrowdownList = (prop) => {
                             return (
                                 <Menu.Item key={item.name}>
                                     {({ active }) => (
-                                        <NavLink
-                                            to={item.to}
-                                            className={classNames(active ? 'bg-gray-100' : '',
-                                                'block text-sm text-gray-700 text-center'
-                                            )}
-                                        >
-                                            <Button variant="text" sx={{ display: 'block', width: '100%', color: 'inherit' }}>
-                                                {item.name}
-                                            </Button>
-                                        </NavLink>
+                                        DropdownItem(item, active)
+                                        // <NavLink
+                                        //     to={item.to}
+                                        //     className={classNames(active ? 'bg-gray-100' : '',
+                                        //         'block text-sm text-gray-700 text-center'
+                                        //     )}
+                                        // >
+                                        //     <Button variant="text" sx={{ display: 'block', width: '100%', color: 'inherit' }}>
+                                        //         {item.name}
+                                        //     </Button>
+                                        // </NavLink>
                                     )}
                                 </Menu.Item>
                             )
@@ -177,6 +186,7 @@ const DrowdownList = (prop) => {
 }
 
 export default function Navigation() {
+    const { user } = useAuth();
     return (
         <>
             <div className="w-full z-50">
@@ -207,7 +217,7 @@ export default function Navigation() {
                                                     else
                                                         return LinkTitle(item)
                                                 })}
-                                                {LinkTitle({ name: "Login", to: "/login" })}
+                                                {!user?.email && LinkTitle({ name: "Login", to: "/login" })}
                                                 {ProfileButton()}
                                             </div>
                                         </div>
