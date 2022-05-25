@@ -9,6 +9,7 @@ import MAT from './pages/MAT/MAT';
 import Search from './pages/Search/Search';
 import Request from './pages/Request/Request';
 import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 
 const theme = createTheme({
   typography: {
@@ -32,6 +33,7 @@ function App() {
           <Route exact path='/search' element={<Search />} />
           <Route exact path='/request' element={<Request />} />
           <Route exact path='/login' element={<Login />} />
+          <Route exact path='/signup' element={<Register />} />
           <Route exact path='/cse' element={<CSE />} />
           <Route exact path='/eee' element={<EEE />} />
           <Route exact path='/math' element={<MAT />} />

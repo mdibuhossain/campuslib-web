@@ -3,15 +3,15 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { NavLink } from 'react-router-dom';
+import { Link } from '@mui/material';
 
-const Login = () => {
+const Register = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -36,7 +36,7 @@ const Login = () => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    SIGN IN
+                    REGISTRATION
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
@@ -65,7 +65,7 @@ const Login = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Sign In
+                        SIGN UP
                     </Button>
                     <hr />
                     <Button
@@ -74,13 +74,13 @@ const Login = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2, bgcolor: 'red' }}
                     >
-                        Sign In with Google
+                        SIGN UP WITH GOOGLE
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <NavLink to="/signup">
+                            <NavLink to="/login">
                                 <Link variant="body2" sx={{ "textDecoration": "none" }}>
-                                    Don't have an account? Sign Up
+                                    Already have an account?
                                 </Link>
                             </NavLink>
                         </Grid>
@@ -91,4 +91,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Register;
