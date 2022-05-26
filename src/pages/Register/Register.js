@@ -65,7 +65,6 @@ const Register = () => {
                         label="Name"
                         name="name"
                         autoComplete="name"
-                        autoFocus
                     />
                     <TextField
                         margin="normal"
@@ -75,7 +74,6 @@ const Register = () => {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
-                        autoFocus
                         onChange={(e) => onChangeWarning(e)}
                     />
                     <Typography variant="subtitle2">{emailWarning && emailWarning}</Typography>
