@@ -22,6 +22,12 @@ const useFirebase = () => {
     const location = useLocation();
     const history = useNavigate();
 
+    const clearUser = () => {
+        setName('')
+        setEmail('')
+        setPassword('')
+    }
+
     useEffect(() => {
         if (location?.pathname === '/')
             logEvent(analytics, `Homepage_visited`)
@@ -74,6 +80,7 @@ const useFirebase = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then(result => {
                 setUser(result.user)
+                clearUser()
                 user && redirect();
             })
             .catch(error => setError("Incorrect Email and Password!"))
@@ -96,8 +103,6 @@ const useFirebase = () => {
                         setUpdateTrack(updateTrack + 1)
                     }).catch(error => setError(error.message))
                 )
-                // user.displayName = name && name
-                // user.photoURL = name && "/assets/images/avator.png"
                 user && redirect();
             })
             .catch(error => setError('Invalid Email and Password!'))
@@ -107,7 +112,10 @@ const useFirebase = () => {
     const logOut = () => {
         setIsLoading(true);
         signOut(auth)
-            .then(() => setUser({}))
+            .then(() => {
+                setUser({})
+                clearUser()
+            })
         // .finally(() => setIsLoading(false))
         user && redirect();
     }
@@ -121,7 +129,8 @@ const useFirebase = () => {
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, user => {
             if (user) {
-                setUser(user);
+                setUser(user)
+                clearUser()
                 if (location.pathname === '/login' || location.pathname === '/signup')
                     history('/');
             }

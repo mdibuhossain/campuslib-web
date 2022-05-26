@@ -12,15 +12,13 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 
 const Login = () => {
-    const { signWithGoogle } = useAuth();
+    const { signWithGoogle, error, email, password, signInWithEmail, setEmail, setPassword } = useAuth();
 
-    const handleSubmit = (event) => {
+    const handleChange = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        setEmail(data.get('email'))
+        setPassword(data.get('password'))
     };
 
     return (
@@ -40,7 +38,13 @@ const Login = () => {
                 <Typography component="h1" variant="h5">
                     SIGN IN
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                {
+                    error &&
+                    <Typography variant="caption" sx={{ mt: 1, background: 'rgb(234, 56, 56)', color: 'white', px: '1.12rem', py: '0.2rem', borderRadius: 10 }}>
+                        {error}
+                    </Typography>
+                }
+                <Box component="form" onChange={handleChange} noValidate sx={{ mt: 1 }}>
                     <TextField
                         margin="normal"
                         required
@@ -66,6 +70,8 @@ const Login = () => {
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
+                        disabled={(email && password) ? false : true}
+                        onClick={signInWithEmail}
                     >
                         Sign In
                     </Button>
