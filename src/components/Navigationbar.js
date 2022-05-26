@@ -59,7 +59,7 @@ const ProfileButton = () => {
                             src={user?.photoURL}
                             alt=""
                         />
-                        <span className="mx-2 font-semibold text-gray-100">{user?.displayName.split(' ')[0]}</span>
+                        <span className="mx-2 font-semibold text-gray-100">{user?.displayName?.split(' ')[0]}</span>
                     </Menu.Button>
                 </div>
                 <Transition

@@ -1,5 +1,5 @@
 import { logEvent } from 'firebase/analytics'
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import initAuth from "../firebase/initAuth"
@@ -10,7 +10,11 @@ const { analytics } = initAuth()
 
 const useFirebase = () => {
     const [user, setUser] = useState({});
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [admin, setAdmin] = useState(false);
+    const [updateTrack, setUpdateTrack] = useState(0);
     const [error, setError] = useState()
     const [isLoading, setIsLoading] = useState(true);
     const auth = getAuth();
@@ -63,6 +67,43 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false))
     }
 
+    const signInWithEmail = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError('');
+        signInWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                setUser(result.user)
+                user && redirect();
+            })
+            .catch(error => setError("Incorrect Email and Password!"))
+            .finally(() => setIsLoading(false))
+    }
+
+    const signUpWithEmail = (event) => {
+        event.preventDefault();
+        setIsLoading(true);
+        setError('');
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                setUser(result.user)
+                saveUser(email, name, "POST");
+                auth?.currentUser && (
+                    updateProfile(auth?.currentUser, {
+                        displayName: `${name && name}`,
+                        photoURL: `${name && "/assets/images/avator.png"}`
+                    }).then(() => {
+                        setUpdateTrack(updateTrack + 1)
+                    }).catch(error => setError(error.message))
+                )
+                // user.displayName = name && name
+                // user.photoURL = name && "/assets/images/avator.png"
+                user && redirect();
+            })
+            .catch(error => setError('Invalid Email and Password!'))
+            .finally(() => setIsLoading(false))
+    }
+
     const logOut = () => {
         setIsLoading(true);
         signOut(auth)
@@ -89,16 +130,24 @@ const useFirebase = () => {
             setIsLoading(false);
         });
         return () => unsubscribed;
-    }, [auth, history, location])
+    }, [auth, history, location, updateTrack])
 
 
     return {
         user,
-        admin,
+        name,
+        email,
         error,
-        isLoading,
+        admin,
         logOut,
-        signWithGoogle
+        setName,
+        setEmail,
+        password,
+        isLoading,
+        setPassword,
+        signWithGoogle,
+        signInWithEmail,
+        signUpWithEmail
     }
 }
 

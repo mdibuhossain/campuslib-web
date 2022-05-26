@@ -12,15 +12,30 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 
 const Register = () => {
-    const { signWithGoogle } = useAuth();
+    const { signWithGoogle, name, setName, setEmail, setPassword, signUpWithEmail } = useAuth();
+    const [emailWarning, setEmailWarning] = React.useState(" ");
+    const [passwordWarning, setPasswordWarning] = React.useState(" ");
+
+    const onChangeWarning = (event) => {
+        if (event.target.name === 'email') {
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value))
+                setEmailWarning("")
+            else
+                setEmailWarning("invalid email address")
+        }
+        else if (event.target.name === 'password') {
+            if (event.target.value.length < 5)
+                setPasswordWarning("At least 4 character")
+            else
+                setPasswordWarning("")
+        }
+    }
 
     const handleSubmit = (event) => {
-        event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        setName(data.get('name'))
+        setEmail(data.get('email'))
+        setPassword(data.get('password'))
     };
 
     return (
@@ -40,7 +55,17 @@ const Register = () => {
                 <Typography component="h1" variant="h5">
                     REGISTRATION
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <Box component="form" onChange={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="name"
+                        label="Name"
+                        name="name"
+                        autoComplete="name"
+                        autoFocus
+                    />
                     <TextField
                         margin="normal"
                         required
@@ -50,7 +75,9 @@ const Register = () => {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        onChange={(e) => onChangeWarning(e)}
                     />
+                    <Typography variant="subtitle2">{emailWarning && emailWarning}</Typography>
                     <TextField
                         margin="normal"
                         required
@@ -60,12 +87,16 @@ const Register = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={(e) => onChangeWarning(e)}
                     />
+                    <Typography variant="subtitle2">{passwordWarning && passwordWarning}</Typography>
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
+                        disabled={!(!name || passwordWarning || emailWarning) ? false : true}
+                        onClick={signUpWithEmail}
                     >
                         SIGN UP
                     </Button>
