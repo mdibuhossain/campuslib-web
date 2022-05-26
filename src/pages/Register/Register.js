@@ -10,9 +10,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
+import { CircularProgress } from '@mui/material';
 
 const Register = () => {
-    const { signWithGoogle, name, setName, setEmail, setPassword, signUpWithEmail } = useAuth();
+    const { signWithGoogle, name, setName, setEmail, setPassword, signUpWithEmail, isLoading } = useAuth();
     const [emailWarning, setEmailWarning] = React.useState(" ");
     const [passwordWarning, setPasswordWarning] = React.useState(" ");
 
@@ -98,7 +99,7 @@ const Register = () => {
                         disabled={!(!name || passwordWarning || emailWarning) ? false : true}
                         onClick={signUpWithEmail}
                     >
-                        SIGN UP
+                        {isLoading ? <CircularProgress color="inherit" /> : 'SIGN UP'}
                     </Button>
                     <hr />
                     <Button

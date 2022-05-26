@@ -10,9 +10,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
+import { CircularProgress } from '@mui/material';
 
 const Login = () => {
-    const { signWithGoogle, error, email, password, signInWithEmail, setEmail, setPassword } = useAuth();
+    const { signWithGoogle, error, email, password, signInWithEmail, setEmail, setPassword, isLoading } = useAuth();
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -73,7 +74,7 @@ const Login = () => {
                         disabled={(email && password) ? false : true}
                         onClick={signInWithEmail}
                     >
-                        Sign In
+                        {isLoading ? <CircularProgress color="inherit" /> : 'Sign In'}
                     </Button>
                     <hr />
                     <Button
