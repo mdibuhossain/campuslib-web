@@ -76,7 +76,7 @@ const Request = () => {
                             />
 
                             {
-                                (cat === 'books') &&
+                                (cat === 'book') &&
                                 <Grid container spacing={{ md: 2 }} sx={{ transition: '0.5s ease-in-out' }}>
                                     <Grid item md={8} xs={12} sx={{ transition: '0.5s ease-in-out' }}>
                                         <TextField
