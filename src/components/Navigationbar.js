@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAuth } from '../Hooks/useAuth';
+import { CircularProgress } from '@mui/material';
 
 const navigation = [
     {
@@ -178,7 +179,7 @@ const DrowdownList = (prop) => {
 }
 
 export default function Navigation() {
-    const { user } = useAuth();
+    const { user, isLoading } = useAuth();
     return (
         <>
             <div className="w-full z-50">
@@ -200,7 +201,7 @@ export default function Navigation() {
                                         <div className="xs:block md:hidden absolute z-50" style={{
                                             "left": "50%", "transform": "translate(-50%, 0)"
                                         }}>
-                                            {ProfileButton()}
+                                            {isLoading ? <CircularProgress color="info" /> : ProfileButton()}
                                         </div>
                                         <div className="hidden md:block ml-auto">
                                             <div className="ml-10 flex items-center space-x-4">
@@ -212,7 +213,7 @@ export default function Navigation() {
                                                         return LinkTitle(item)
                                                 })}
                                                 {!user?.email && LinkTitle({ name: "Login", to: "/login" })}
-                                                {ProfileButton()}
+                                                {isLoading ? <CircularProgress color="info" /> : ProfileButton()}
                                             </div>
                                         </div>
                                     </div>
