@@ -59,8 +59,8 @@ const Request = () => {
                                     required
                                 >
                                     <MenuItem value="syllabus">Syllabus</MenuItem>
-                                    <MenuItem value="book">Books</MenuItem>
-                                    <MenuItem value="question">Questions</MenuItem>
+                                    <MenuItem value="book">Book</MenuItem>
+                                    <MenuItem value="question">Question</MenuItem>
                                 </Select>
                             </FormControl>
 
