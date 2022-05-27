@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-export const useBooks = (setAcademic, department, cat) => {
+export const useBooks = (setData, department, cat) => {
     useEffect(() => {
         fetch(process.env.REACT_APP_JSON_URL)
             .then(res => res.json())
@@ -10,7 +10,7 @@ export const useBooks = (setAcademic, department, cat) => {
                     if (info?.categories?.includes(department))
                         display_data.push(info)
                 }
-                setAcademic(display_data)
+                setData(display_data)
             })
     }, [])
 }
