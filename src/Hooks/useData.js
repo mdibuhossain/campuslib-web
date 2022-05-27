@@ -6,6 +6,7 @@ const useData = () => {
     const [syllabus, setSyllabus] = useState([]);
     const [allData, setAllData] = useState([]);
     const [dataLoading, setDataLoading] = useState(false);
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         setDataLoading(true)
@@ -44,9 +45,11 @@ const useData = () => {
 
     return {
         books,
+        message,
         allData,
         syllabus,
         questions,
+        setMessage,
         dataLoading,
         setDataLoading
     }

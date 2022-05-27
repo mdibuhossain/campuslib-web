@@ -1,38 +1,44 @@
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Button } from '@mui/material';
 import React from 'react';
+import { useAuth } from '../../Hooks/useAuth';
+import Services from '../../services/Services';
 
-const submit_data_format = {
-    title: '',
-    author: '',
-    edition: '',
-    download_link: '',
-    categories: '',
-    subcategories: ''
-}
 
 const Request = () => {
+    const { user } = useAuth()
+    const submit_data_format = {
+        book_name: '',
+        author: '',
+        edition: '',
+        download_link: '',
+        categories: '',
+        status: false,
+        added_by: user?.email
+    }
     const [cat, setCat] = React.useState('')
     const [title, setTitle] = React.useState('')
     const [author, setAuthor] = React.useState('')
     const [edition, setEdition] = React.useState('')
     const [dept, setDept] = React.useState('')
     const [downloadlink, setDownloadlink] = React.useState('')
+    const [dataStruct, setDataStruct] = React.useState(submit_data_format)
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        const tmpdata = {
-            title: title,
-            author: author,
-            edition: edition,
-            download_link: downloadlink,
-            categories: cat,
-            subcategories: dept
-        }
+        setDataStruct({
+            ...dataStruct,
+            [e.target.name]: e.target.value.trim()
+        })
     }
 
+    const handlePost = (e) => {
+        e.preventDefault()
+        Services("POST_REQUEST", cat, dataStruct)
+        e.target.reset()
+    }
+
+
     return (
-        <Box sx={{ mt: 5 }}>
-            <h1 className="text-center text-4xl mb-9 text-red-700 font-bold">** This is page is under construction **</h1>
+        <Box sx={{ mt: 8 }}>
             <Grid container sx={{ alignItems: 'center' }}>
                 <Grid item md={6}>
                     <Box sx={{ display: { md: "block", xs: "none" } }}>
@@ -41,7 +47,7 @@ const Request = () => {
                 </Grid>
                 <Grid item md={6} sx={{ m: "auto" }}>
                     <Box sx={{ maxWidth: "450px", m: { md: "auto", xs: 2 }, p: 5, bgcolor: "white", borderRadius: 2, boxShadow: '0.65px 1.75px 10px rgb(0, 0, 0, 0.3)' }}>
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handlePost}>
                             <FormControl fullWidth sx={{ mb: 2 }}>
                                 <InputLabel id="demo-simple-select-label">Category</InputLabel>
                                 <Select
@@ -53,8 +59,8 @@ const Request = () => {
                                     required
                                 >
                                     <MenuItem value="syllabus">Syllabus</MenuItem>
-                                    <MenuItem value="books">Books</MenuItem>
-                                    <MenuItem value="questions">Questions</MenuItem>
+                                    <MenuItem value="book">Books</MenuItem>
+                                    <MenuItem value="question">Questions</MenuItem>
                                 </Select>
                             </FormControl>
 
@@ -62,8 +68,9 @@ const Request = () => {
                                 sx={{ mb: 2 }}
                                 id="outlined-basic"
                                 label="Title"
+                                name="book_name"
                                 variant="outlined"
-                                onChange={(e) => setTitle(e.target.value)}
+                                onChange={handleSubmit}
                                 fullWidth
                                 required
                             />
@@ -76,8 +83,9 @@ const Request = () => {
                                             sx={{ mb: 2 }}
                                             id="outlined-basic"
                                             label="Author"
+                                            name="author"
                                             variant="outlined"
-                                            onChange={(e) => setAuthor(e.target.value)}
+                                            onChange={handleSubmit}
                                             fullWidth
                                         />
                                     </Grid>
@@ -86,9 +94,10 @@ const Request = () => {
                                             sx={{ mb: 2 }}
                                             id="outlined-basic"
                                             label="Edition"
+                                            name="edition"
                                             variant="outlined"
                                             type="number"
-                                            onChange={(e) => setEdition(e.target.value)}
+                                            onChange={handleSubmit}
                                             fullWidth
                                         />
                                     </Grid>
@@ -100,9 +109,10 @@ const Request = () => {
                                 <Select
                                     labelId="department-selection"
                                     id="department-selection"
-                                    value={dept}
+                                    value={dataStruct.categories}
                                     label="Department"
-                                    onChange={(e) => setDept(e.target.value)}
+                                    name="categories"
+                                    onChange={handleSubmit}
                                     required
                                 >
                                     <MenuItem value="cse">CSE</MenuItem>
@@ -117,8 +127,9 @@ const Request = () => {
                                 sx={{ mb: 2 }}
                                 id="outlined-basic"
                                 label="Download link"
+                                name="download_link"
                                 variant="outlined"
-                                onChange={(e) => setDownloadlink(e.target.value)}
+                                onChange={handleSubmit}
                                 fullWidth
                                 required
                             />
@@ -126,7 +137,7 @@ const Request = () => {
                                 type='submit'
                                 sx={{ width: "100%" }}
                                 variant="contained"
-                                disabled={(cat && title && dept && downloadlink) ? false : true}
+                                disabled={(cat && dataStruct.book_name && dataStruct.categories && dataStruct.download_link) ? false : true}
                             >
                                 submit
                             </Button>

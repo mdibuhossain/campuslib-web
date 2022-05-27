@@ -4,38 +4,22 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box } from '@mui/system';
 import { Button } from '@mui/material';
+import { useAuth } from '../../Hooks/useAuth';
 
 const Search = () => {
-    const [totalData, setTotalData] = useState([])
+    const { allData } = useAuth();
     const [search_text, setSearch_Text] = useState('')
     const [searchData, setSearchData] = useState([])
-    let tmp = []
 
     useEffect(() => {
-        fetch(process.env.REACT_APP_JSON_URL)
-            .then(res => res.json())
-            .then(data => {
-                for (const info in data) {
-                    if (data[info].length) {
-                        tmp.push(...data[info])
-                    }
-                }
-                setTotalData(tmp)
-            }
-            )
-    }, [])
-
-    // console.log(totalData)
-
-    useEffect(() => {
-        const tmp_res = totalData?.filter(info => (
+        const tmp_res = allData?.filter(info => (
             (info?.book_name?.toLowerCase()?.includes(search_text.toLowerCase()) ||
                 info?.author?.toLowerCase()?.includes(search_text.toLowerCase()) ||
                 info?.categories?.includes(search_text.toLowerCase()) ||
                 info?.subcategories?.includes(search_text.toLowerCase())) && (search_text.length > 0)
         ))
         setSearchData(tmp_res);
-    }, [search_text, totalData])
+    }, [search_text, allData])
 
     // console.log(searchData);
 
