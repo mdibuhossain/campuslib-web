@@ -5,6 +5,8 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import { useAuth } from '../Hooks/useAuth';
+import { CircularProgress } from '@mui/material';
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -43,6 +45,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function Accordionlist({ title, contents }) {
+    const { dataLoading } = useAuth()
     const [expanded, setExpanded] = React.useState(null);
 
     const handleChange = (panel) => (event, newExpanded) => {
@@ -55,17 +58,21 @@ export default function Accordionlist({ title, contents }) {
                 <Typography sx={{ fontWeight: 600 }}>{title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <ol>
-                    {
-                        contents?.map((item, index) => (
-                            <li key={index} className="list-decimal ml-6 my-5">
-                                <a href={item?.download_link} target="_blank" rel="noreferrer">
-                                    <strong>{item?.book_name} {item?.edition ? item?.edition + 'E' : ''}</strong> {item?.author ? ' - ' + item?.author : ''}
-                                </a>
-                            </li>
-                        ))
-                    }
-                </ol>
+                {
+                    dataLoading ? <CircularProgress color="inherit" /> :
+                        <ol>
+                            {
+                                contents?.map((item, index) => (
+                                    item?.status &&
+                                    <li key={index} className="list-decimal ml-6 my-5">
+                                        <a href={item?.download_link} target="_blank" rel="noreferrer">
+                                            <strong>{item?.book_name} {item?.edition ? item?.edition + 'E' : ''}</strong> {item?.author ? ' - ' + item?.author : ''}
+                                        </a>
+                                    </li>
+                                ))
+                            }
+                        </ol>
+                }
             </AccordionDetails>
         </Accordion>
     );

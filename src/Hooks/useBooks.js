@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useAuth } from "./useAuth"
 
 export const useBooks = (setData, department, cat) => {
-    const { books, questions, syllabus, allData } = useAuth();
+    const { books, questions, syllabus, setDataLoading } = useAuth();
+
     useEffect(() => {
         switch (cat) {
             case "books":
@@ -17,12 +18,9 @@ export const useBooks = (setData, department, cat) => {
                 const tmpSyllabus = syllabus.filter(item => item.categories === department)
                 setData(tmpSyllabus)
                 break
-            case "all":
-                setData([...books, ...questions, ...syllabus])
-                break
             default:
                 setData([])
                 break
         }
-    }, [books, questions, syllabus, cat, setData, department])
+    }, [books, questions, syllabus, cat, setData, department, setDataLoading])
 }

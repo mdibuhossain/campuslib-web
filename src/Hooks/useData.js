@@ -5,23 +5,36 @@ const useData = () => {
     const [questions, setQuestions] = useState([]);
     const [syllabus, setSyllabus] = useState([]);
     const [allData, setAllData] = useState([]);
+    const [dataLoading, setDataLoading] = useState(false);
 
     useEffect(() => {
+        setDataLoading(true)
         fetch(`${process.env.REACT_APP_BACKEND}/books`)
             .then(res => res.json())
-            .then(data => setBooks(data))
+            .then(data => {
+                setBooks(data)
+                setDataLoading(false)
+            })
     }, [])
 
     useEffect(() => {
+        setDataLoading(true)
         fetch(`${process.env.REACT_APP_BACKEND}/questions`)
             .then(res => res.json())
-            .then(data => setQuestions(data))
+            .then(data => {
+                setQuestions(data)
+                setDataLoading(false)
+            })
     }, [])
 
     useEffect(() => {
+        setDataLoading(true)
         fetch(`${process.env.REACT_APP_BACKEND}/syllabus`)
             .then(res => res.json())
-            .then(data => setSyllabus(data))
+            .then(data => {
+                setSyllabus(data)
+                setDataLoading(false)
+            })
     }, [])
 
     useEffect(() => {
@@ -33,7 +46,9 @@ const useData = () => {
         books,
         allData,
         syllabus,
-        questions
+        questions,
+        dataLoading,
+        setDataLoading
     }
 }
 
