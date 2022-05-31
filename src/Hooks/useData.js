@@ -16,6 +16,7 @@ const useData = () => {
             .then(data => {
                 setBooks(data)
                 setDataLoading(false)
+                console.log(books)
             })
     }, [update])
 
@@ -42,10 +43,6 @@ const useData = () => {
     useEffect(() => {
         setAllData([...books, ...questions, ...syllabus]);
     }, [books, questions, syllabus])
-
-    console.log(books)
-    console.log(questions)
-    console.log(syllabus)
 
     return {
         books,

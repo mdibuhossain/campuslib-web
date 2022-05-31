@@ -33,14 +33,21 @@ const navigation = [
         name: 'Request',
         to: '/request'
     },
-    // {
-    //     name: 'Login',
-    //     to: 'login'
-    // },
     {
         name: '',
         icon: <SearchIcon />,
         to: '/search'
+    }
+]
+
+const usersRoute = [
+    {
+        name: 'Pending Request',
+        to: '/pending'
+    },
+    {
+        name: 'My Content',
+        to: '/mycontent'
     }
 ]
 
@@ -74,6 +81,19 @@ const ProfileButton = () => {
                 >
                     <Menu.Items className="origin-top-right absolute md:right-0 -right-20 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                         {/* Admin and normal user features */}
+                        {
+                            usersRoute.map(route => (
+                                <Menu.Item key={route?.name}>
+                                    {({ active }) => (
+                                        <NavLink to={route.to}
+                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                        >
+                                            {route.name}
+                                        </NavLink>
+                                    )}
+                                </Menu.Item>
+                            ))
+                        }
                         <Menu.Item>
                             {({ active }) => (
                                 <NavLink to="#"

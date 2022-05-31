@@ -12,6 +12,8 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './PrivateRoute/RequireAuth';
+import PendingRequest from './pages/PendingRequest/PendingRequest';
+import MyContents from './pages/MyContents/MyContents';
 
 const theme = createTheme({
   typography: {
@@ -37,6 +39,16 @@ function App() {
             <Route exact path='/request' element={
               <RequireAuth>
                 <Request />
+              </RequireAuth>
+            } />
+            <Route exact path='/pending' element={
+              <RequireAuth>
+                <PendingRequest />
+              </RequireAuth>
+            } />
+            <Route exact path='/mycontent' element={
+              <RequireAuth>
+                <MyContents />
               </RequireAuth>
             } />
             <Route exact path='/login' element={<Login />} />
