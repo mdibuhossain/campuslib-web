@@ -54,7 +54,10 @@ const ListOfRequest = ({ content, title }) => {
 }
 
 const PendingRequest = () => {
-    const { books, questions, syllabus } = useAuth()
+    const { books, questions, syllabus, setUpdate, update } = useAuth()
+    useEffect(() => {
+        setUpdate(update + 1)
+    }, [])
     return (
         <div>
             <ListOfRequest content={books} title="Books" />
