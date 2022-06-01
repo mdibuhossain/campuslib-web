@@ -1,9 +1,11 @@
-import { FolderIcon } from '@heroicons/react/outline';
+import { BookOpenIcon } from '@heroicons/react/outline';
 import { Avatar, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../Hooks/useAuth';
 import styled from '@emotion/styled';
+import { Box } from '@mui/system';
+import { NavLink } from 'react-router-dom';
 
 const Demo = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
@@ -19,38 +21,48 @@ const Demo = styled('div')(({ theme }) => ({
 }));
 
 const ListOfRequest = ({ content, title }) => {
-    // const [dense, setDense] = useState(false);
-    // const [secondary, setSecondary] = useState(false);
-    if (content?.length > 0)
-        return (
-            <Demo>
-                <Typography variant='h6' sx={{ ml: 2 }}>{title}</Typography>
-                <List >
-                    {content.map(item => (
-                        !item?.status &&
-                        <ListItem
-                            key={item?._id}
-                            secondaryAction={
-                                <IconButton edge="end" aria-label="delete">
-                                    <DeleteIcon />
-                                </IconButton>
-                            }
-                        >
+    const { user } = useAuth();
+    return (
+        <Demo>
+            <Typography variant='h6' sx={{ ml: 2 }}>{title}</Typography>
+            <List >
+                {content.map(item => (
+                    !item?.status && (item?.added_by === user?.email) &&
+                    <ListItem
+                        key={item?._id}
+                        secondaryAction={
+                            <IconButton edge="end" aria-label="delete">
+                                <DeleteIcon />
+                            </IconButton>
+                        }
+                    >
+                        <Box sx={{ display: 'flex' }}>
                             <ListItemAvatar>
-                                <Avatar>
-                                    <FolderIcon />
+                                <Avatar sx={{ p: 1 }}>
+                                    <BookOpenIcon />
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText
-                                primary={item?.book_name}
-                            // secondary={secondary ? 'Secondary text' : null}
-                            />
-                        </ListItem>
-                    ))}
-                </List>
-            </Demo>
-        )
-    return null
+                            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                                {console.log(item?.download_link)}
+                                <a href={!(item?.download_link?.startsWith('https://') || item?.download_link?.startsWith('http://')) ? 'http://' + item?.download_link : item?.download_link} target="_blank" rel="noreferrer">
+                                    <Typography>
+                                        <strong>{item?.book_name} {item?.edition && ' - ' + item?.edition + 'E'}</strong><em>{item?.author && ' by ' + item?.author}</em>
+                                    </Typography>
+                                </a>
+                                <Typography variant='caption'>
+                                    ( {item?.categories} ) | <NavLink to="#" style={{ color: 'rgb(59 130 246)' }}>Edit</NavLink> | ( {item?.added_by} )
+                                </Typography>
+                            </Box>
+                        </Box>
+                        {/* <ListItemText
+                            primary={item?.book_name}
+                        // secondary={secondary ? 'Secondary text' : null}
+                        /> */}
+                    </ListItem>
+                ))}
+            </List>
+        </Demo >
+    )
 }
 
 const PendingRequest = () => {
