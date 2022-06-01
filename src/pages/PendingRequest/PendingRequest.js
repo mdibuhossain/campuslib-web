@@ -6,6 +6,7 @@ import { useAuth } from '../../Hooks/useAuth';
 import styled from '@emotion/styled';
 import { Box } from '@mui/system';
 import { NavLink } from 'react-router-dom';
+import useServices from '../../Hooks/useServices';
 
 const Demo = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
@@ -22,6 +23,14 @@ const Demo = styled('div')(({ theme }) => ({
 
 const ListOfRequest = ({ content, title }) => {
     const { user } = useAuth();
+    const { Services } = useServices();
+    const { setUpdate, update } = useAuth()
+
+    const deleteRequest = (title, item) => {
+        Services("DELETE", title.toLowerCase(), item)
+        setUpdate(update + 1);
+    }
+
     return (
         <Demo>
             <Typography variant='h6' sx={{ ml: 2 }}>{title}</Typography>
@@ -31,7 +40,7 @@ const ListOfRequest = ({ content, title }) => {
                     <ListItem
                         key={item?._id}
                         secondaryAction={
-                            <IconButton edge="end" aria-label="delete">
+                            <IconButton edge="end" aria-label="delete" onClick={() => deleteRequest(title, item)}>
                                 <DeleteIcon />
                             </IconButton>
                         }
@@ -43,7 +52,6 @@ const ListOfRequest = ({ content, title }) => {
                                 </Avatar>
                             </ListItemAvatar>
                             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                                {console.log(item?.download_link)}
                                 <a href={!(item?.download_link?.startsWith('https://') || item?.download_link?.startsWith('http://')) ? 'http://' + item?.download_link : item?.download_link} target="_blank" rel="noreferrer">
                                     <Typography>
                                         <strong>{item?.book_name} {item?.edition && ' - ' + item?.edition + 'E'}</strong><em>{item?.author && ' by ' + item?.author}</em>
@@ -59,8 +67,9 @@ const ListOfRequest = ({ content, title }) => {
                         // secondary={secondary ? 'Secondary text' : null}
                         /> */}
                     </ListItem>
-                ))}
-            </List>
+                ))
+                }
+            </List >
         </Demo >
     )
 }
@@ -72,8 +81,8 @@ const PendingRequest = () => {
     }, [])
     return (
         <div>
-            <ListOfRequest content={books} title="Books" />
-            <ListOfRequest content={questions} title="Questions" />
+            <ListOfRequest content={books} title="Book" />
+            <ListOfRequest content={questions} title="Question" />
             <ListOfRequest content={syllabus} title="Syllabus" />
         </div >
     );

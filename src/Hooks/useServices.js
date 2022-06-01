@@ -10,14 +10,18 @@ const useServices = () => {
                     .then(function (response) {
                         if (response?.data?.insertedId) {
                             alert("Request submit successfully")
-                            setUpdate(update + 1)
                         }
                     })
                     .catch(function (error) {
                         // console.log(error);
                     });
                 break;
-
+            case "DELETE":
+                axios.delete(`${process.env.REACT_APP_BACKEND}/${type}/delete/${data?._id}`)
+                    .then((res) => {
+                        console.log(res)
+                    }).catch(error => console.log(error))
+                break;
             default:
                 break;
         }
