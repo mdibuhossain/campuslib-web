@@ -22,6 +22,12 @@ const useServices = () => {
                         console.log(res)
                     }).catch(error => console.log(error))
                 break;
+            case "STATUS_UPDATE":
+                axios.put(`${process.env.REACT_APP_BACKEND}/${type}/status/${data?._id}`, data)
+                    .then(res => {
+                        console.log(res)
+                    }).catch(error => console.log(error))
+                break;
             default:
                 break;
         }

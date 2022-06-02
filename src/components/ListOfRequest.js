@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useAuth } from '../Hooks/useAuth';
 import useServices from '../Hooks/useServices';
+import axios from 'axios';
 
 const Demo = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
@@ -29,6 +30,11 @@ const ListOfRequest = ({ content, title, status }) => {
             Services("DELETE", title.toLowerCase(), item)
             setUpdate(update + 1);
         }
+    }
+
+    const handleStatus = (_id, status) => {
+        Services("STATUS_UPDATE", title.toLowerCase(), { _id, status })
+        setUpdate(update + 1);
     }
 
     return (
@@ -60,7 +66,7 @@ const ListOfRequest = ({ content, title, status }) => {
                                 <Typography variant='caption'>
                                     ( {item?.categories} ) &nbsp;
 
-                                    {admin && (!item?.status ? <Chip size="small" label="allow" sx={{ color: 'white', bgcolor: '#5959ff' }} /> : <Chip size="small" label="hide" sx={{ color: 'white', bgcolor: '#ff3a3a' }} />)} &nbsp;
+                                    {admin && (!item?.status ? <button onClick={() => handleStatus(item?._id, true)} className="bg-blue-500 hover:bg-blue-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs">allow</button> : <button onClick={() => handleStatus(item?._id, false)} className="bg-red-500 hover:bg-red-400 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs">hide</button>)} &nbsp;
 
                                     {(admin || !item?.status) && <Chip size="small" label="edit" sx={{ color: 'white', bgcolor: '#e28a61' }} />}&nbsp;
 
