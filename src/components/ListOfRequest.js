@@ -1,6 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import { BookOpenIcon } from '@heroicons/react/outline';
-import { Avatar, IconButton, List, ListItem, ListItemAvatar, Typography } from '@mui/material';
+import { Avatar, Chip, IconButton, List, ListItem, ListItemAvatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
@@ -58,7 +58,13 @@ const ListOfRequest = ({ content, title, status }) => {
                                     </Typography>
                                 </a>
                                 <Typography variant='caption'>
-                                    ( {item?.categories} ) {admin && '|'} {(admin && !item?.status) ? <span style={{ color: 'rgb(59 130 246)' }}>Allow</span> : <span style={{ color: 'rgb(242, 31, 31)' }}>Hide</span>} {(admin || !item?.status) && '|'} {(admin || !item?.status) && <NavLink to="#" style={{ color: 'rgb(59 130 246)' }}>Edit</NavLink>} | ( {item?.added_by} ){admin && (item?.added_by === user?.email) && <span style={{ color: 'red' }}> ( Admin )</span>}
+                                    ( {item?.categories} ) &nbsp;
+
+                                    {admin && (!item?.status ? <Chip size="small" label="allow" sx={{ color: 'white', bgcolor: '#5959ff' }} /> : <Chip size="small" label="hide" sx={{ color: 'white', bgcolor: '#ff3a3a' }} />)} &nbsp;
+
+                                    {(admin || !item?.status) && <Chip size="small" label="edit" sx={{ color: 'white', bgcolor: '#e28a61' }} />}&nbsp;
+
+                                    ( {item?.added_by} ){admin && (item?.added_by === user?.email) && <span style={{ color: 'red' }}> ( Admin )</span>}
                                 </Typography>
                             </Box>
                         </Box>
