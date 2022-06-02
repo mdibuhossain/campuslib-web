@@ -1,0 +1,36 @@
+[debug] [2022-06-02T17:42:46.425Z] ----------------------------------------------------------------------
+[debug] [2022-06-02T17:42:46.427Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Ibrahim\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-06-02T17:42:46.427Z] CLI Version:   10.0.1
+[debug] [2022-06-02T17:42:46.427Z] Platform:      win32
+[debug] [2022-06-02T17:42:46.427Z] Node Version:  v14.17.1
+[debug] [2022-06-02T17:42:46.431Z] Time:          Thu Jun 02 2022 23:42:46 GMT+0600 (Bangladesh Standard Time)
+[debug] [2022-06-02T17:42:46.431Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-06-02T17:42:46.480Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-06-02T17:42:46.480Z] > authorizing via signed-in user (mahmud.ponir.9800@gmail.com)
+[debug] [2022-06-02T17:42:46.481Z] [iam] checking project campuslb for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-06-02T17:42:46.482Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/campuslb:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-06-02T17:51:33.981Z] [iam] error while checking permissions, command may fail: FirebaseError: Server Error. read ECONNRESET
+[debug] [2022-06-02T17:51:33.983Z] > refreshing access token with scopes: []
+[debug] [2022-06-02T17:51:33.983Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-06-02T17:51:33.992Z] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2022-06-02T17:51:33.997Z] FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+    at invalidCredentialError (C:\Users\Ibrahim\AppData\Roaming\npm\node_modules\firebase-tools\lib\auth.js:141:12)
+    at refreshTokens (C:\Users\Ibrahim\AppData\Roaming\npm\node_modules\firebase-tools\lib\auth.js:448:15)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at async Client.getAccessToken (C:\Users\Ibrahim\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:146:23)
+    at async Client.addAuthHeader (C:\Users\Ibrahim\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:137:21)
+    at async Client.request (C:\Users\Ibrahim\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:93:34)
+    at async Object.getFirebaseProject (C:\Users\Ibrahim\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:290:21)
+    at async Object.getDefaultHostingSite (C:\Users\Ibrahim\AppData\Roaming\npm\node_modules\firebase-tools\lib\getDefaultHostingSite.js:8:21)
+    at async requireHostingSite (C:\Users\Ibrahim\AppData\Roaming\npm\node_modules\firebase-tools\lib\requireHostingSite.js:9:18)
+    at async Object.fn (C:\Users\Ibrahim\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\deploy.js:73:9)
+    at async C:\Users\Ibrahim\AppData\Roaming\npm\node_modules\firebase-tools\lib\command.js:188:17
+[error] 
+[error] Error: Failed to get Firebase project campuslb. Please make sure the project exists and your account has permission to access it.

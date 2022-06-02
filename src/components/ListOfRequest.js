@@ -64,11 +64,11 @@ const ListOfRequest = ({ content, title, status }) => {
                                     </Typography>
                                 </a>
                                 <Typography variant='caption'>
-                                    ( {item?.categories} ) &nbsp;
+                                    {admin && (!item?.status ? <button onClick={() => handleStatus(item?._id, true)} className="bg-blue-500 hover:bg-blue-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs mr-2">allow</button> : <button onClick={() => handleStatus(item?._id, false)} className="bg-red-500 hover:bg-red-400 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs mr-2">hide</button>)}
 
-                                    {admin && (!item?.status ? <button onClick={() => handleStatus(item?._id, true)} className="bg-blue-500 hover:bg-blue-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs">allow</button> : <button onClick={() => handleStatus(item?._id, false)} className="bg-red-500 hover:bg-red-400 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs">hide</button>)} &nbsp;
+                                    {(admin || !item?.status) && <button className="bg-green-500 hover:bg-green-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs mr-2">edit</button>}
 
-                                    {(admin || !item?.status) && <button className="bg-green-500 hover:bg-green-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs">edit</button>}&nbsp;
+                                    <span className="mr-2 inline-block">( {item?.categories} )</span>
 
                                     ( {item?.added_by} ){admin && (item?.added_by === user?.email) && <span style={{ color: 'red' }}> ( Admin )</span>}
                                 </Typography>
