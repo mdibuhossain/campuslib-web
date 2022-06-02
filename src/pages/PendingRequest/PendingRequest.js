@@ -10,7 +10,7 @@ const PendingRequest = () => {
     }, [])
     return (
         <div>
-            <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', my: 4 }}>Pending Request</Typography>
+            <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', my: 4 }}>PENDING REQUEST</Typography>
             <ListOfRequest content={books} status={false} title="Book" />
             <ListOfRequest content={questions} status={false} title="Question" />
             <ListOfRequest content={syllabus} status={false} title="Syllabus" />

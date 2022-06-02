@@ -10,7 +10,7 @@ const MyContents = () => {
     }, [])
     return (
         <div>
-            <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', my: 4 }}>My Content</Typography>
+            <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', my: 4 }}>MY CONTENT</Typography>
             <ListOfRequest content={books} status={true} title="Book" />
             <ListOfRequest content={questions} status={true} title="Question" />
             <ListOfRequest content={syllabus} status={true} title="Syllabus" />

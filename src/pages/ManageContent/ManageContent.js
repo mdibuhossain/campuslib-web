@@ -10,7 +10,7 @@ const ManageContent = () => {
     }, [])
     return (
         <div>
-            <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', my: 4 }}>Manage Contents</Typography>
+            <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', my: 4 }}>MANAGE CONTENTS</Typography>
             <ListOfRequest content={books} status={false} title="Book" />
             <ListOfRequest content={questions} status={false} title="Question" />
             <ListOfRequest content={syllabus} status={false} title="Syllabus" />
