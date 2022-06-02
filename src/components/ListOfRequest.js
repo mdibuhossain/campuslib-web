@@ -27,13 +27,13 @@ const ListOfRequest = ({ content, title, status }) => {
 
     const deleteRequest = (title, item) => {
         if (window.confirm("Are you sure want to delete?")) {
-            Services("DELETE", title.toLowerCase(), item)
+            Services("DELETE_CONTENT", title.toLowerCase(), item)
             setUpdate(update + 1);
         }
     }
 
     const handleStatus = (_id, status) => {
-        Services("STATUS_UPDATE", title.toLowerCase(), { _id, status })
+        Services("UPDATE_STATUS", title.toLowerCase(), { _id, status })
         setUpdate(update + 1);
     }
 
@@ -46,7 +46,7 @@ const ListOfRequest = ({ content, title, status }) => {
                     <ListItem
                         key={item?._id}
                         secondaryAction={
-                            (admin || !item?.status) && <IconButton edge="end" aria-label="delete" onClick={() => deleteRequest(title, item)}>
+                            (admin || !item?.status) && <IconButton edge="end" aria-label="DELETE_CONTENT" onClick={() => deleteRequest(title, item)}>
                                 <DeleteIcon />
                             </IconButton>
                         }
@@ -66,7 +66,7 @@ const ListOfRequest = ({ content, title, status }) => {
                                 <Typography variant='caption'>
                                     {admin && (!item?.status ? <button onClick={() => handleStatus(item?._id, true)} className="bg-blue-500 hover:bg-blue-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs mr-2">allow</button> : <button onClick={() => handleStatus(item?._id, false)} className="bg-red-500 hover:bg-red-400 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs mr-2">hide</button>)}
 
-                                    {(admin || !item?.status) && <button className="bg-green-500 hover:bg-green-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs mr-2">edit</button>}
+                                    {(admin || !item?.status) && <NavLink to={`/edit/${item?._id}`} className="bg-green-500 hover:bg-green-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs mr-2">edit</NavLink>}
 
                                     <span className="mr-2 inline-block">( {item?.categories} )</span>
 

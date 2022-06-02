@@ -17,6 +17,7 @@ import MyContents from './pages/MyContents/MyContents';
 import ManageContent from './pages/ManageContent/ManageContent';
 import AdminRoute from './PrivateRoute/AdminRoute';
 import MakeAdmin from './pages/MakeAdmin/MakeAdmin';
+import EditContent from './pages/EditContent/EditContent';
 
 const theme = createTheme({
   typography: {
@@ -57,6 +58,11 @@ function App() {
             <Route exact path='/manage' element={
               <AdminRoute>
                 <ManageContent />
+              </AdminRoute>
+            } />
+            <Route exact path='/edit/:id' element={
+              <AdminRoute>
+                <EditContent />
               </AdminRoute>
             } />
             <Route exact path='/makeadmin' element={
