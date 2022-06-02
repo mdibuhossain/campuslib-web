@@ -21,12 +21,14 @@ const Demo = styled('div')(({ theme }) => ({
 }));
 
 const ListOfRequest = ({ content, title, status }) => {
-    const { user, setUpdate, update } = useAuth();
+    const { user, setUpdate, update, admin } = useAuth();
     const { Services } = useServices();
 
     const deleteRequest = (title, item) => {
-        Services("DELETE", title.toLowerCase(), item)
-        setUpdate(update + 1);
+        if (window.confirm("Are you sure want to delete?")) {
+            Services("DELETE", title.toLowerCase(), item)
+            setUpdate(update + 1);
+        }
     }
 
     return (
@@ -34,11 +36,11 @@ const ListOfRequest = ({ content, title, status }) => {
             <Typography variant='h6' sx={{ ml: 2 }}>{title}</Typography>
             <List >
                 {content.map(item => (
-                    (item?.status === status) && (item?.added_by === user?.email) &&
+                    (admin || ((item?.status === status) && (item?.added_by === user?.email))) &&
                     <ListItem
                         key={item?._id}
                         secondaryAction={
-                            !item?.status && <IconButton edge="end" aria-label="delete" onClick={() => deleteRequest(title, item)}>
+                            (admin || !item?.status) && <IconButton edge="end" aria-label="delete" onClick={() => deleteRequest(title, item)}>
                                 <DeleteIcon />
                             </IconButton>
                         }
@@ -56,7 +58,7 @@ const ListOfRequest = ({ content, title, status }) => {
                                     </Typography>
                                 </a>
                                 <Typography variant='caption'>
-                                    ( {item?.categories} ) {!item?.status && '|'} {!item?.status && <NavLink to="#" style={{ color: 'rgb(59 130 246)' }}>Edit</NavLink>} | ( {item?.added_by} )
+                                    ( {item?.categories} ) {admin && '|'} {(admin && !item?.status) ? <span style={{ color: 'rgb(59 130 246)' }}>Allow</span> : <span style={{ color: 'rgb(242, 31, 31)' }}>Hide</span>} {(admin || !item?.status) && '|'} {(admin || !item?.status) && <NavLink to="#" style={{ color: 'rgb(59 130 246)' }}>Edit</NavLink>} | ( {item?.added_by} ){admin && (item?.added_by === user?.email) && <span style={{ color: 'red' }}> ( Admin )</span>}
                                 </Typography>
                             </Box>
                         </Box>

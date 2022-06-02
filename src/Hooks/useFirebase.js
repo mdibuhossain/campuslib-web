@@ -120,11 +120,13 @@ const useFirebase = () => {
         user && redirect();
     }
 
-    // useEffect(() => {
-    //     fetch(`https://travel-pagla.herokuapp.com/users/admin/${user?.email}`)
-    //         .then(res => res.json())
-    //         .then(data => setAdmin(data?.admin))
-    // }, [user])
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_BACKEND}/user/checkadmin/${user?.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data?.admin))
+    }, [user])
+
+    console.log("admin: ", admin)
 
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, user => {

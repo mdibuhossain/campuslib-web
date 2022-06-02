@@ -14,6 +14,8 @@ import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './PrivateRoute/RequireAuth';
 import PendingRequest from './pages/PendingRequest/PendingRequest';
 import MyContents from './pages/MyContents/MyContents';
+import ManageContent from './pages/ManageContent/ManageContent';
+import AdminRoute from './PrivateRoute/AdminRoute';
 
 const theme = createTheme({
   typography: {
@@ -50,6 +52,11 @@ function App() {
               <RequireAuth>
                 <MyContents />
               </RequireAuth>
+            } />
+            <Route exact path='/manage' element={
+              <AdminRoute>
+                <ManageContent />
+              </AdminRoute>
             } />
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/signup' element={<Register />} />
