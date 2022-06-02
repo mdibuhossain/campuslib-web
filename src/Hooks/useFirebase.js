@@ -40,8 +40,8 @@ const useFirebase = () => {
         (state?.from) ? history(state?.from?.pathname) : history('/')
     }
 
-    const saveUser = (email, displayName, method) => {
-        const tmpUser = { email, displayName }
+    const saveUser = (email, password, displayName, photoURL, type, method) => {
+        const tmpUser = { email, password, displayName, photoURL, authType: type }
         fetch(`${process.env.REACT_APP_BACKEND}/user_post`, {
             method: method,
             headers: {
@@ -65,7 +65,7 @@ const useFirebase = () => {
                     .then(data => {
                         const tmpData = data.find(item => item?.email === result?.user?.email)
                         if (!tmpData?.email)
-                            saveUser(result?.user?.email, result?.user?.displayName, "POST")
+                            saveUser(result?.user?.email, "", result?.user?.displayName, result?.user?.photoURL, result?.user?.providerData[0]?.providerId, "POST")
                     })
                 user && redirect()
             })
@@ -94,7 +94,6 @@ const useFirebase = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 setUser(result.user)
-                saveUser(email, name, "POST");
                 auth?.currentUser && (
                     updateProfile(auth?.currentUser, {
                         displayName: `${name && name}`,
@@ -103,6 +102,7 @@ const useFirebase = () => {
                         setUpdateTrack(updateTrack + 1)
                     }).catch(error => setError(error.message))
                 )
+                saveUser(email, password, name, result?.user?.photoURL, result?.user?.providerData[0]?.providerId, "POST");
                 user && redirect();
             })
             .catch(error => setError('Invalid Email and Password!'))
@@ -125,8 +125,6 @@ const useFirebase = () => {
             .then(res => res.json())
             .then(data => setAdmin(data?.admin))
     }, [user])
-
-    console.log("admin: ", admin)
 
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, user => {

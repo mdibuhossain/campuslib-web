@@ -16,7 +16,6 @@ const useData = () => {
             .then(data => {
                 setBooks(data)
                 setDataLoading(false)
-                console.log(books)
             })
     }, [update])
 

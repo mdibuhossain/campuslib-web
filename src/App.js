@@ -16,6 +16,7 @@ import PendingRequest from './pages/PendingRequest/PendingRequest';
 import MyContents from './pages/MyContents/MyContents';
 import ManageContent from './pages/ManageContent/ManageContent';
 import AdminRoute from './PrivateRoute/AdminRoute';
+import MakeAdmin from './pages/MakeAdmin/MakeAdmin';
 
 const theme = createTheme({
   typography: {
@@ -56,6 +57,11 @@ function App() {
             <Route exact path='/manage' element={
               <AdminRoute>
                 <ManageContent />
+              </AdminRoute>
+            } />
+            <Route exact path='/makeadmin' element={
+              <AdminRoute>
+                <MakeAdmin />
               </AdminRoute>
             } />
             <Route exact path='/login' element={<Login />} />
