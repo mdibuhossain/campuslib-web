@@ -10,7 +10,8 @@ const AdminRoute = ({ children }) => {
         return <Typography variant='h4'>Wait babu</Typography>
     if (!((user?.email || user?.displayName) && admin))
         return <Navigate to="/" state={{ from: location }} />
-    return children
+    if ((user?.email || user?.displayName) && admin)
+        return children
 };
 
 export default AdminRoute;

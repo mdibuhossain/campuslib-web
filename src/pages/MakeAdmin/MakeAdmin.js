@@ -5,9 +5,10 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../Hooks/useAuth';
 
 const MakeAdmin = () => {
-    const { user } = useAuth();
-    const [isFetching, setIsFetching] = useState(false);
-    const [users, setUsers] = useState([]);
+    const { user } = useAuth()
+    const [isFetching, setIsFetching] = useState(false)
+    const [users, setUsers] = useState([])
+    const [updateCount, setUpdateCount] = useState(0)
     useEffect(() => {
         setIsFetching(true)
         axios.get(`${process.env.REACT_APP_BACKEND}/users`)
@@ -15,7 +16,16 @@ const MakeAdmin = () => {
                 setUsers(res?.data)
                 setIsFetching(false)
             })
-    }, [])
+    }, [updateCount])
+    const handleMakeAdmin = (id) => {
+        if (window.confirm("Are you sure want to make this person ADMIN?")) {
+            axios.put(`${process.env.REACT_APP_BACKEND}/user/makeadmin/${id}`)
+                .then(res => {
+                    console.log(res)
+                    setUpdateCount(updateCount + 1)
+                })
+        }
+    }
     return (
         <>
             <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', my: 4 }}>MAKE ADMIN</Typography>
@@ -44,7 +54,7 @@ const MakeAdmin = () => {
                                         item.role === 'admin' ?
                                             <button className="bg-gray-300 rounded-md px-2 py-1 font-semibold text-gray-50 text-xs cursor-default">Admin</button>
                                             :
-                                            <button className="bg-green-500 hover:bg-green-600 rounded-md px-2 py-1 font-semibold text-gray-800 hover:text-gray-200 text-xs">Make Admin</button>
+                                            <button onClick={() => handleMakeAdmin(item?._id)} className="bg-green-500 hover:bg-green-600 rounded-md px-2 py-1 font-semibold text-gray-800 hover:text-gray-200 text-xs">Make Admin</button>
                                     }
                                 </div>
                             </div>

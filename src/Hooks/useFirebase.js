@@ -121,6 +121,12 @@ const useFirebase = () => {
     }
 
     useEffect(() => {
+        if (location?.state) {
+            history(location?.state?.from?.pathname)
+        }
+    }, [history, location])
+
+    useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND}/user/checkadmin/${user?.email}`)
             .then(res => res.json())
             .then(data => setAdmin(data?.admin))
