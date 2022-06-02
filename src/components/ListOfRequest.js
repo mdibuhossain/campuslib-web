@@ -68,7 +68,7 @@ const ListOfRequest = ({ content, title, status }) => {
 
                                     {admin && (!item?.status ? <button onClick={() => handleStatus(item?._id, true)} className="bg-blue-500 hover:bg-blue-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs">allow</button> : <button onClick={() => handleStatus(item?._id, false)} className="bg-red-500 hover:bg-red-400 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs">hide</button>)} &nbsp;
 
-                                    {(admin || !item?.status) && <Chip size="small" label="edit" sx={{ color: 'white', bgcolor: '#e28a61' }} />}&nbsp;
+                                    {(admin || !item?.status) && <button className="bg-green-500 hover:bg-green-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs">edit</button>}&nbsp;
 
                                     ( {item?.added_by} ){admin && (item?.added_by === user?.email) && <span style={{ color: 'red' }}> ( Admin )</span>}
                                 </Typography>
