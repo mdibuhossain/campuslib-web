@@ -18,6 +18,7 @@ import ManageContent from './pages/ManageContent/ManageContent';
 import AdminRoute from './PrivateRoute/AdminRoute';
 import MakeAdmin from './pages/MakeAdmin/MakeAdmin';
 import EditContent from './pages/EditContent/EditContent';
+import FooterBar from './components/FooterBar';
 
 const theme = createTheme({
   typography: {
@@ -61,9 +62,9 @@ function App() {
               </AdminRoute>
             } />
             <Route exact path='/edit/:id' element={
-              <AdminRoute>
+              <RequireAuth>
                 <EditContent />
-              </AdminRoute>
+              </RequireAuth>
             } />
             <Route exact path='/makeadmin' element={
               <AdminRoute>
@@ -76,6 +77,7 @@ function App() {
             <Route exact path='/eee' element={<EEE />} />
             <Route exact path='/math' element={<MAT />} />
           </Routes>
+          <FooterBar />
         </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>

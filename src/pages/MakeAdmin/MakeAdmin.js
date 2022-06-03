@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../Hooks/useAuth';
+import PageLayout from '../../Layout/PageLayout';
 
 const MakeAdmin = () => {
     const { user } = useAuth()
@@ -27,7 +28,7 @@ const MakeAdmin = () => {
         }
     }
     return (
-        <>
+        <PageLayout>
             <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', my: 4 }}>MAKE ADMIN</Typography>
             <div className='flex flex-col 2xl:w-6/12 xl:w-7/12 lg:w-8/12 md:w-9/12 w-11/12 mx-auto mt-10 mb-10 bg-white p-5 rounded-lg'>
                 {
@@ -61,7 +62,7 @@ const MakeAdmin = () => {
                         ))
                 }
             </div >
-        </>
+        </PageLayout>
     );
 };
 

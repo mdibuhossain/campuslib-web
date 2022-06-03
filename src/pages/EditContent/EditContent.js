@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 import useServices from '../../Hooks/useServices';
+import PageLayout from '../../Layout/PageLayout';
 
 const EditContent = () => {
     const { id } = useParams()
@@ -36,7 +37,7 @@ const EditContent = () => {
     }
 
     return (
-        <>
+        <PageLayout>
             <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', my: 4 }}>EDIT CONTENT</Typography>
             <Box sx={{ maxWidth: "450px", m: { md: "auto", xs: 2 }, p: 5, bgcolor: "white", borderRadius: 2, boxShadow: '0.65px 1.75px 10px rgb(0, 0, 0, 0.3)' }}>
                 <form onSubmit={handlePost}>
@@ -140,7 +141,7 @@ const EditContent = () => {
                     </Button>
                 </form>
             </Box>
-        </>
+        </PageLayout>
     );
 };
 
