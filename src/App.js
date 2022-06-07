@@ -77,7 +77,6 @@ function App() {
             <Route exact path='/eee' element={<EEE />} />
             <Route exact path='/math' element={<MAT />} />
           </Routes>
-          <FooterBar />
         </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>
