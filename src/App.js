@@ -19,6 +19,7 @@ import AdminRoute from './PrivateRoute/AdminRoute';
 import MakeAdmin from './pages/MakeAdmin/MakeAdmin';
 import EditContent from './pages/EditContent/EditContent';
 import FooterBar from './components/FooterBar';
+import Ads from './components/Ads';
 
 const theme = createTheme({
   typography: {
@@ -36,6 +37,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <AuthProvider>
+          <Ads />
           <Navigation />
           <Routes>
             <Route exact path='' element={<Home />} />
