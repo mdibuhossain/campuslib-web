@@ -22,7 +22,7 @@ const Ads = () => {
         }
     }, [])
     return (
-        <ins class="adsbygoogle"
+        <ins className="adsbygoogle"
             style={{ display: "inline-block", width: "100%", height: "auto" }}
             data-ad-client="ca-pub-4007744418062861"
             data-ad-slot="2835914651"

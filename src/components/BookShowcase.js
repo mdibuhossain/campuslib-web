@@ -14,9 +14,9 @@ const BookShowcase = ({ department }) => {
 
     return (
         <div className='md:w-3/5 w-11/12 m-auto my-10 md:border-2 md:rounded-lg p-10 bg-white'>
-            <Accordionlist title="Syllabus ↓" contents={syllabus} />
-            <Accordionlist title="Academic Books ↓" contents={academic} />
-            <Accordionlist title="Previous Year Questions ↓" contents={questions} />
+            <Accordionlist title="Syllabus" contents={syllabus} />
+            <Accordionlist title="Books" contents={academic} />
+            <Accordionlist title="Questions" contents={questions} />
         </div>
     );
 };

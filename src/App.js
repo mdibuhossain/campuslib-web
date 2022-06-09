@@ -37,17 +37,13 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <AuthProvider>
-          <Ads />
+          {/* <Ads /> */}
           <Navigation />
           <Routes>
             <Route exact path='' element={<Home />} />
             <Route exact path='/' element={<Home />} />
             <Route exact path='/search' element={<Search />} />
-            <Route exact path='/request' element={
-              <RequireAuth>
-                <Request />
-              </RequireAuth>
-            } />
+            <Route exact path='/request' element={<Request />} />
             <Route exact path='/pending' element={
               <RequireAuth>
                 <PendingRequest />

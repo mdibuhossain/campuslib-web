@@ -1,5 +1,6 @@
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Button, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 import useServices from '../../Hooks/useServices';
 import PageLayout from '../../Layout/PageLayout';
@@ -8,6 +9,20 @@ import PageLayout from '../../Layout/PageLayout';
 const Request = () => {
     const { user } = useAuth()
     const { Services } = useServices();
+    const [blink, setBlink] = useState(false);
+
+    useEffect(() => {
+        const handleBlink = () => {
+            if (!user?.email) {
+                setBlink(!blink)
+            }
+        }
+        let interval = setInterval(() => {
+            handleBlink()
+        }, 500)
+        return () => clearInterval(interval)
+    }, [blink, user])
+
     const submit_data_format = {
         book_name: '',
         author: '',
@@ -33,7 +48,6 @@ const Request = () => {
         e.target.reset()
     }
 
-
     return (
         <PageLayout>
             <Box sx={{ mt: 8 }}>
@@ -44,7 +58,12 @@ const Request = () => {
                         </Box>
                     </Grid>
                     <Grid item md={6} sx={{ m: "auto" }}>
-                        <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', mb: 4 }}>POST YOUR CONTENT</Typography>
+                        <Box sx={{ fontWeight: 600, textAlign: 'center', mb: 4 }}>
+                            <Typography variant='h5'>POST YOUR CONTENT</Typography>
+                            {!user?.email &&
+                                <NavLink to='/login' style={{ color: blink ? 'powderblue' : 'limegreen', textDecoration: 'underline' }}>→ require sign-in ←</NavLink>
+                            }
+                        </Box>
                         <Box sx={{ maxWidth: "450px", m: { md: "auto", xs: 2 }, p: 5, bgcolor: "white", borderRadius: 2, boxShadow: '0.65px 1.75px 10px rgb(0, 0, 0, 0.3)' }}>
                             <form onSubmit={handlePost}>
                                 <FormControl fullWidth sx={{ mb: 2 }}>
@@ -56,6 +75,7 @@ const Request = () => {
                                         label="Category"
                                         onChange={(e) => setCat(e.target.value)}
                                         required
+                                        disabled={!user?.email}
                                     >
                                         <MenuItem value="syllabus">Syllabus</MenuItem>
                                         <MenuItem value="book">Book</MenuItem>
@@ -72,8 +92,8 @@ const Request = () => {
                                     onChange={handleSubmit}
                                     fullWidth
                                     required
+                                    disabled={!user?.email}
                                 />
-
                                 {
                                     (cat === 'book') &&
                                     <Grid container spacing={{ md: 2 }} sx={{ transition: '0.5s ease-in-out' }}>
@@ -86,6 +106,7 @@ const Request = () => {
                                                 variant="outlined"
                                                 onChange={handleSubmit}
                                                 fullWidth
+                                                disabled={!user?.email}
                                             />
                                         </Grid>
                                         <Grid item md={4} xs={12} sx={{ transition: '0.5s ease-in-out' }}>
@@ -98,6 +119,7 @@ const Request = () => {
                                                 type="number"
                                                 onChange={handleSubmit}
                                                 fullWidth
+                                                disabled={!user?.email}
                                             />
                                         </Grid>
                                     </Grid>
@@ -113,6 +135,7 @@ const Request = () => {
                                         name="categories"
                                         onChange={handleSubmit}
                                         required
+                                        disabled={!user?.email}
                                     >
                                         <MenuItem value="cse">CSE</MenuItem>
                                         <MenuItem value="eee">EEE</MenuItem>
@@ -131,12 +154,13 @@ const Request = () => {
                                     onChange={handleSubmit}
                                     fullWidth
                                     required
+                                    disabled={!user?.email}
                                 />
                                 <Button
                                     type='submit'
                                     sx={{ width: "100%" }}
                                     variant="contained"
-                                    disabled={(cat && dataStruct.book_name && dataStruct.categories && dataStruct.download_link) ? false : true}
+                                    disabled={!(cat && dataStruct.book_name && dataStruct.categories && dataStruct.download_link)}
                                 >
                                     submit
                                 </Button>
