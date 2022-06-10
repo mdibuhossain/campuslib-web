@@ -42,6 +42,10 @@ const navigation = [
 
 const usersRoute = [
     {
+        name: 'Change DP',
+        to: '/changedp'
+    },
+    {
         name: 'Pending Request',
         to: '/pending'
     },
@@ -52,6 +56,10 @@ const usersRoute = [
 ]
 
 const adminRoute = [
+    {
+        name: 'Change DP',
+        to: '/changedp'
+    },
     {
         name: 'Manage Content',
         to: '/manage'

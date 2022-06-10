@@ -20,6 +20,7 @@ import MakeAdmin from './pages/MakeAdmin/MakeAdmin';
 import EditContent from './pages/EditContent/EditContent';
 import FooterBar from './components/FooterBar';
 import Ads from './components/Ads';
+import ChangeDP from './pages/ChangeDP/ChangeDP';
 
 const theme = createTheme({
   typography: {
@@ -44,6 +45,11 @@ function App() {
             <Route exact path='/' element={<Home />} />
             <Route exact path='/search' element={<Search />} />
             <Route exact path='/request' element={<Request />} />
+            <Route exact path='/changedp' element={
+              <RequireAuth>
+                <ChangeDP />
+              </RequireAuth>
+            } />
             <Route exact path='/pending' element={
               <RequireAuth>
                 <PendingRequest />
