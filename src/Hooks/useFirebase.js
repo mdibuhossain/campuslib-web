@@ -7,7 +7,7 @@ import initAuth from "../firebase/initAuth"
 
 
 
-const { analytics } = initAuth()
+const { analytics, DB } = initAuth()
 
 const useFirebase = () => {
     const [user, setUser] = useState({});
@@ -157,6 +157,7 @@ const useFirebase = () => {
 
 
     return {
+        DB,
         user,
         name,
         email,
