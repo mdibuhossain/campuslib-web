@@ -1,8 +1,10 @@
 import { Avatar, Chip, CircularProgress, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import axios from 'axios';
+import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../Hooks/useAuth';
+import useRealtimedb from '../../Hooks/useRealtimedb';
 import PageLayout from '../../Layout/PageLayout';
 
 const MakeAdmin = () => {
@@ -10,21 +12,24 @@ const MakeAdmin = () => {
     const [isFetching, setIsFetching] = useState(false)
     const [users, setUsers] = useState([])
     const [updateCount, setUpdateCount] = useState(0)
+    const { usersCollectionRef, DB } = useRealtimedb();
     useEffect(() => {
-        setIsFetching(true)
-        axios.get(`${process.env.REACT_APP_BACKEND}/users`)
-            .then(res => {
-                setUsers(res?.data)
-                setIsFetching(false)
-            })
-    }, [updateCount])
+        // setIsFetching(true)
+        // axios.get(`${process.env.REACT_APP_BACKEND}/users`)
+        //     .then(res => {
+        //         setUsers(res?.data)
+        //         setIsFetching(false)
+        //     })
+        const unsubscribe = onSnapshot(usersCollectionRef, snapshot => {
+            setUsers(snapshot.docs.map(doc => ({ ...doc.data(), _id: doc.id })))
+        })
+        return () => unsubscribe()
+    }, [usersCollectionRef])
     const handleMakeAdmin = (id) => {
         if (window.confirm("Are you sure want to make this person ADMIN?")) {
-            axios.put(`${process.env.REACT_APP_BACKEND}/user/makeadmin/${id}`)
-                .then(res => {
-                    console.log(res)
-                    setUpdateCount(updateCount + 1)
-                })
+            updateDoc(doc(DB, "user", id), { role: 'admin' })
+            // axios.put(`${process.env.REACT_APP_BACKEND}/user/makeadmin/${id}`)
+            //     .then(res => { }).catch(() => { })
         }
     }
     return (
