@@ -65,7 +65,7 @@ export default function Accordionlist({ title, contents }) {
                                 contents?.map((item, index) => (
                                     item?.status &&
                                     <li key={index} className="list-decimal ml-6 my-5">
-                                        <a href={item?.download_link} target="_blank" rel="noreferrer">
+                                        <a href={!(item?.download_link?.startsWith('https://') || item?.download_link?.startsWith('http://')) ? 'http://' + item?.download_link : item?.download_link} target="_blank" rel="noreferrer">
                                             <strong>{item?.book_name} {item?.edition ? item?.edition + 'E' : ''}</strong> {item?.author ? ' - ' + item?.author : ''}
                                         </a>
                                     </li>

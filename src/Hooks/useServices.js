@@ -42,10 +42,12 @@ const useServices = () => {
                     .then(res => console.log(res)).catch(error => console.log(error))
                 break;
             case "UPDATE_STATUS":
-                axios.put(`${URL}/${type}/status/${data?._id}`, data)
-                    .then(res => {
-                        console.log(res)
-                    }).catch(error => console.log(error))
+                // axios.put(`${URL}/${type}/status/${data?._id}`, data)
+                //     .then(res => {
+                //         console.log(res)
+                //     }).catch(error => console.log(error))
+                updateDoc(doc(DB, type, data?._id), { status: data.status })
+                    .then(res => console.log(res)).catch(error => console.log(error))
                 break;
             default:
                 break;
