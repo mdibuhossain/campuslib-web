@@ -29,10 +29,11 @@ const Request = () => {
         edition: '',
         download_link: '',
         categories: '',
+        sub_categories: '',
         status: false,
         added_by: user?.email
     }
-    const [cat, setCat] = React.useState('')
+    // const [cat, setCat] = React.useState('')
     const [dataStruct, setDataStruct] = React.useState(submit_data_format)
 
     const handleSubmit = (e) => {
@@ -44,7 +45,7 @@ const Request = () => {
 
     const handlePost = (e) => {
         e.preventDefault()
-        Services("POST_REQUEST", cat, dataStruct)
+        Services("POST_REQUEST", dataStruct.sub_categories, dataStruct)
         e.target.reset()
     }
 
@@ -71,9 +72,10 @@ const Request = () => {
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={cat}
+                                        name="sub_categories"
+                                        value={dataStruct.sub_categories}
                                         label="Category"
-                                        onChange={(e) => setCat(e.target.value)}
+                                        onChange={handleSubmit}
                                         required
                                         disabled={!user?.email}
                                     >
@@ -95,7 +97,7 @@ const Request = () => {
                                     disabled={!user?.email}
                                 />
                                 {
-                                    (cat === 'book') &&
+                                    (dataStruct.sub_categories === 'book') &&
                                     <Grid container spacing={{ md: 2 }} sx={{ transition: '0.5s ease-in-out' }}>
                                         <Grid item md={8} xs={12} sx={{ transition: '0.5s ease-in-out' }}>
                                             <TextField
@@ -160,7 +162,7 @@ const Request = () => {
                                     type='submit'
                                     sx={{ width: "100%" }}
                                     variant="contained"
-                                    disabled={!(cat && dataStruct.book_name && dataStruct.categories && dataStruct.download_link)}
+                                    disabled={!(dataStruct.sub_categories && dataStruct.book_name && dataStruct.categories && dataStruct.download_link)}
                                 >
                                     submit
                                 </Button>
