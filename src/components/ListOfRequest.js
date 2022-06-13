@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useAuth } from '../Hooks/useAuth';
 import useServices from '../Hooks/useServices';
-import axios from 'axios';
 
 const Demo = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
@@ -26,7 +25,7 @@ const ListOfRequest = ({ content, title, status }) => {
     const { Services } = useServices();
 
     const deleteRequest = (title, item) => {
-        if (window.confirm(`Are you sure want to delete "${item.book_name}"?`)) {
+        if (window.confirm(`Are you sure want to delete "${item?.book_name}"?`)) {
             Services("DELETE_CONTENT", title.toLowerCase(), item)
             setUpdate(update + 1);
         }

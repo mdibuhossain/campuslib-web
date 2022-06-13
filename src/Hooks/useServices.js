@@ -1,10 +1,8 @@
 import axios from "axios";
-import useData from "./useData";
 import useRealtimedb from "./useRealtimedb";
 import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 
 const useServices = () => {
-    const { setUpdate, update } = useData()
     const { DB } = useRealtimedb();
     const URL = process.env.REACT_APP_BACKEND
     const Services = async (action, type, data) => {
