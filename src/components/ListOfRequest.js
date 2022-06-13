@@ -26,7 +26,7 @@ const ListOfRequest = ({ content, title, status }) => {
     const { Services } = useServices();
 
     const deleteRequest = (title, item) => {
-        if (window.confirm("Are you sure want to delete?")) {
+        if (window.confirm(`Are you sure want to delete "${item.book_name}"?`)) {
             Services("DELETE_CONTENT", title.toLowerCase(), item)
             setUpdate(update + 1);
         }

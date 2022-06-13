@@ -12,14 +12,13 @@ const useData = () => {
     const [update, setUpdate] = useState(0);
 
     const {
-        usersCollectionRef,
         syllabusCollectionRef,
         questionsCollectionRef,
         booksCollectionRef
     } = useRealtimedb();
 
     useEffect(() => {
-        // setDataLoading(true)
+        setDataLoading(true)
         // fetch(`${process.env.REACT_APP_BACKEND}/books`)
         //     .then(res => res.json())
         //     .then(data => {
@@ -28,12 +27,13 @@ const useData = () => {
         //     })
         const unsubscribe = onSnapshot(booksCollectionRef, snapshot => {
             setBooks(snapshot.docs.map(doc => ({ ...doc.data(), _id: doc.id })))
+            setDataLoading(false)
         })
         return () => unsubscribe()
-    }, [update])
+    }, [])
 
     useEffect(() => {
-        // setDataLoading(true)
+        setDataLoading(true)
         // fetch(`${process.env.REACT_APP_BACKEND}/questions`)
         //     .then(res => res.json())
         //     .then(data => {
@@ -42,12 +42,13 @@ const useData = () => {
         //     })
         const unsubscribe = onSnapshot(questionsCollectionRef, snapshot => {
             setQuestions(snapshot.docs.map(doc => ({ ...doc.data(), _id: doc.id })))
+            setDataLoading(false)
         })
         return () => unsubscribe()
-    }, [update])
+    }, [])
 
     useEffect(() => {
-        // setDataLoading(true)
+        setDataLoading(true)
         // fetch(`${process.env.REACT_APP_BACKEND}/syllabus`)
         //     .then(res => res.json())
         //     .then(data => {
@@ -56,9 +57,10 @@ const useData = () => {
         //     })
         const unsubscribe = onSnapshot(syllabusCollectionRef, snapshot => {
             setSyllabus(snapshot.docs.map(doc => ({ ...doc.data(), _id: doc.id })))
+            setDataLoading(false)
         })
         return () => unsubscribe()
-    }, [update])
+    }, [])
 
     useEffect(() => {
         setAllData([...books, ...questions, ...syllabus]);
