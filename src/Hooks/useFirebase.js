@@ -1,9 +1,11 @@
 import { logEvent } from 'firebase/analytics'
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
+import { onSnapshot, query, where } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadString } from 'firebase/storage';
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import initAuth from "../firebase/initAuth"
+import useServices from './useServices';
 
 
 
@@ -18,6 +20,7 @@ const useFirebase = () => {
     const [updateTrack, setUpdateTrack] = useState(0);
     const [error, setError] = useState()
     const [isLoading, setIsLoading] = useState(true);
+    const { Services } = useServices();
     const auth = getAuth();
     const storage = getStorage();
 
@@ -135,9 +138,10 @@ const useFirebase = () => {
     }
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BACKEND}/user/checkadmin/${user?.email}`)
-            .then(res => res.json())
-            .then(data => setAdmin(data?.admin))
+        // fetch(`${process.env.REACT_APP_BACKEND}/user/checkadmin/${user?.email}`)
+        //     .then(res => res.json())
+        //     .then(data => setAdmin(data?.admin))
+        Services("CHECK_ADMIN", "user", { email: user?.email, setAdmin })
     }, [user])
 
     useEffect(() => {
@@ -165,6 +169,7 @@ const useFirebase = () => {
         admin,
         logOut,
         setName,
+        setAdmin,
         setEmail,
         password,
         isLoading,

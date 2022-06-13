@@ -2,13 +2,13 @@ import axios from "axios";
 import useData from "./useData";
 import useRealtimedb from "./useRealtimedb";
 import { ref, set } from "firebase/database";
-import { addDoc, collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 
 const useServices = () => {
     const { setUpdate, update } = useData()
     const { DB } = useRealtimedb();
     const URL = process.env.REACT_APP_BACKEND
-    const Services = (action, type, data) => {
+    const Services = async (action, type, data) => {
         switch (action) {
             case "POST_REQUEST":
                 // axios.post(`${URL}/post_${type}`, data)
@@ -48,6 +48,15 @@ const useServices = () => {
                 //     }).catch(error => console.log(error))
                 updateDoc(doc(DB, type, data?._id), { status: data.status })
                     .then(res => console.log(res)).catch(error => console.log(error))
+                break;
+            case "CHECK_ADMIN":
+                if (data?.email) {
+                    const qData = query(collection(DB, type), where("email", "==", data?.email))
+                    const snapshot = await getDocs(qData);
+                    snapshot.forEach(doc => {
+                        data?.setAdmin(doc?.data()?.role === 'admin')
+                    })
+                }
                 break;
             default:
                 break;
