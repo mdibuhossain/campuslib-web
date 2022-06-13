@@ -1,6 +1,5 @@
 import { logEvent } from 'firebase/analytics'
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
-import { onSnapshot, query, where } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadString } from 'firebase/storage';
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -59,14 +58,7 @@ const useFirebase = () => {
 
     const saveUser = (email, password, displayName, photoURL, type, method) => {
         const tmpUser = { email, password, displayName, photoURL, authType: type }
-        fetch(`${process.env.REACT_APP_BACKEND}/user_post`, {
-            method: method,
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(tmpUser)
-        })
-        //.then(data => console.log(data))
+        Services("POST_USER", "user", tmpUser)
     }
 
     const signWithGoogle = (e) => {
@@ -138,9 +130,6 @@ const useFirebase = () => {
     }
 
     useEffect(() => {
-        // fetch(`${process.env.REACT_APP_BACKEND}/user/checkadmin/${user?.email}`)
-        //     .then(res => res.json())
-        //     .then(data => setAdmin(data?.admin))
         Services("CHECK_ADMIN", "user", { email: user?.email, setAdmin })
     }, [user])
 
@@ -169,7 +158,6 @@ const useFirebase = () => {
         admin,
         logOut,
         setName,
-        setAdmin,
         setEmail,
         password,
         isLoading,

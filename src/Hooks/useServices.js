@@ -1,8 +1,7 @@
 import axios from "axios";
 import useData from "./useData";
 import useRealtimedb from "./useRealtimedb";
-import { ref, set } from "firebase/database";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 
 const useServices = () => {
     const { setUpdate, update } = useData()
@@ -11,15 +10,13 @@ const useServices = () => {
     const Services = async (action, type, data) => {
         switch (action) {
             case "POST_REQUEST":
-                // axios.post(`${URL}/post_${type}`, data)
-                //     .then(function (response) {
-                //         if (response?.data?.insertedId) {
-                //             alert("Request submit successfully")
-                //         }
-                //     })
-                //     .catch(function (error) {
-                //         // console.log(error);
-                //     });
+                axios.post(`${URL}/post_${type}`, data)
+                    .then(function (response) {
+                        if (response?.data?.insertedId) {
+                            alert("Request submit successfully")
+                        }
+                    })
+                    .catch(function (error) { });
                 addDoc(collection(DB, type), data)
                     .then(res => console.log(res)).catch(error => console.log(error))
                 break;
@@ -49,7 +46,16 @@ const useServices = () => {
                 updateDoc(doc(DB, type, data?._id), { status: data.status })
                     .then(res => console.log(res)).catch(error => console.log(error))
                 break;
+            case "POST_USER":
+                axios.post(`${process.env.REACT_APP_BACKEND}/user_post`, data)
+                    .then(() => { }).catch(() => { })
+                addDoc(collection(DB, type), data)
+                    .then(res => console.log(res)).catch(error => console.log(error))
+                break;
             case "CHECK_ADMIN":
+                // fetch(`${process.env.REACT_APP_BACKEND}/user/checkadmin/${data?.email}`)
+                //     .then(res => res.json())
+                //     .then(data => data?.setAdmin(data?.admin))
                 if (data?.email) {
                     const qData = query(collection(DB, type), where("email", "==", data?.email))
                     const snapshot = await getDocs(qData);
