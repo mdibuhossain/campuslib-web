@@ -45,7 +45,7 @@ const Request = () => {
 
     const handlePost = (e) => {
         e.preventDefault()
-        Services("POST_REQUEST", dataStruct.sub_categories, dataStruct)
+        Services("POST_REQUEST", dataStruct?.sub_categories, dataStruct)
         e.target.reset()
     }
 

@@ -7,7 +7,7 @@ const STA = () => {
     return (
         <PageLayout>
             <Banner title="Statistics" src="assets/images/sta.png" />
-            <BookShowcase department="STA" />
+            <BookShowcase department="sta" />
         </PageLayout>
     );
 };
