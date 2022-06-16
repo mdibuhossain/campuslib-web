@@ -115,6 +115,7 @@ const EditContent = () => {
                             <MenuItem value="cse">CSE</MenuItem>
                             <MenuItem value="eee">EEE</MenuItem>
                             <MenuItem value="math">MATH</MenuItem>
+                            <MenuItem value="sta">STATISTICS</MenuItem>
                             <MenuItem value="islamic">Islamic</MenuItem>
                             <MenuItem value="others">Others</MenuItem>
                         </Select>

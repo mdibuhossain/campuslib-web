@@ -21,6 +21,7 @@ import EditContent from './pages/EditContent/EditContent';
 import FooterBar from './components/FooterBar';
 import Ads from './components/Ads';
 import ChangeDP from './pages/ChangeDP/ChangeDP';
+import STA from './pages/STA/STA';
 
 const theme = createTheme({
   typography: {
@@ -80,6 +81,7 @@ function App() {
             <Route exact path='/cse' element={<CSE />} />
             <Route exact path='/eee' element={<EEE />} />
             <Route exact path='/math' element={<MAT />} />
+            <Route exact path='/sta' element={<STA />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
