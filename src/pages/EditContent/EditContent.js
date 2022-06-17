@@ -30,7 +30,6 @@ const EditContent = () => {
         e.preventDefault()
         if (window.confirm("Are you sure want to update?")) {
             Services("UPDATE_CONTENT", dataStruct?.sub_categories, dataStruct)
-            setUpdate(update + 1)
             e.target.reset()
             navigate(-1)
         }

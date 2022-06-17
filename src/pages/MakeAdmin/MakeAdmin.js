@@ -12,7 +12,11 @@ const MakeAdmin = () => {
     const [updateCount, setUpdateCount] = useState(0)
     useEffect(() => {
         setIsFetching(true)
-        axios.get(`${process.env.REACT_APP_BACKEND}/users`)
+        axios.get(`${process.env.REACT_APP_BACKEND}/users`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then(res => {
                 setUsers(res?.data)
                 setIsFetching(false)

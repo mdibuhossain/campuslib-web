@@ -22,19 +22,17 @@ const Demo = styled('div')(({ theme }) => ({
 }));
 
 const ListOfRequest = ({ content, title, status }) => {
-    const { user, setUpdate, update, admin } = useAuth();
+    const { user, admin } = useAuth();
     const { Services } = useServices();
 
     const deleteRequest = (title, item) => {
         if (window.confirm("Are you sure want to delete?")) {
             Services("DELETE_CONTENT", title.toLowerCase(), item)
-            setUpdate(update + 1);
         }
     }
 
     const handleStatus = (_id, status) => {
         Services("UPDATE_STATUS", title.toLowerCase(), { _id, status })
-        setUpdate(update + 1);
     }
 
     return (

@@ -1,8 +1,8 @@
 import axios from "axios";
-import useData from "./useData";
+import { useAuth } from "./useAuth";
 
 const useServices = () => {
-    const { setUpdate, update } = useData()
+    const { setUpdate, update, token } = useAuth()
     const URL = process.env.REACT_APP_BACKEND
     const Services = (action, type, data) => {
         switch (action) {
@@ -18,23 +18,41 @@ const useServices = () => {
                     });
                 break;
             case "UPDATE_CONTENT":
-                axios.put(`${URL}/update_${type}/${data?._id}`, data)
+                axios.put(`${URL}/update_${type}/${data?._id}`, data, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                })
                     .then(res => {
-                        console.log(res)
+                        if (res?.data?.acknowledged) {
+                            setUpdate(update + 1)
+                        }
                     }).catch(function (error) {
                         console.log(error);
                     });
                 break
             case "DELETE_CONTENT":
-                axios.delete(`${URL}/${type}/delete/${data?._id}`)
+                axios.delete(`${URL}/${type}/delete/${data?._id}`, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                })
                     .then((res) => {
-                        console.log(res)
+                        if (res?.data?.acknowledged) {
+                            setUpdate(update + 1)
+                        }
                     }).catch(error => console.log(error))
                 break;
             case "UPDATE_STATUS":
-                axios.put(`${URL}/${type}/status/${data?._id}`, data)
+                axios.put(`${URL}/${type}/status/${data?._id}`, data, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                })
                     .then(res => {
-                        console.log(res)
+                        if (res?.data?.acknowledged) {
+                            setUpdate(update + 1)
+                        }
                     }).catch(error => console.log(error))
                 break;
             default:
