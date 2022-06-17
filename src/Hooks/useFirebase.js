@@ -1,5 +1,5 @@
 import { logEvent } from 'firebase/analytics'
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, getIdToken } from 'firebase/auth'
 import { getDownloadURL, getStorage, ref, uploadString } from 'firebase/storage';
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -16,7 +16,8 @@ const useFirebase = () => {
     const [password, setPassword] = useState('');
     const [admin, setAdmin] = useState(false);
     const [updateTrack, setUpdateTrack] = useState(0);
-    const [error, setError] = useState()
+    const [error, setError] = useState();
+    const [token, setToken] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const auth = getAuth();
     const storage = getStorage();
@@ -144,6 +145,8 @@ const useFirebase = () => {
         const unsubscribed = onAuthStateChanged(auth, user => {
             if (user) {
                 setUser(user)
+                getIdToken(user)
+                    .then(idToken => setToken(idToken))
                 clearUser()
                 if (location.pathname === '/login' || location.pathname === '/signup')
                     history('/');
@@ -160,6 +163,7 @@ const useFirebase = () => {
         user,
         name,
         email,
+        token,
         error,
         admin,
         logOut,

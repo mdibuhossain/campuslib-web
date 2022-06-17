@@ -6,7 +6,7 @@ import { useAuth } from '../../Hooks/useAuth';
 import PageLayout from '../../Layout/PageLayout';
 
 const MakeAdmin = () => {
-    const { user } = useAuth()
+    const { user, token } = useAuth()
     const [isFetching, setIsFetching] = useState(false)
     const [users, setUsers] = useState([])
     const [updateCount, setUpdateCount] = useState(0)
@@ -20,7 +20,11 @@ const MakeAdmin = () => {
     }, [updateCount])
     const handleMakeAdmin = (id) => {
         if (window.confirm("Are you sure want to make this person ADMIN?")) {
-            axios.put(`${process.env.REACT_APP_BACKEND}/user/makeadmin/${id}`)
+            axios.put(`${process.env.REACT_APP_BACKEND}/user/makeadmin/${id}`, {}, {
+                headers: {
+                    'authorization': `Bearer ${token}`
+                }
+            })
                 .then(res => {
                     console.log(res)
                     setUpdateCount(updateCount + 1)
