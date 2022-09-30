@@ -9,49 +9,37 @@ const useData = () => {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        const unsubscribe = () => {
-            setDataLoading(true)
-            fetch(`${process.env.REACT_APP_BACKEND}/books`)
-                .then(res => res.json())
-                .then(data => {
-                    setBooks(data)
-                    setDataLoading(false)
-                })
-        }
-        return unsubscribe
+        setDataLoading(true)
+        fetch(`${process.env.REACT_APP_BACKEND}/books`)
+            .then(res => res.json())
+            .then(data => {
+                setBooks(data)
+                setDataLoading(false)
+            })
     }, [])
 
     useEffect(() => {
-        const unsubscribe = () => {
-            setDataLoading(true)
-            fetch(`${process.env.REACT_APP_BACKEND}/questions`)
-                .then(res => res.json())
-                .then(data => {
-                    setQuestions(data)
-                    setDataLoading(false)
-                })
-        }
-        return unsubscribe
+        setDataLoading(true)
+        fetch(`${process.env.REACT_APP_BACKEND}/questions`)
+            .then(res => res.json())
+            .then(data => {
+                setQuestions(data)
+                setDataLoading(false)
+            })
     }, [])
 
     useEffect(() => {
-        const unsubscribe = () => {
-            setDataLoading(true)
-            fetch(`${process.env.REACT_APP_BACKEND}/syllabus`)
-                .then(res => res.json())
-                .then(data => {
-                    setSyllabus(data)
-                    setDataLoading(false)
-                })
-        }
-        return unsubscribe
+        setDataLoading(true)
+        fetch(`${process.env.REACT_APP_BACKEND}/syllabus`)
+            .then(res => res.json())
+            .then(data => {
+                setSyllabus(data)
+                setDataLoading(false)
+            })
     }, [])
 
     useEffect(() => {
-        const unsubscribe = () => {
-            setAllData([...books, ...questions, ...syllabus]);
-        }
-        return unsubscribe
+        setAllData([...books, ...questions, ...syllabus]);
     }, [books, questions, syllabus])
 
     return {
