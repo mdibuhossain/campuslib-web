@@ -1,8 +1,11 @@
 import React from 'react';
+import useData from '../../Hooks/useData';
 import PageLayout from '../../Layout/PageLayout';
 import { Banner } from './Home.style';
 
 const Home = () => {
+    const {books} = useData();
+    console.log(books);
     return (
         <PageLayout>
             <Banner src="assets/images/home.jfif" title="CAMPUS LIBRARY" />

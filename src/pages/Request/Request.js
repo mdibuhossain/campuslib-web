@@ -11,6 +11,18 @@ const Request = () => {
     const { Services } = useServices();
     const [blink, setBlink] = useState(false);
 
+    const submit_data_format = {
+        book_name: '',
+        author: '',
+        edition: '',
+        download_link: '',
+        categories: '',
+        sub_categories: '',
+        status: false,
+        added_by: user?.email
+    }
+    const [dataStruct, setDataStruct] = React.useState(submit_data_format)
+
     useEffect(() => {
         const handleBlink = () => {
             if (!user?.email) {
@@ -23,17 +35,7 @@ const Request = () => {
         return () => clearInterval(interval)
     }, [blink, user])
 
-    const submit_data_format = {
-        book_name: '',
-        author: '',
-        edition: '',
-        download_link: '',
-        categories: '',
-        sub_categories: '',
-        status: false,
-        added_by: user?.email
-    }
-    const [dataStruct, setDataStruct] = React.useState(submit_data_format)
+
 
     const handleSubmit = (e) => {
         setDataStruct({
