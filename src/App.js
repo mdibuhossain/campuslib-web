@@ -19,7 +19,7 @@ import AdminRoute from './PrivateRoute/AdminRoute';
 import MakeAdmin from './pages/MakeAdmin/MakeAdmin';
 import EditContent from './pages/EditContent/EditContent';
 import FooterBar from './components/FooterBar';
-import Ads from './components/Ads';
+// import Ads from './components/Ads';
 import ChangeDP from './pages/ChangeDP/ChangeDP';
 import STA from './pages/STA/STA';
 
