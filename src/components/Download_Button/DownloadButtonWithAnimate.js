@@ -3,7 +3,7 @@ import downloadStyles from './downloadStyles.module.css'
 
 const DownloadButtonWithAnimate = () => {
     return (
-        <a target="_blank" href="https://drive.google.com/file/d/1fCZDZR5bjNgZD_58nRqElsaBwGvKv26q/view?usp=sharing">
+        <a target="_blank" href="https://drive.google.com/file/d/10jLrS9NrfMze-qSXVp_dLvU-ZJa0ZeoA/view?usp=sharing">
             <div className={`${downloadStyles.outer} ${downloadStyles.button}`}>
                 <button>DOWNLOAD APP</button>
                 <span></span>
