@@ -103,14 +103,14 @@ const ProfileButton = () => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                 >
-                    <Menu.Items className="origin-top-right absolute md:right-0 -right-20 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="bg-gray-700 origin-top-right absolute md:right-0 -right-20 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                         {/* Admin and normal user features */}
                         {admin &&
                             adminRoute.map(route => (
                                 <Menu.Item key={route?.name}>
                                     {({ active }) => (
                                         <NavLink to={route.to}
-                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                            className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 text-sm text-gray-200')}
                                         >
                                             {route.name}
                                         </NavLink>
@@ -122,7 +122,7 @@ const ProfileButton = () => {
                                 <Menu.Item key={route?.name}>
                                     {({ active }) => (
                                         <NavLink to={route.to}
-                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                            className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 text-sm text-gray-200')}
                                         >
                                             {route.name}
                                         </NavLink>
@@ -133,13 +133,16 @@ const ProfileButton = () => {
                         <Menu.Item>
                             {({ active }) => (
                                 <NavLink to="#"
-                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                    className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 text-sm text-gray-200')}
                                     onClick={logOut}
                                 >
                                     Sign out
                                 </NavLink>
                             )}
                         </Menu.Item>
+                        <div className="md:hidden p-5">
+                            <DownloadButtonWithAnimate />
+                        </div>
                     </Menu.Items>
                 </Transition>
             </Menu>
