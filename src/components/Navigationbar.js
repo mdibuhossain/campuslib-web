@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAuth } from '../Hooks/useAuth';
 import { CircularProgress } from '@mui/material';
+import DownloadButtonWithAnimate from './Download_Button/DownloadButtonWithAnimate';
 
 const navigation = [
     {
@@ -143,7 +144,13 @@ const ProfileButton = () => {
                 </Transition>
             </Menu>
         )
-    return null
+    return (
+        <div className="xs:block md:hidden ml-11">
+            <DownloadButtonWithAnimate />
+        </div>
+    )
+
+
 }
 
 const LinkTitle = (prop) => {
@@ -269,6 +276,7 @@ export default function Navigation() {
                                                 })}
                                                 {!user?.email && LinkTitle({ name: "Login", to: "/login" })}
                                                 {isLoading ? <CircularProgress color="info" /> : ProfileButton()}
+                                                <DownloadButtonWithAnimate />
                                             </div>
                                         </div>
                                     </div>
