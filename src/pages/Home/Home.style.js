@@ -18,14 +18,14 @@ export const Banner = styled.section`
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: min(11vw, 5rem);
+        font-size: 7vh;
         text-align: center;
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%,-50%);
         border: 2px solid white;
-        padding: 1rem 2rem;
+        padding: 0.75em 1.75em;
     }
     &:before{
         content: "";
