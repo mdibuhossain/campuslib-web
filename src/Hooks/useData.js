@@ -7,6 +7,7 @@ const useData = () => {
     const [allData, setAllData] = useState([]);
     const [dataLoading, setDataLoading] = useState(false);
     const [message, setMessage] = useState('');
+    const [update, setUpdate] = useState(0);
 
     useEffect(() => {
         setDataLoading(true)
@@ -16,7 +17,7 @@ const useData = () => {
                 setBooks(data)
                 setDataLoading(false)
             })
-    }, [])
+    }, [update])
 
     useEffect(() => {
         setDataLoading(true)
@@ -26,7 +27,7 @@ const useData = () => {
                 setQuestions(data)
                 setDataLoading(false)
             })
-    }, [])
+    }, [update])
 
     useEffect(() => {
         setDataLoading(true)
@@ -36,7 +37,7 @@ const useData = () => {
                 setSyllabus(data)
                 setDataLoading(false)
             })
-    }, [])
+    }, [update])
 
     useEffect(() => {
         setAllData([...books, ...questions, ...syllabus]);
@@ -44,9 +45,11 @@ const useData = () => {
 
     return {
         books,
+        update,
         message,
         allData,
         syllabus,
+        setUpdate,
         questions,
         setMessage,
         dataLoading,
