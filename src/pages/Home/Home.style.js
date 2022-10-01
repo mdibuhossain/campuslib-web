@@ -18,7 +18,7 @@ export const Banner = styled.section`
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 7vh;
+        font-size: min(7vh, 8vw);
         text-align: center;
         position: absolute;
         left: 50%;
