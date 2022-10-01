@@ -178,8 +178,8 @@ const DropdownItem = (prop, active) => {
     return (
         <NavLink
             to={prop.to}
-            className={classNames(active ? 'bg-gray-100' : '',
-                'block text-sm text-gray-700 text-center'
+            className={classNames(active ? 'bg-gray-900' : '',
+                'bg-gray-700 block text-sm text-gray-200 text-center'
             )}
         >
             <Button variant="text" sx={{ display: 'block', width: '100%', color: 'inherit' }}>
@@ -212,7 +212,7 @@ const DrowdownList = (prop) => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="origin-top-right absolute right-0 z-50 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="bg-gray-700 origin-top-right absolute right-0 z-50 mt-2 w-48 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 focus:outline-none">
                     {prop?.list?.map((item) => {
                         if (item?.list?.length) {
                             return DrowdownList(item)
@@ -222,16 +222,6 @@ const DrowdownList = (prop) => {
                                 <Menu.Item key={item.name}>
                                     {({ active }) => (
                                         DropdownItem(item, active)
-                                        // <NavLink
-                                        //     to={item.to}
-                                        //     className={classNames(active ? 'bg-gray-100' : '',
-                                        //         'block text-sm text-gray-700 text-center'
-                                        //     )}
-                                        // >
-                                        //     <Button variant="text" sx={{ display: 'block', width: '100%', color: 'inherit' }}>
-                                        //         {item.name}
-                                        //     </Button>
-                                        // </NavLink>
                                     )}
                                 </Menu.Item>
                             )
