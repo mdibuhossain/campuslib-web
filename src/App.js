@@ -12,16 +12,13 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './PrivateRoute/RequireAuth';
-import PendingRequest from './pages/PendingRequest/PendingRequest';
-import MyContents from './pages/MyContents/MyContents';
-import ManageContent from './pages/ManageContent/ManageContent';
 import AdminRoute from './PrivateRoute/AdminRoute';
 import MakeAdmin from './pages/MakeAdmin/MakeAdmin';
 import EditContent from './pages/EditContent/EditContent';
-import FooterBar from './components/FooterBar';
 // import Ads from './components/Ads';
 import ChangeDP from './pages/ChangeDP/ChangeDP';
 import STA from './pages/STA/STA';
+import ContentManagement from './pages/ContentManagement/ContentManagement';
 
 const theme = createTheme({
   typography: {
@@ -53,17 +50,17 @@ function App() {
             } />
             <Route exact path='/pending' element={
               <RequireAuth>
-                <PendingRequest />
+                <ContentManagement isMyContent={false} pageTitle="PENDING REQUEST" />
               </RequireAuth>
             } />
             <Route exact path='/mycontent' element={
               <RequireAuth>
-                <MyContents />
+                <ContentManagement isMyContent={true} pageTitle="MY CONTENT" />
               </RequireAuth>
             } />
             <Route exact path='/manage' element={
               <AdminRoute>
-                <ManageContent />
+                <ContentManagement pageTitle="MANAGE CONTENT" />
               </AdminRoute>
             } />
             <Route exact path='/edit/:id' element={
