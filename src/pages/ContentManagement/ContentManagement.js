@@ -25,7 +25,6 @@ const TabActive = () => {
 
 const ContentManagement = ({ isMyContent = false, pageTitle }) => {
     const { _isActive, activeHandler } = TabActive();
-    console.log(_isActive)
     const { books, questions, syllabus, setUpdate, update } = useAuth()
     useEffect(() => {
         setUpdate(update + 1)
