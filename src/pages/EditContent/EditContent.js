@@ -7,7 +7,6 @@ import useServices from '../../Hooks/useServices';
 import PageLayout from '../../Layout/PageLayout';
 
 const EditContent = () => {
-    const [dataStruct, setDataStruct] = useState(product)
     const { id } = useParams()
     const navigate = useNavigate()
     const { books, questions, syllabus, setUpdate, update } = useAuth()
@@ -17,8 +16,9 @@ const EditContent = () => {
         product = questions.find(item => item?._id === id)
     if (!product?._id)
         product = syllabus.find(item => item?._id === id)
-        
-    setDataStruct(product)
+
+    const [dataStruct, setDataStruct] = useState(product)
+
 
     const handleSubmit = (e) => {
         setDataStruct({
