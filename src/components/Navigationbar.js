@@ -178,14 +178,12 @@ const DropdownItem = (prop, active) => {
     return (
         <NavLink
             to={prop.to}
-            className={classNames(active ? 'bg-gray-900' : '',
-                'bg-gray-700 block text-sm text-gray-200 text-center'
-            )}
+            className={'bg-gray-700 hover:bg-gray-800 block text-sm text-gray-200 text-center'}
         >
             <Button variant="text" sx={{ display: 'block', width: '100%', color: 'inherit' }}>
                 {prop.name}
             </Button>
-        </NavLink>
+        </NavLink >
     )
 }
 
