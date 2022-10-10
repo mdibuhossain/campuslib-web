@@ -1,5 +1,4 @@
 import React from 'react';
-import useData from '../../Hooks/useData';
 import PageLayout from '../../Layout/PageLayout';
 import { Banner } from './Home.style';
 

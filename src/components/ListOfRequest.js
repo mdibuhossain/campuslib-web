@@ -1,12 +1,11 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import { BookOpenIcon } from '@heroicons/react/outline';
-import { Avatar, Chip, IconButton, List, ListItem, ListItemAvatar, Typography } from '@mui/material';
+import { Avatar, IconButton, List, ListItem, ListItemAvatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useAuth } from '../Hooks/useAuth';
 import useServices from '../Hooks/useServices';
-import axios from 'axios';
 
 const Demo = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,

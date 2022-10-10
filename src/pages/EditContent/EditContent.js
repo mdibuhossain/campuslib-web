@@ -9,7 +9,7 @@ import PageLayout from '../../Layout/PageLayout';
 const EditContent = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-    const { books, questions, syllabus, setUpdate, update } = useAuth()
+    const { books, questions, syllabus } = useAuth()
     const { Services } = useServices()
     let product = books.find(item => item?._id === id)
     if (!product?._id)

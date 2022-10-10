@@ -5,7 +5,7 @@ import { useAuth } from '../../Hooks/useAuth';
 import PageLayout from '../../Layout/PageLayout';
 
 const ChangeDP = () => {
-    const { user, logOut, uploadAvatar } = useAuth();
+    const { user, uploadAvatar } = useAuth();
     const [selectedImg, setSelectedImg] = React.useState(null);
     const [showModal, setShowModal] = React.useState(false);
     const [scale, setScale] = React.useState(1);

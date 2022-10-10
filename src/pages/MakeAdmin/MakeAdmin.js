@@ -1,5 +1,4 @@
-import { Avatar, Chip, CircularProgress, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { CircularProgress, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../Hooks/useAuth';
@@ -21,7 +20,7 @@ const MakeAdmin = () => {
                 setUsers(res?.data)
                 setIsFetching(false)
             })
-    }, [updateCount])
+    }, [updateCount, token])
     const handleMakeAdmin = (id) => {
         if (window.confirm("Are you sure want to make this person ADMIN?")) {
             axios.put(`${process.env.REACT_APP_BACKEND}/user/makeadmin/${id}`, {}, {
