@@ -62,7 +62,7 @@ const Request = () => {
                     </Grid>
                     <Grid item md={6} sx={{ m: "auto" }}>
                         <Box sx={{ fontWeight: 600, textAlign: 'center', mb: 4 }}>
-                            <Typography variant='h5'>POST YOUR CONTENT</Typography>
+                            <Typography variant='h5'>UPLOAD YOUR CONTENT</Typography>
                             {!user?.email &&
                                 <NavLink to='/login' style={{ color: blink ? 'powderblue' : 'limegreen', textDecoration: 'underline' }}>→ require sign-in ←</NavLink>
                             }
@@ -167,7 +167,7 @@ const Request = () => {
                                     variant="contained"
                                     disabled={!(dataStruct.sub_categories && dataStruct.book_name && dataStruct.categories && dataStruct.download_link)}
                                 >
-                                    submit
+                                    UPLOAD
                                 </Button>
                             </form>
                         </Box>
