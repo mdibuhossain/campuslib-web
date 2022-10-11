@@ -57,7 +57,7 @@ const Request = () => {
                 <Grid container sx={{ alignItems: 'center' }}>
                     <Grid item md={6}>
                         <Box sx={{ display: { md: "block", xs: "none" } }}>
-                            <img style={{ width: "72%", margin: "auto" }} src="assets/images/request_banner.png" alt="request banner" />
+                            <img style={{ width: "72%", margin: "auto" }} src="assets/images/request_banner.webp" alt="request banner" />
                         </Box>
                     </Grid>
                     <Grid item md={6} sx={{ m: "auto" }}>

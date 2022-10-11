@@ -246,7 +246,7 @@ export default function Navigation() {
                                             <NavLink to="/">
                                                 <img
                                                     className="w-14"
-                                                    src="assets/images/logo.png"
+                                                    src="assets/images/logo.webp"
                                                     alt="campuslib logo"
                                                 />
                                             </NavLink>

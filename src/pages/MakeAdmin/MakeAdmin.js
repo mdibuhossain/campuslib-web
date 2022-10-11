@@ -47,7 +47,7 @@ const MakeAdmin = () => {
                                 <div className='flex items-center col-span-2'>
                                     <div className='mr-2 w-12 hidden sm:block'>
                                         <img
-                                            src={item?.photoURL || '/assets/images/avator.png'}
+                                            src={item?.photoURL || '/assets/images/avator.webp'}
                                             className="rounded-full w-full"
                                             alt="Avatar"
                                         />

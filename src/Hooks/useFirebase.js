@@ -112,7 +112,7 @@ const useFirebase = () => {
                 auth?.currentUser && (
                     updateProfile(auth?.currentUser, {
                         displayName: `${name && name}`,
-                        photoURL: `${name && "/assets/images/avator.png"}`
+                        photoURL: `${name && "/assets/images/avator.webp"}`
                     }).then(() => {
                         setUpdateTrack(updateTrack + 1)
                     }).catch(error => setError(error.message))

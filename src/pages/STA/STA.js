@@ -6,7 +6,7 @@ import { Banner } from '../Home/Home.style';
 const STA = () => {
     return (
         <PageLayout>
-            <Banner title="Statistics" src="assets/images/sta.png" />
+            <Banner title="Statistics" src="assets/images/sta.webp" />
             <BookShowcase department="sta" />
         </PageLayout>
     );
