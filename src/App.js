@@ -19,6 +19,7 @@ import './App.css';
 // import STA from './pages/STA/STA';
 // import ContentManagement from './pages/ContentManagement/ContentManagement';
 import { AuthProvider } from './context/AuthProvider';
+import CircularLoading from './components/Circular_Loading/CircularLoading';
 const Navigation = lazy(() => import('./components/Navigationbar'))
 const CSE = lazy(() => import('./pages/CSE/CSE'))
 const EEE = lazy(() => import('./pages/EEE/EEE'))
@@ -52,7 +53,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Suspense fallback={<div>Wait Babu...</div>}>
+        <Suspense fallback={<CircularLoading />}>
           <AuthProvider>
             {/* <Ads /> */}
             <Navigation />
