@@ -20,6 +20,7 @@ import './App.css';
 // import ContentManagement from './pages/ContentManagement/ContentManagement';
 import { AuthProvider } from './context/AuthProvider';
 import CircularLoading from './components/Circular_Loading/CircularLoading';
+import NotFound from './components/NotFound/NotFound';
 const Navigation = lazy(() => import('./components/Navigationbar'))
 const CSE = lazy(() => import('./pages/CSE/CSE'))
 const EEE = lazy(() => import('./pages/EEE/EEE'))
@@ -58,6 +59,7 @@ function App() {
             {/* <Ads /> */}
             <Navigation />
             <Routes>
+              <Route path='*' element={<NotFound />} />
               <Route exact path='' element={<Home />} />
               <Route exact path='/' element={<Home />} />
               <Route exact path='/search' element={<Search />} />
