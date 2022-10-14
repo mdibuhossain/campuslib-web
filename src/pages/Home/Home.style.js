@@ -8,9 +8,11 @@ export const Banner = styled.section`
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    filter: contrast(0.9);
     -webkit-filter: contrast(0.9);
     -moz-filter: contrast(0.9);
+    -ms-filter:contrast(0.9);
+    -o-filter:contrast(0.9);
+    filter: contrast(0.9);
     font-family: 'Secular One', sans-serif;
     &:after{
         content: "${(props) => props.title}";
