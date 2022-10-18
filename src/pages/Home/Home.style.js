@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 
-export const Banner = styled.section`
+const Banner = styled.section`
     height: calc(100vh - 64px);
     background-image: url(${(props) => props.src});
     background-repeat: no-repeat;
@@ -36,3 +36,5 @@ export const Banner = styled.section`
         background: rgba(16, 22, 50,.7);
     }
 `
+
+export default Banner;
