@@ -1,2 +1,3 @@
-# [CampudLib](https://campuslb.web.app/){:target="_blank"}
+# <a target="_blank" rel="noopener" href="https://campuslb.web.app/">CampusLibrary</a>
+
 #### Author: @mdibuhossain
