@@ -1,2 +1,2 @@
-# [CampudLib](www.campuslb.web.app)
+# [CampudLib](https://campuslb.web.app/)
 #### Author: @mdibuhossain
