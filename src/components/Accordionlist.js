@@ -7,6 +7,7 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { useAuth } from '../Hooks/useAuth';
 import { CircularProgress } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -46,23 +47,31 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function Accordionlist({ title, contents }) {
     const { dataLoading } = useAuth()
+    const [showData, setShowData] = useState(null);
     const [expanded, setExpanded] = React.useState(null);
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
 
+    useEffect(() => {
+        const activeDataHandler = () => {
+            setShowData(contents?.filter(item => item?.status))
+        }
+        return activeDataHandler();
+    }, [contents])
+
     return (
         <Accordion onChange={handleChange('panel1')}>
             <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                <Typography sx={{ fontWeight: 600 }}>{title}</Typography>
+                <Typography sx={{ fontWeight: 600 }}>{title} - {showData?.length}</Typography>
             </AccordionSummary>
             <AccordionDetails>
                 {
                     dataLoading ? <CircularProgress color="inherit" /> :
                         <ol>
                             {
-                                contents?.map((item, index) => (
+                                showData?.map((item, index) => (
                                     item?.status &&
                                     <li key={index} className="list-decimal ml-6 my-5">
                                         <a href={item?.download_link} target="_blank" rel="noreferrer">
