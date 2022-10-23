@@ -31,6 +31,10 @@ const navigation = [
             {
                 name: 'STATISTICS',
                 to: '/sta'
+            },
+            {
+                name: 'NON ACADEMIC',
+                to: '/nonacademic'
             }
         ]
     },

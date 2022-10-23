@@ -145,8 +145,8 @@ const Request = () => {
                                         <MenuItem value="eee">EEE</MenuItem>
                                         <MenuItem value="math">MATH</MenuItem>
                                         <MenuItem value="sta">STATISTICS</MenuItem>
-                                        <MenuItem value="islamic">Islamic</MenuItem>
-                                        <MenuItem value="others">Others</MenuItem>
+                                        <MenuItem value="islamic">ISLAMIC</MenuItem>
+                                        <MenuItem value="nonacademic">NON ACADEMIC</MenuItem>
                                     </Select>
                                 </FormControl>
 

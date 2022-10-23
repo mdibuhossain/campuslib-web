@@ -21,6 +21,7 @@ import './App.css';
 import { AuthProvider } from './context/AuthProvider';
 import CircularLoading from './components/Circular_Loading/CircularLoading';
 import NotFound from './components/NotFound/NotFound';
+import NonAcademic from './pages/NonAcademic/NonAcademic';
 const Navigation = lazy(() => import('./components/Navigationbar'))
 const CSE = lazy(() => import('./pages/CSE/CSE'))
 const EEE = lazy(() => import('./pages/EEE/EEE'))
@@ -100,6 +101,7 @@ function App() {
               <Route exact path='/eee' element={<EEE />} />
               <Route exact path='/math' element={<MAT />} />
               <Route exact path='/sta' element={<STA />} />
+              <Route exact path='/nonacademic' element={<NonAcademic />} />
             </Routes>
           </AuthProvider>
         </Suspense>
