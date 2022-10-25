@@ -61,28 +61,30 @@ export default function Accordionlist({ title, contents }) {
         return activeDataHandler();
     }, [contents])
 
-    return (
-        <Accordion onChange={handleChange('panel1')}>
-            <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                <Typography sx={{ fontWeight: 600 }}>{title} - {showData?.length}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-                {
-                    dataLoading ? <CircularProgress color="inherit" /> :
-                        <ol>
-                            {
-                                showData?.map((item, index) => (
-                                    item?.status &&
-                                    <li key={index} className="list-decimal ml-6 my-5">
-                                        <a href={item?.download_link} target="_blank" rel="noreferrer">
-                                            <strong>{item?.book_name} {item?.edition ? item?.edition + 'E' : ''}</strong> {item?.author ? ' - ' + item?.author : ''}
-                                        </a>
-                                    </li>
-                                ))
-                            }
-                        </ol>
-                }
-            </AccordionDetails>
-        </Accordion>
-    );
+    if (showData?.length) {
+        return (
+            <Accordion onChange={handleChange('panel1')}>
+                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                    <Typography sx={{ fontWeight: 600 }}>{title} - {showData?.length}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    {
+                        dataLoading ? <CircularProgress color="inherit" /> :
+                            <ol>
+                                {
+                                    showData?.map((item, index) => (
+                                        <li key={index} className="list-decimal ml-6 my-5">
+                                            <a href={item?.download_link} target="_blank" rel="noreferrer">
+                                                <strong>{item?.book_name} {item?.edition ? item?.edition + 'E' : ''}</strong> {item?.author ? ' - ' + item?.author : ''}
+                                            </a>
+                                        </li>
+                                    ))
+                                }
+                            </ol>
+                    }
+                </AccordionDetails>
+            </Accordion>
+        )
+    }
+    else { return null }
 }
