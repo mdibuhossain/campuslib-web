@@ -3,12 +3,12 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box } from '@mui/system';
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import { useAuth } from '../../Hooks/useAuth';
 import PageLayout from '../../Layout/PageLayout';
 
 const Search = () => {
-    const { allData } = useAuth();
+    const { allData, dataLoading } = useAuth();
     const [search_text, setSearch_Text] = useState('')
     const [searchData, setSearchData] = useState([])
 
@@ -46,23 +46,27 @@ const Search = () => {
                         }}
                     />
                 </Paper>
-
-                {
-                    searchData.length ?
-                        <Box sx={{ p: 2, mt: 2, border: 1, borderRadius: 2, borderColor: 'rgba(0, 0, 0, 0.15)' }}>
-                            {
-                                searchData.map((item, index) => (
-                                    <a href={item?.download_link} key={index} target="_blank" rel="noreferrer">
-                                        <Paper sx={{ my: 2, p: 2, color: 'rgba(0, 0, 0, 0.7)' }}>
-                                            <strong>{item?.book_name}</strong>
-                                            <p className='text-blue-500 font-semibold text-sm'>{item?.edition ? item?.edition + 'E' : ''} <em>{item?.author ? ' - ' + item?.author : ''}</em> <span style={{ color: 'rgba(0, 0, 0, 0.7)' }}>({item?.categories})</span></p>
-                                        </Paper>
-                                    </a>
-                                ))
-                            }
-                        </Box>
-                        : ''
-                }
+                <Box sx={{ p: 2, mt: 2, ...(searchData.length && { border: 1, borderRadius: 2, borderColor: 'rgba(0, 0, 0, 0.15)' }) }}>
+                    {
+                        (dataLoading) && <CircularProgress color="inherit" />
+                    }
+                    {
+                        searchData.length ?
+                            <div>
+                                {
+                                    searchData.map((item, index) => (
+                                        <a href={item?.download_link} key={index} target="_blank" rel="noreferrer">
+                                            <Paper sx={{ my: 2, p: 2, color: 'rgba(0, 0, 0, 0.7)' }}>
+                                                <strong>{item?.book_name}</strong>
+                                                <p className='text-blue-500 font-semibold text-sm'>{item?.edition ? item?.edition + 'E' : ''} <em>{item?.author ? ' - ' + item?.author : ''}</em> <span style={{ color: 'rgba(0, 0, 0, 0.7)' }}>({item?.categories})</span></p>
+                                            </Paper>
+                                        </a>
+                                    ))
+                                }
+                            </div>
+                            : ''
+                    }
+                </Box>
             </Box>
         </PageLayout>
     );
