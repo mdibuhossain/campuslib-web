@@ -1,9 +1,11 @@
+import { useQuery } from '@apollo/client';
 import { logEvent } from 'firebase/analytics'
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, getIdToken } from 'firebase/auth'
 import { getDownloadURL, getStorage, ref, uploadString } from 'firebase/storage';
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import initAuth from "../firebase/initAuth"
+import { GET_ADMIN, GET_USER } from '../queries/query';
 
 
 
@@ -14,7 +16,6 @@ const useFirebase = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [admin, setAdmin] = useState(false);
     const [updateTrack, setUpdateTrack] = useState(0);
     const [error, setError] = useState();
     const [token, setToken] = useState('');
@@ -75,6 +76,7 @@ const useFirebase = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 setUser(result.user)
+                // const {data, loading, error} = useQuery(GET_USER)
                 fetch(`${process.env.REACT_APP_BACKEND}/users`)
                     .then(res => res.json())
                     .then(data => {
@@ -135,11 +137,10 @@ const useFirebase = () => {
         user && redirect();
     }
 
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_BACKEND}/user/checkadmin/${user?.email}`)
-            .then(res => res.json())
-            .then(data => setAdmin(data?.admin))
-    }, [user])
+    // Check is User admin or Not
+    const { data: { isAdmin: { isAdmin: admin = false } = {} } = [], loading, error: adminError } = useQuery(GET_ADMIN, {
+        variables: { email: user?.email }
+    })
 
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, user => {

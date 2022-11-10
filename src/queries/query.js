@@ -54,5 +54,12 @@ const GET_USER = gql`
     }
   }
 `;
+const GET_ADMIN = gql`
+  query IsAdmin($email: String!){
+    isAdmin(email: $email) {
+      isAdmin
+    }
+  }
+`;
 
-export { GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, GET_USER };
+export { GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, GET_USER, GET_ADMIN };
