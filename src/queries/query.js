@@ -54,12 +54,31 @@ const GET_USER = gql`
     }
   }
 `;
+const GET_USERS = gql`
+  query {
+    getUsers {
+      _id
+      displayName
+      email
+      photoURL
+      authType
+      role
+    }
+  }
+`;
 const GET_ADMIN = gql`
-  query IsAdmin($email: String!){
+  query IsAdmin($email: String!) {
     isAdmin(email: $email) {
       isAdmin
     }
   }
 `;
 
-export { GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, GET_USER, GET_ADMIN };
+export {
+  GET_BOOKS,
+  GET_QUESTIONS,
+  GET_SYLLABUS,
+  GET_USER,
+  GET_ADMIN,
+  GET_USERS,
+};

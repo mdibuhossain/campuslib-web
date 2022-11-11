@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import axios from 'axios';
 import { logEvent } from 'firebase/analytics'
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, getIdToken } from 'firebase/auth'
 import { getDownloadURL, getStorage, ref, uploadString } from 'firebase/storage';
@@ -142,6 +143,20 @@ const useFirebase = () => {
         variables: { email: user?.email }
     })
 
+    // store user token on local storage
+    // useEffect(() => {
+    //     localStorage.setItem('token', token)
+    // }, [token]);
+
+    // sending token to server
+    useEffect(() => {
+        axios.post(process.env.REACT_APP_BACKEND, {}, {
+            headers: {
+                "authorization": `Bearer ${token}`
+            }
+        })
+    }, [token])
+
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, user => {
             if (user) {
@@ -158,7 +173,6 @@ const useFirebase = () => {
         });
         return () => unsubscribed;
     }, [auth, history, location, updateTrack])
-
 
     return {
         user,
