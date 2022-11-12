@@ -73,22 +73,14 @@ const useFirebase = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 setUser(result.user)
-                // const {data, loading, error} = useQuery(GET_USER)
-                fetch(`${process.env.REACT_APP_BACKEND}/users`)
-                    .then(res => res.json())
-                    .then(data => {
-                        const tmpData = data.find(item => item?.email === result?.user?.email)
-                        if (!tmpData?.email)
-                            createUser({
-                                variables: {
-                                    email: result?.user?.email,
-                                    displayName: result?.user?.displayName,
-                                    photoURL: result?.user?.photoURL,
-                                    authType: result?.user?.providerData[0]?.providerId
-                                }
-                            })
-                        // saveUser(result?.user?.email, "", result?.user?.displayName, result?.user?.photoURL, result?.user?.providerData[0]?.providerId, "POST")
-                    })
+                createUser({
+                    variables: {
+                        email: result?.user?.email,
+                        displayName: result?.user?.displayName,
+                        photoURL: result?.user?.photoURL,
+                        authType: result?.user?.providerData[0]?.providerId
+                    }
+                })
                 user && redirect()
             })
             .catch(error => setError('Something wrong with Google'))
@@ -155,20 +147,6 @@ const useFirebase = () => {
     const { data: { isAdmin: { isAdmin: admin = false } = {} } = [] } = useQuery(GET_ADMIN, {
         variables: { email: user?.email }
     })
-
-    // store user token on local storage
-    // useEffect(() => {
-    //     localStorage.setItem('token', token)
-    // }, [token]);
-
-    // sending token to server
-    // useEffect(() => {
-    //     axios.post(process.env.REACT_APP_BACKEND, {}, {
-    //         headers: {
-    //             "authorization": `Bearer ${token}`
-    //         }
-    //     })
-    // }, [token])
 
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, user => {
