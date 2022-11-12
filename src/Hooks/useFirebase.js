@@ -152,7 +152,7 @@ const useFirebase = () => {
     }
 
     // Check is User admin or Not
-    const { data: { isAdmin: { isAdmin: admin = false } = {} } = [], loading, error: adminError } = useQuery(GET_ADMIN, {
+    const { data: { isAdmin: { isAdmin: admin = false } = {} } = [] } = useQuery(GET_ADMIN, {
         variables: { email: user?.email }
     })
 
