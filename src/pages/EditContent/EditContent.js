@@ -11,11 +11,11 @@ const EditContent = () => {
     const navigate = useNavigate()
     const { books, questions, syllabus } = useAuth()
     const { Services } = useServices()
-    let product = books.find(item => item?._id === id)
+    let product = books?.find(item => item?._id === id)
     if (!product?._id)
-        product = questions.find(item => item?._id === id)
+        product = questions?.find(item => item?._id === id)
     if (!product?._id)
-        product = syllabus.find(item => item?._id === id)
+        product = syllabus?.find(item => item?._id === id)
 
     const [dataStruct, setDataStruct] = useState(product)
 

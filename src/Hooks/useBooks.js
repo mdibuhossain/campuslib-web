@@ -7,15 +7,15 @@ export const useBooks = (setData, department, cat) => {
     useEffect(() => {
         switch (cat) {
             case "books":
-                const tmpBooks = books?.filter(item => item.categories === department)
+                const tmpBooks = books?.filter(item => item?.categories === department)
                 setData(tmpBooks)
                 break
             case "questions":
-                const tmpQuestions = questions?.filter(item => item.categories === department)
+                const tmpQuestions = questions?.filter(item => item?.categories === department)
                 setData(tmpQuestions)
                 break
             case "syllabus":
-                const tmpSyllabus = syllabus?.filter(item => item.categories === department)
+                const tmpSyllabus = syllabus?.filter(item => item?.categories === department)
                 setData(tmpSyllabus)
                 break
             default:
