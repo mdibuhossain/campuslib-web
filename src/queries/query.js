@@ -73,6 +73,32 @@ const GET_ADMIN = gql`
     }
   }
 `;
+const CREATE_USER = gql`
+  mutation CreateUser(
+    $displayName: String
+    $email: String
+    $password: String
+    $authType: String
+    $photoURL: String
+  ) {
+    createUser(
+      displayName: $displayName
+      email: $email
+      password: $password
+      authType: $authType
+      photoURL: $photoURL
+    ) {
+      _id
+    }
+  }
+`;
+const UPDATE_PROFILE = gql`
+  mutation EditProfile($photoURL: String, $token: String!){
+    editProfile(photoURL: $photoURL, token: $token){
+      _id
+    }
+  }
+`;
 const MAKE_ADMIN = gql`
   mutation MakeAdmin($_id: ID!, $token: String!) {
     makeAdmin(_id: $_id, token: $token) {
@@ -89,4 +115,6 @@ export {
   GET_ADMIN,
   GET_USERS,
   MAKE_ADMIN,
+  CREATE_USER,
+  UPDATE_PROFILE
 };

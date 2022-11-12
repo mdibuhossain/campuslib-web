@@ -1,11 +1,11 @@
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { logEvent } from 'firebase/analytics'
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, getIdToken } from 'firebase/auth'
 import { getDownloadURL, getStorage, ref, uploadString } from 'firebase/storage';
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import initAuth from "../firebase/initAuth"
-import { GET_ADMIN } from '../queries/query';
+import { CREATE_USER, GET_ADMIN, UPDATE_PROFILE } from '../queries/query';
 
 
 
@@ -44,6 +44,8 @@ const useFirebase = () => {
         (state?.from) ? history(state?.from?.pathname) : history('/')
     }
 
+    const [changePhoto] = useMutation(UPDATE_PROFILE)
+
     const uploadAvatar = async (file) => {
         const fileRef = ref(storage, 'avatar/' + auth?.currentUser?.uid + '.png');
         setIsLoading(true);
@@ -52,21 +54,25 @@ const useFirebase = () => {
         updateProfile(auth?.currentUser, { photoURL })
             .then(() => console.log('avatar uploaded'))
             .catch(e => console.log(e.message))
-            .finally((result) => setUser({ ...user, photoURL }))
+            .finally((result) => {
+                changePhoto({ variables: { token, photoURL } })
+                setUser({ ...user, photoURL })
+            })
         setIsLoading(false);
     }
+    const [createUser] = useMutation(CREATE_USER)
 
-    const saveUser = (email, password, displayName, photoURL, type, method) => {
-        const tmpUser = { email, password, displayName, photoURL, authType: type }
-        fetch(`${process.env.REACT_APP_BACKEND}/user_post`, {
-            method: method,
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(tmpUser)
-        })
-        //.then(data => console.log(data))
-    }
+    // const saveUser = (email, password, displayName, photoURL, type, method) => {
+    //     const tmpUser = { email, password, displayName, photoURL, authType: type }
+    //     fetch(`${process.env.REACT_APP_BACKEND}/user_post`, {
+    //         method: method,
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(tmpUser)
+    //     })
+    //     //.then(data => console.log(data))
+    // }
 
     const signWithGoogle = (e) => {
         e.preventDefault();
@@ -82,7 +88,15 @@ const useFirebase = () => {
                     .then(data => {
                         const tmpData = data.find(item => item?.email === result?.user?.email)
                         if (!tmpData?.email)
-                            saveUser(result?.user?.email, "", result?.user?.displayName, result?.user?.photoURL, result?.user?.providerData[0]?.providerId, "POST")
+                            createUser({
+                                variables: {
+                                    email: result?.user?.email,
+                                    displayName: result?.user?.displayName,
+                                    photoURL: result?.user?.photoURL,
+                                    authType: result?.user?.providerData[0]?.providerId
+                                }
+                            })
+                        // saveUser(result?.user?.email, "", result?.user?.displayName, result?.user?.photoURL, result?.user?.providerData[0]?.providerId, "POST")
                     })
                 user && redirect()
             })
@@ -119,7 +133,16 @@ const useFirebase = () => {
                         setUpdateTrack(updateTrack + 1)
                     }).catch(error => setError(error.message))
                 )
-                saveUser(email, password, name, result?.user?.photoURL, result?.user?.providerData[0]?.providerId, "POST");
+                createUser({
+                    variables: {
+                        email,
+                        password,
+                        displayName: result?.user?.displayName,
+                        photoURL: result?.user?.photoURL,
+                        authType: result?.user?.providerData[0]?.providerId
+                    }
+                })
+                // saveUser(email, password, name, result?.user?.photoURL, result?.user?.providerData[0]?.providerId, "POST");
                 user && redirect();
             })
             .catch(error => setError('Invalid Email and Password!'))
