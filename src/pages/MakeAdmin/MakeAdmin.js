@@ -1,35 +1,41 @@
-import { useQuery } from "@apollo/client";
+import { Cache, useMutation, useQuery } from "@apollo/client";
 import { CircularProgress, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import { useAuth } from "../../Hooks/useAuth";
 import PageLayout from "../../Layout/PageLayout";
-import { GET_USERS } from "../../queries/query";
+import { GET_USERS, MAKE_ADMIN } from "../../queries/query";
 
 const MakeAdmin = () => {
     const { user, token } = useAuth();
     const [updateCount, setUpdateCount] = useState(0);
 
-    const { data: { getUsers: users = [] } = {}, loading: usersLoading, userError } = useQuery(GET_USERS);
+    const updateAdmin = (arg, comp) => {
+        const res = [...arg]
+        const indx = res.findIndex(tmp => tmp?._id === comp?._id)
+        res[indx] = { ...res[indx], role: ((res[indx].role === 'admin') ? 'regular' : 'admin') }
+        return res
+    }
 
-    const handleMakeAdmin = (id) => {
-        if (window.confirm("Are you sure want to make this person ADMIN?")) {
-            axios
-                .put(
-                    `${process.env.REACT_APP_BACKEND}/user/makeadmin/${id}`,
-                    {},
-                    {
-                        headers: {
-                            authorization: `Bearer ${token}`,
-                        },
-                    }
-                )
-                .then((res) => {
-                    console.log(res);
-                    setUpdateCount(updateCount + 1);
-                });
-        }
-    };
+    const { data: { getUsers: users = [] } = {}, loading: usersLoading } =
+        useQuery(GET_USERS, { variables: { token } });
+
+    const [handleMakeAdmin] = useMutation(MAKE_ADMIN, {
+        update(cache, { data: { makeAdmin } }) {
+            const { getUsers } = cache.readQuery({
+                query: GET_USERS,
+                variables: { token },
+            });
+            cache.writeQuery({
+                query: GET_USERS,
+                variables: { token },
+                data: {
+                    getUsers: updateAdmin(getUsers, makeAdmin)
+                },
+            });
+        },
+    });
+
     return (
         <PageLayout>
             <Typography
@@ -45,7 +51,10 @@ const MakeAdmin = () => {
                     </div>
                 ) : (
                     users?.map((item) => (
-                        <div key={item._id} className="grid grid-cols-1 sm:grid-cols-3 m-2">
+                        <div
+                            key={item?._id}
+                            className="grid grid-cols-1 sm:grid-cols-3 m-2"
+                        >
                             <div className="flex items-center col-span-2">
                                 <div className="mr-2 w-12 hidden sm:block">
                                     <img
@@ -56,21 +65,29 @@ const MakeAdmin = () => {
                                 </div>
                                 <div className="flex flex-col justify-start w-full">
                                     <h5 className="text-sm font-medium leading-tight mr-2">
-                                        {item.email}
+                                        {item?.email}
                                     </h5>
                                     <p className="text-xs text-gray-500">
-                                        {item.displayName} {user.email === item.email && "( me )"} (by-{item.authType})
+                                        {item?.displayName} {user.email === item?.email && "( me )"}{" "}
+                                        (by-{item?.authType})
                                     </p>
                                 </div>
                             </div>
                             <div className="sm:grid sm:justify-self-end sm:mt-0 mt-1 content-center">
-                                {item.role === "admin" ? (
-                                    <button className="bg-gray-300 rounded-md px-2 py-1 font-semibold text-gray-50 text-xs cursor-default">
+                                {item?.role === "admin" ? (
+                                    <button
+                                        onClick={() =>
+                                            handleMakeAdmin({ variables: { _id: item?._id, token } })
+                                        }
+                                        className="bg-red-600 hover:bg-red-900 rounded-md px-2 py-1 font-semibold text-gray-50 text-xs"
+                                    >
                                         Admin
                                     </button>
                                 ) : (
                                     <button
-                                        onClick={() => handleMakeAdmin(item?._id)}
+                                        onClick={() =>
+                                            handleMakeAdmin({ variables: { _id: item?._id, token } })
+                                        }
                                         className="bg-green-500 hover:bg-green-600 rounded-md px-2 py-1 font-semibold text-gray-800 hover:text-gray-200 text-xs"
                                     >
                                         Make Admin

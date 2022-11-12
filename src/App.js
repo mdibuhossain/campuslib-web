@@ -27,9 +27,38 @@ const ContentManagement = lazy(() =>
 );
 // import Ads from './components/Ads';
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        books: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        questions: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        syllabus: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        users: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
+  },
+});
+
 const client = new ApolloClient({
   uri: process.env.REACT_APP_BACKEND,
-  cache: new InMemoryCache(),
+  cache,
 });
 
 const theme = createTheme({

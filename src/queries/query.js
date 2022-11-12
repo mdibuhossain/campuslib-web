@@ -55,8 +55,8 @@ const GET_USER = gql`
   }
 `;
 const GET_USERS = gql`
-  query {
-    getUsers {
+  query GetUsers($token: String!) {
+    getUsers(token: $token) {
       _id
       displayName
       email
@@ -73,6 +73,13 @@ const GET_ADMIN = gql`
     }
   }
 `;
+const MAKE_ADMIN = gql`
+  mutation MakeAdmin($_id: ID!, $token: String!) {
+    makeAdmin(_id: $_id, token: $token) {
+      _id
+    }
+  }
+`;
 
 export {
   GET_BOOKS,
@@ -81,4 +88,5 @@ export {
   GET_USER,
   GET_ADMIN,
   GET_USERS,
+  MAKE_ADMIN,
 };

@@ -1,12 +1,11 @@
 import { useQuery } from '@apollo/client';
-import axios from 'axios';
 import { logEvent } from 'firebase/analytics'
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, getIdToken } from 'firebase/auth'
 import { getDownloadURL, getStorage, ref, uploadString } from 'firebase/storage';
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import initAuth from "../firebase/initAuth"
-import { GET_ADMIN, GET_USER } from '../queries/query';
+import { GET_ADMIN } from '../queries/query';
 
 
 
@@ -149,20 +148,20 @@ const useFirebase = () => {
     // }, [token]);
 
     // sending token to server
-    useEffect(() => {
-        axios.post(process.env.REACT_APP_BACKEND, {}, {
-            headers: {
-                "authorization": `Bearer ${token}`
-            }
-        })
-    }, [token])
+    // useEffect(() => {
+    //     axios.post(process.env.REACT_APP_BACKEND, {}, {
+    //         headers: {
+    //             "authorization": `Bearer ${token}`
+    //         }
+    //     })
+    // }, [token])
 
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, user => {
             if (user) {
                 setUser(user)
                 getIdToken(user)
-                    .then(idToken => setToken(idToken))
+                    .then(idToken => setToken(`Bearer ${idToken}`))
                 clearUser()
                 if (location.pathname === '/login' || location.pathname === '/signup')
                     history('/');
