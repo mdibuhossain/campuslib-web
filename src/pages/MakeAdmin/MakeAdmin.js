@@ -1,26 +1,26 @@
-import { Cache, useMutation, useQuery } from "@apollo/client";
-import { CircularProgress, Typography } from "@mui/material";
-import axios from "axios";
-import React, { useState } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { CircularProgress, LinearProgress, Typography } from "@mui/material";
 import { useAuth } from "../../Hooks/useAuth";
 import PageLayout from "../../Layout/PageLayout";
 import { GET_USERS, MAKE_ADMIN } from "../../queries/query";
 
 const MakeAdmin = () => {
     const { user, token } = useAuth();
-    const [updateCount, setUpdateCount] = useState(0);
 
     const updateAdmin = (arg, comp) => {
-        const res = [...arg]
-        const indx = res.findIndex(tmp => tmp?._id === comp?._id)
-        res[indx] = { ...res[indx], role: ((res[indx].role === 'admin') ? 'regular' : 'admin') }
-        return res
-    }
+        const res = [...arg];
+        const indx = res.findIndex((tmp) => tmp?._id === comp?._id);
+        res[indx] = {
+            ...res[indx],
+            role: res[indx].role === "admin" ? "regular" : "admin",
+        };
+        return res;
+    };
 
     const { data: { getUsers: users = [] } = {}, loading: usersLoading } =
         useQuery(GET_USERS, { variables: { token } });
 
-    const [handleMakeAdmin] = useMutation(MAKE_ADMIN, {
+    const [handleMakeAdmin, { loading: adminLoading }] = useMutation(MAKE_ADMIN, {
         update(cache, { data: { makeAdmin } }) {
             const { getUsers } = cache.readQuery({
                 query: GET_USERS,
@@ -30,7 +30,7 @@ const MakeAdmin = () => {
                 query: GET_USERS,
                 variables: { token },
                 data: {
-                    getUsers: updateAdmin(getUsers, makeAdmin)
+                    getUsers: updateAdmin(getUsers, makeAdmin),
                 },
             });
         },
@@ -45,6 +45,7 @@ const MakeAdmin = () => {
                 MAKE ADMIN
             </Typography>
             <div className="flex flex-col 2xl:w-6/12 xl:w-7/12 lg:w-8/12 md:w-9/12 w-11/12 mx-auto mt-10 mb-10 bg-white p-5 rounded-lg">
+                {adminLoading && <LinearProgress />}
                 {usersLoading ? (
                     <div className=" flex justify-center items-center">
                         <CircularProgress color="info" />
