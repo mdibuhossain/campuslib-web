@@ -44,6 +44,7 @@ const useFirebase = () => {
         (state?.from) ? history(state?.from?.pathname) : history('/')
     }
 
+    // Change Profile photo
     const [changePhoto] = useMutation(UPDATE_PROFILE)
 
     const uploadAvatar = async (file) => {
@@ -60,19 +61,9 @@ const useFirebase = () => {
             })
         setIsLoading(false);
     }
-    const [createUser] = useMutation(CREATE_USER)
 
-    // const saveUser = (email, password, displayName, photoURL, type, method) => {
-    //     const tmpUser = { email, password, displayName, photoURL, authType: type }
-    //     fetch(`${process.env.REACT_APP_BACKEND}/user_post`, {
-    //         method: method,
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(tmpUser)
-    //     })
-    //     //.then(data => console.log(data))
-    // }
+    // new user entry in DB
+    const [createUser] = useMutation(CREATE_USER)
 
     const signWithGoogle = (e) => {
         e.preventDefault();
