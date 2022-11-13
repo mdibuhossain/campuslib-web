@@ -5,7 +5,7 @@ import { getDownloadURL, getStorage, ref, uploadString } from 'firebase/storage'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import initAuth from "../firebase/initAuth"
-import { CREATE_USER, GET_ADMIN, UPDATE_PROFILE } from '../queries/query';
+import { POST_USER, GET_ADMIN, UPDATE_PROFILE } from '../queries/query';
 
 
 
@@ -63,7 +63,7 @@ const useFirebase = () => {
     }
 
     // new user entry in DB
-    const [createUser] = useMutation(CREATE_USER)
+    const [saveUser] = useMutation(POST_USER)
 
     const signWithGoogle = (e) => {
         e.preventDefault();
@@ -73,7 +73,7 @@ const useFirebase = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 setUser(result.user)
-                createUser({
+                saveUser({
                     variables: {
                         email: result?.user?.email,
                         displayName: result?.user?.displayName,
@@ -116,11 +116,11 @@ const useFirebase = () => {
                         setUpdateTrack(updateTrack + 1)
                     }).catch(error => setError(error.message))
                 )
-                createUser({
+                saveUser({
                     variables: {
                         email,
                         password,
-                        displayName: result?.user?.displayName,
+                        displayName: name,
                         photoURL: result?.user?.photoURL,
                         authType: result?.user?.providerData[0]?.providerId
                     }
