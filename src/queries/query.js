@@ -172,15 +172,17 @@ const POST_USER = gql`
 // update data
 const UPDATE_BOOK = gql`
   mutation EditBook(
+    $_id: ID
     $book_name: String
     $download_link: String
     $categories: String
     $sub_categories: String
     $author: String
-    $edition: Number
+    $edition: String
     $token: String
   ) {
     editBook(
+      _id: $_id
       book_name: $book_name
       download_link: $download_link
       categories: $categories
@@ -195,6 +197,7 @@ const UPDATE_BOOK = gql`
 `;
 const UPDATE_QUESTION = gql`
   mutation EditQuestion(
+    $_id: ID
     $book_name: String
     $download_link: String
     $categories: String
@@ -202,6 +205,7 @@ const UPDATE_QUESTION = gql`
     $token: String
   ) {
     editQuestion(
+      _id: $_id
       book_name: $book_name
       download_link: $download_link
       categories: $categories
@@ -214,6 +218,7 @@ const UPDATE_QUESTION = gql`
 `;
 const UPDATE_SYLLABUS = gql`
   mutation EditSyllabus(
+    $_id: ID
     $book_name: String
     $download_link: String
     $categories: String
@@ -221,6 +226,7 @@ const UPDATE_SYLLABUS = gql`
     $token: String
   ) {
     editSyllabus(
+      _id: $_id
       book_name: $book_name
       download_link: $download_link
       categories: $categories

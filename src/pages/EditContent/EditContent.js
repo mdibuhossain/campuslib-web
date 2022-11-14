@@ -1,16 +1,18 @@
+import { useMutation } from '@apollo/client';
+import { LoadingButton } from '@mui/lab';
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
-import useServices from '../../Hooks/useServices';
 import PageLayout from '../../Layout/PageLayout';
+import { GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, UPDATE_BOOK, UPDATE_QUESTION, UPDATE_SYLLABUS } from '../../queries/query';
 
 const EditContent = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-    const { books, questions, syllabus } = useAuth()
-    const { Services } = useServices()
+    const { books, questions, syllabus, token } = useAuth()
     let product = books?.find(item => item?._id === id)
     if (!product?._id)
         product = questions?.find(item => item?._id === id)
@@ -19,6 +21,54 @@ const EditContent = () => {
 
     const [dataStruct, setDataStruct] = useState(product)
 
+    const updateContentFromCache = (arg, comp) => {
+        const tmp = [...arg]
+        const indx = tmp.findIndex((unit) => unit?._id === comp?._id)
+        tmp[indx] = dataStruct
+        return tmp
+    }
+
+    const [updateBook, { loading: bookUpdateLoading }] = useMutation(UPDATE_BOOK, {
+        update(cache, { data: { editBook } }) {
+            const { getBooks } = cache.readQuery({
+                query: GET_BOOKS,
+            });
+            cache.writeQuery({
+                query: GET_BOOKS,
+                data: {
+                    getBooks: updateContentFromCache(getBooks, editBook),
+                },
+            });
+        },
+    })
+
+    const [updateQuestion, { loading: questionUpdateLoading }] = useMutation(UPDATE_QUESTION, {
+        update(cache, { data: { editQuestion } }) {
+            const { getQuestions } = cache.readQuery({
+                query: GET_QUESTIONS,
+            });
+            cache.writeQuery({
+                query: GET_QUESTIONS,
+                data: {
+                    getQuestions: updateContentFromCache(getQuestions, editQuestion),
+                },
+            });
+        },
+    })
+
+    const [updateSyllabus, { loading: syllabusUpdateLoading }] = useMutation(UPDATE_SYLLABUS, {
+        update(cache, { data: { editSyllabus } }) {
+            const { getAllSyllabus } = cache.readQuery({
+                query: GET_SYLLABUS,
+            });
+            cache.writeQuery({
+                query: GET_SYLLABUS,
+                data: {
+                    getAllSyllabus: updateContentFromCache(getAllSyllabus, editSyllabus),
+                },
+            });
+        },
+    })
 
     const handleSubmit = (e) => {
         setDataStruct({
@@ -30,7 +80,12 @@ const EditContent = () => {
     const handlePost = (e) => {
         e.preventDefault()
         if (window.confirm("Are you sure want to update?")) {
-            Services("UPDATE_CONTENT", dataStruct?.sub_categories, dataStruct)
+            if (dataStruct?.sub_categories === 'syllabus')
+                updateSyllabus({ variables: { token, ...dataStruct } })
+            else if (dataStruct?.sub_categories === 'book')
+                updateBook({ variables: { token, ...dataStruct } })
+            else if (dataStruct?.sub_categories === 'question')
+                updateQuestion({ variables: { token, ...dataStruct } })
             e.target.reset()
             navigate(-1)
         }
@@ -132,14 +187,18 @@ const EditContent = () => {
                         fullWidth
                         required
                     />
-                    <Button
-                        type='submit'
-                        sx={{ width: "100%" }}
-                        variant="contained"
-                        disabled={(dataStruct?.sub_categories && dataStruct?.book_name && dataStruct?.categories && dataStruct?.download_link) ? false : true}
-                    >
-                        submit
-                    </Button>
+                    {
+                        (syllabusUpdateLoading || questionUpdateLoading || bookUpdateLoading) ?
+                            <LoadingButton sx={{ width: "100%" }} loading variant="contained">Loading</LoadingButton>
+                            : <Button
+                                type='submit'
+                                sx={{ width: "100%" }}
+                                variant="contained"
+                                disabled={(dataStruct?.sub_categories && dataStruct?.book_name && dataStruct?.categories && dataStruct?.download_link) ? false : true}
+                            >
+                                submit
+                            </Button>
+                    }
                 </form>
             </Box>
         </PageLayout>
