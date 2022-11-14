@@ -5,7 +5,7 @@ import { Box } from '@mui/system';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useAuth } from '../Hooks/useAuth';
-import { DELETE_BOOK, DELETE_QUESTION, DELETE_SYLLABUS, UPDATE_STATUS_BOOK, UPDATE_STATUS_QUESTION, UPDATE_STATUS_SYLLABUS } from '../queries/query';
+import { DELETE_BOOK, DELETE_QUESTION, DELETE_SYLLABUS, GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, UPDATE_STATUS_BOOK, UPDATE_STATUS_QUESTION, UPDATE_STATUS_SYLLABUS } from '../queries/query';
 import { useMutation } from '@apollo/client';
 
 const Demo = styled('div')(({ theme }) => ({
@@ -25,6 +25,9 @@ const ListOfRequest = ({ content, title, status }) => {
     const { user, admin, dataLoading, token } = useAuth();
 
     const API = {
+        'get_books': GET_BOOKS,
+        'get_syllabus': GET_SYLLABUS,
+        'get_questions': GET_QUESTIONS,
         'delete_book': DELETE_BOOK,
         'delete_question': DELETE_QUESTION,
         'delete_syllabus': DELETE_SYLLABUS,
@@ -33,11 +36,22 @@ const ListOfRequest = ({ content, title, status }) => {
         'update_status_syllabus': UPDATE_STATUS_SYLLABUS,
     }
 
-    const [updateStatus, { loading: updateStatusloading }] = useMutation(API[`update_status_${title.toLowerCase()}`] || UPDATE_STATUS_SYLLABUS)
-    const [deleteContent, { data, loading: deleteLoading }] = useMutation(API[`delete_${title.toLowerCase()}`] || DELETE_SYLLABUS)
+    const CAT = {
+        'book': 'books',
+        'question': 'questions',
+        'syllabus': 'syllabus'
+    }
 
-    console.log(data)
-    console.log(deleteLoading)
+    const [updateStatus, { loading: updateStatusloading }] = useMutation(API[`update_status_${title.toLowerCase()}`] || UPDATE_STATUS_SYLLABUS, {
+        refetchQueries: [{
+            query: API[`get_${CAT[title.toLowerCase()]}`]
+        }]
+    })
+    const [deleteContent, { loading: deleteLoading }] = useMutation(API[`delete_${title.toLowerCase()}`] || DELETE_SYLLABUS, {
+        refetchQueries: [{
+            query: API[`get_${CAT[title.toLowerCase()]}`]
+        }]
+    })
 
     const deleteRequest = (title, item) => {
         if (window.confirm("Are you sure want to delete?")) {
@@ -51,7 +65,7 @@ const ListOfRequest = ({ content, title, status }) => {
 
     return (
         <Demo>
-            {(updateStatusloading || deleteLoading) && <LinearProgress />}
+            {((updateStatusloading || deleteLoading) && !dataLoading) && <LinearProgress />}
             <Typography variant='h6' sx={{ ml: 2 }}>{title}</Typography>
             {
                 dataLoading ? <CircularProgress color="info" /> :
