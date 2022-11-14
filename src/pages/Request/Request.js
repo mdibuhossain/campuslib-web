@@ -52,7 +52,7 @@ const Request = () => {
         })
     }
 
-    const [postContent, { data, error, loading: postLoading }] = useMutation((API[`post_${dataStruct?.sub_categories}`] || POST_BOOK), {
+    const [postContent, { data, loading: postLoading }] = useMutation((API[`post_${dataStruct?.sub_categories}`] || POST_BOOK), {
         variables: {
             ...dataStruct,
             token

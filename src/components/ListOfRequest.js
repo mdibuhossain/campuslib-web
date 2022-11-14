@@ -5,7 +5,7 @@ import { Box } from '@mui/system';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useAuth } from '../Hooks/useAuth';
-import { DELETE_BOOK, DELETE_QUESTION, DELETE_SYLLABUS, GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, UPDATE_STATUS_BOOK, UPDATE_STATUS_QUESTION, UPDATE_STATUS_SYLLABUS } from '../queries/query';
+import { DELETE_BOOK, DELETE_QUESTION, DELETE_SYLLABUS, GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, UPDATE_BOOK, UPDATE_QUESTION, UPDATE_STATUS_BOOK, UPDATE_STATUS_QUESTION, UPDATE_STATUS_SYLLABUS, UPDATE_SYLLABUS } from '../queries/query';
 import { useMutation } from '@apollo/client';
 
 const Demo = styled('div')(({ theme }) => ({
@@ -42,11 +42,54 @@ const ListOfRequest = ({ content, title, status }) => {
         'syllabus': 'syllabus'
     }
 
-    const [updateStatus, { loading: updateStatusloading }] = useMutation(API[`update_status_${title.toLowerCase()}`] || UPDATE_STATUS_SYLLABUS, {
-        refetchQueries: [{
-            query: API[`get_${CAT[title.toLowerCase()]}`]
-        }]
+    const updateContentStatusFromCache = (arg, comp) => {
+        const res = [...arg]
+        const indx = res.findIndex((unit) => unit?._id === comp?._id)
+        res[indx] = { ...res[indx], status: !res[indx]?.status }
+        return res
+    }
+
+    const [updateStatusBook, { loading: updateStatusBookloading }] = useMutation(UPDATE_STATUS_BOOK, {
+        update(cache, { data: { editBookStatus } }) {
+            const { getBooks } = cache.readQuery({
+                query: GET_BOOKS,
+            });
+            cache.writeQuery({
+                query: GET_BOOKS,
+                data: {
+                    getBooks: updateContentStatusFromCache(getBooks, editBookStatus),
+                },
+            });
+        },
     })
+    const [updateStatusQuestion, { loading: updateStatusQuestionloading }] = useMutation(UPDATE_STATUS_QUESTION, {
+        update(cache, { data: { editQuestionStatus } }) {
+            const { getQuestions } = cache.readQuery({
+                query: GET_QUESTIONS,
+            });
+            cache.writeQuery({
+                query: GET_QUESTIONS,
+                data: {
+                    getQuestions: updateContentStatusFromCache(getQuestions, editQuestionStatus),
+                },
+            });
+        },
+    })
+    const [updateStatusSyllabus, { loading: updateStatusSyllabusloading }] = useMutation(UPDATE_STATUS_SYLLABUS, {
+        update(cache, { data: { editSyllabusStatus } }) {
+            const { getAllSyllabus } = cache.readQuery({
+                query: GET_SYLLABUS,
+            });
+            cache.writeQuery({
+                query: GET_SYLLABUS,
+                data: {
+                    getAllSyllabus: updateContentStatusFromCache(getAllSyllabus, editSyllabusStatus),
+                },
+            });
+        },
+    })
+
+
     const [deleteContent, { loading: deleteLoading }] = useMutation(API[`delete_${title.toLowerCase()}`] || DELETE_SYLLABUS, {
         refetchQueries: [{
             query: API[`get_${CAT[title.toLowerCase()]}`]
@@ -60,12 +103,20 @@ const ListOfRequest = ({ content, title, status }) => {
     }
 
     const handleStatus = (_id, status) => {
-        updateStatus({ variables: { _id, status, token } })
+        if (title.toLowerCase() === 'book')
+            updateStatusBook({ variables: { _id, status, token } })
+        else if (title.toLowerCase() === 'question')
+            updateStatusQuestion({ variables: { _id, status, token } })
+        else if (title.toLowerCase() === 'syllabus')
+            updateStatusSyllabus({ variables: { _id, status, token } })
     }
 
     return (
         <Demo>
-            {((updateStatusloading || deleteLoading) && !dataLoading) && <LinearProgress />}
+            {((updateStatusSyllabusloading ||
+                updateStatusQuestionloading ||
+                updateStatusBookloading ||
+                deleteLoading) && !dataLoading) && <LinearProgress />}
             <Typography variant='h6' sx={{ ml: 2 }}>{title}</Typography>
             {
                 dataLoading ? <CircularProgress color="info" /> :

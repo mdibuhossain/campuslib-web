@@ -22,10 +22,10 @@ const EditContent = () => {
     const [dataStruct, setDataStruct] = useState(product)
 
     const updateContentFromCache = (arg, comp) => {
-        const tmp = [...arg]
-        const indx = tmp.findIndex((unit) => unit?._id === comp?._id)
-        tmp[indx] = dataStruct
-        return tmp
+        const res = [...arg]
+        const indx = res.findIndex((unit) => unit?._id === comp?._id)
+        res[indx] = dataStruct
+        return res
     }
 
     const [updateBook, { loading: bookUpdateLoading }] = useMutation(UPDATE_BOOK, {
