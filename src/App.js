@@ -31,22 +31,22 @@ const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        books: {
+        getBooks: {
           merge(existing, incoming) {
             return incoming;
           },
         },
-        questions: {
+        getQuestions: {
           merge(existing, incoming) {
             return incoming;
           },
         },
-        syllabus: {
+        getAllSyllabus: {
           merge(existing, incoming) {
             return incoming;
           },
         },
-        users: {
+        getUsers: {
           merge(existing, incoming) {
             return incoming;
           },

@@ -24,24 +24,6 @@ const Demo = styled('div')(({ theme }) => ({
 const ListOfRequest = ({ content, title, status }) => {
     const { user, admin, dataLoading, token } = useAuth();
 
-    const API = {
-        'get_books': GET_BOOKS,
-        'get_syllabus': GET_SYLLABUS,
-        'get_questions': GET_QUESTIONS,
-        'delete_book': DELETE_BOOK,
-        'delete_question': DELETE_QUESTION,
-        'delete_syllabus': DELETE_SYLLABUS,
-        'update_status_book': UPDATE_STATUS_BOOK,
-        'update_status_question': UPDATE_STATUS_QUESTION,
-        'update_status_syllabus': UPDATE_STATUS_SYLLABUS,
-    }
-
-    const CAT = {
-        'book': 'books',
-        'question': 'questions',
-        'syllabus': 'syllabus'
-    }
-
     const updateContentStatusFromCache = (arg, comp) => {
         const res = [...arg]
         const indx = res.findIndex((unit) => unit?._id === comp?._id)
@@ -89,16 +71,58 @@ const ListOfRequest = ({ content, title, status }) => {
         },
     })
 
+    const deleteContentFromCache = (arg, comp) => {
+        return arg.filter((unit) => unit?._id !== comp?._id)
+    }
 
-    const [deleteContent, { loading: deleteLoading }] = useMutation(API[`delete_${title.toLowerCase()}`] || DELETE_SYLLABUS, {
-        refetchQueries: [{
-            query: API[`get_${CAT[title.toLowerCase()]}`]
-        }]
+    const [deleteContentBook, { loading: deleteBookLoading }] = useMutation(DELETE_BOOK, {
+        update(cache, { data: { deleteBook } }) {
+            const { getBooks } = cache.readQuery({
+                query: GET_BOOKS,
+            });
+            cache.writeQuery({
+                query: GET_BOOKS,
+                data: {
+                    getBooks: deleteContentFromCache(getBooks, deleteBook),
+                },
+            });
+        },
+    })
+    const [deleteContentQuestion, { loading: deleteQuestionLoading }] = useMutation(DELETE_QUESTION, {
+        update(cache, { data: { deleteQuestion } }) {
+            const { getQuestions } = cache.readQuery({
+                query: GET_QUESTIONS,
+            });
+            cache.writeQuery({
+                query: GET_QUESTIONS,
+                data: {
+                    getQuestions: deleteContentFromCache(getQuestions, deleteQuestion),
+                },
+            });
+        },
+    })
+    const [deleteContentSyllabus, { loading: deleteSyllabusLoading }] = useMutation(DELETE_SYLLABUS, {
+        update(cache, { data: { deleteSyllabus } }) {
+            const { getAllSyllabus } = cache.readQuery({
+                query: GET_SYLLABUS,
+            });
+            cache.writeQuery({
+                query: GET_SYLLABUS,
+                data: {
+                    getAllSyllabus: deleteContentFromCache(getAllSyllabus, deleteSyllabus),
+                },
+            });
+        },
     })
 
     const deleteRequest = (title, item) => {
         if (window.confirm("Are you sure want to delete?")) {
-            deleteContent({ variables: { token, _id: item?._id } })
+            if (title.toLowerCase() === 'book')
+                deleteContentBook({ variables: { token, _id: item?._id } })
+            else if (title.toLowerCase() === 'question')
+                deleteContentQuestion({ variables: { token, _id: item?._id } })
+            else if (title.toLowerCase() === 'syllabus')
+                deleteContentSyllabus({ variables: { token, _id: item?._id } })
         }
     }
 
@@ -116,7 +140,9 @@ const ListOfRequest = ({ content, title, status }) => {
             {((updateStatusSyllabusloading ||
                 updateStatusQuestionloading ||
                 updateStatusBookloading ||
-                deleteLoading) && !dataLoading) && <LinearProgress />}
+                deleteSyllabusLoading ||
+                deleteQuestionLoading ||
+                deleteBookLoading) && !dataLoading) && <LinearProgress />}
             <Typography variant='h6' sx={{ ml: 2 }}>{title}</Typography>
             {
                 dataLoading ? <CircularProgress color="info" /> :
