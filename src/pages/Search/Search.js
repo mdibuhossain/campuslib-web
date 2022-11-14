@@ -22,8 +22,6 @@ const Search = () => {
         setSearchData(tmp_res);
     }, [search_text, allData])
 
-    // console.log(searchData);
-
     return (
         <PageLayout>
             <Box sx={{ width: 'min(90vw, 50rem)', m: 'auto', mt: 2 }}>

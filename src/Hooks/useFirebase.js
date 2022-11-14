@@ -47,23 +47,28 @@ const useFirebase = () => {
     // Change Profile photo
     const [changePhoto] = useMutation(UPDATE_PROFILE)
 
+    // new user entry in DB
+    const [saveUser] = useMutation(POST_USER)
+
+    // Check is User admin or Not
+    const { data: { isAdmin: { isAdmin: admin = false } = {} } = [] } = useQuery(GET_ADMIN, {
+        variables: { email: user?.email }
+    })
+
     const uploadAvatar = async (file) => {
         const fileRef = ref(storage, 'avatar/' + auth?.currentUser?.uid + '.png');
         setIsLoading(true);
         const snapshot = await uploadString(fileRef, file, 'data_url');
         const photoURL = await getDownloadURL(fileRef);
         updateProfile(auth?.currentUser, { photoURL })
-            .then(() => console.log('avatar uploaded'))
-            .catch(e => console.log(e.message))
+            .then(() => { })
+            .catch(e => { })
             .finally((result) => {
                 changePhoto({ variables: { token, photoURL } })
                 setUser({ ...user, photoURL })
             })
         setIsLoading(false);
     }
-
-    // new user entry in DB
-    const [saveUser] = useMutation(POST_USER)
 
     const signWithGoogle = (e) => {
         e.preventDefault();
@@ -142,11 +147,6 @@ const useFirebase = () => {
         // .finally(() => setIsLoading(false))
         user && redirect();
     }
-
-    // Check is User admin or Not
-    const { data: { isAdmin: { isAdmin: admin = false } = {} } = [] } = useQuery(GET_ADMIN, {
-        variables: { email: user?.email }
-    })
 
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, user => {

@@ -173,7 +173,9 @@ const LinkTitle = (prop) => {
             }
             aria-current={prop.current ? 'page' : undefined}
         >
-            {prop.name} {prop.icon ? prop.icon : ''}
+            <Disclosure.Button>
+                {prop.name} {prop.icon ? prop.icon : ''}
+            </Disclosure.Button>
         </NavLink>
     )
 }
@@ -184,10 +186,10 @@ const DropdownItem = (prop, active) => {
             to={prop.to}
             className={'bg-gray-700 hover:bg-gray-800 block text-sm text-gray-200 text-center'}
         >
-            <Button variant="text" sx={{ display: 'block', width: '100%', color: 'inherit' }}>
+            <Disclosure.Button className="block w-full text-inherit py-2">
                 {prop.name}
-            </Button>
-        </NavLink >
+            </Disclosure.Button>
+        </NavLink>
     )
 }
 
@@ -277,7 +279,7 @@ export default function Navigation() {
                                     </div>
 
                                     <div className="-mr-2 flex md:hidden">
-                                        {/* Mobile menu button */}
+                                        {/* Mobile menu button hamburger icon */}
                                         <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                             <span className="sr-only">Open main menu</span>
                                             {open ? (
@@ -290,6 +292,7 @@ export default function Navigation() {
                                 </div>
                             </div>
 
+                            {/* Mobile Panel */}
                             <Disclosure.Panel className="md:hidden">
                                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                                     {navigation.map((item) => {
