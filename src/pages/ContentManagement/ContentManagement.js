@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Typography } from '@mui/material';
 import { useAuth } from '../../Hooks/useAuth';
 import PageLayout from '../../Layout/PageLayout';
@@ -25,10 +25,7 @@ const TabActive = () => {
 
 const ContentManagement = ({ isMyContent = false, pageTitle }) => {
     const { _isActive, activeHandler } = TabActive();
-    const { books, questions, syllabus, setUpdate, update } = useAuth()
-    useEffect(() => {
-        setUpdate(update + 1)
-    }, [])
+    const { books, questions, syllabus } = useAuth()
     return (
         <PageLayout>
             <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', my: 4 }}>{pageTitle}</Typography>

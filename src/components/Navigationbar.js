@@ -2,7 +2,6 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { NavLink } from 'react-router-dom'
-import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAuth } from '../Hooks/useAuth';
 import { CircularProgress } from '@mui/material';
@@ -107,7 +106,7 @@ const ProfileButton = () => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                 >
-                    <Menu.Items className="bg-gray-700 origin-top-right absolute md:right-0 -right-20 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="bg-gray-700 origin-top-right absolute md:right-0 -right-20 mt-2 w-48 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 focus:outline-none">
                         {/* Admin and normal user features */}
                         {admin &&
                             adminRoute.map(route => (
