@@ -246,6 +246,53 @@ const MAKE_ADMIN = gql`
   }
 `;
 
+// update status
+const UPDATE_STATUS_BOOK = gql`
+  mutation EditBookStatus(
+    $_id: ID
+    $token: String
+    $status: Boolean
+  ) {
+    editBookStatus(
+      _id: $_id
+      token: $token
+      status: $status
+    ) {
+      _id
+    }
+  }
+`;
+const UPDATE_STATUS_QUESTION = gql`
+  mutation EditQuestionStatus(
+    $_id: ID
+    $token: String
+    $status: Boolean
+  ) {
+    editQuestionStatus(
+      _id: $_id
+      token: $token
+      status: $status
+    ) {
+      _id
+    }
+  }
+`;
+const UPDATE_STATUS_SYLLABUS = gql`
+  mutation EditSyllabusStatus(
+    $_id: ID
+    $token: String
+    $status: Boolean
+  ) {
+    editSyllabusStatus(
+      _id: $_id
+      token: $token
+      status: $status
+    ) {
+      _id
+    }
+  }
+`;
+
 // delete data
 const DELETE_BOOK = gql`
   mutation DeleteBook($_id: ID, $token: String) {
@@ -288,4 +335,7 @@ export {
   DELETE_BOOK,
   DELETE_QUESTION,
   DELETE_SYLLABUS,
+  UPDATE_STATUS_BOOK,
+  UPDATE_STATUS_SYLLABUS,
+  UPDATE_STATUS_QUESTION,
 };

@@ -1,11 +1,12 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import { BookOpenIcon } from '@heroicons/react/outline';
-import { Avatar, CircularProgress, IconButton, List, ListItem, ListItemAvatar, Typography } from '@mui/material';
+import { Avatar, CircularProgress, IconButton, LinearProgress, List, ListItem, ListItemAvatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useAuth } from '../Hooks/useAuth';
-import useServices from '../Hooks/useServices';
+import { DELETE_BOOK, DELETE_QUESTION, DELETE_SYLLABUS, UPDATE_STATUS_BOOK, UPDATE_STATUS_QUESTION, UPDATE_STATUS_SYLLABUS } from '../queries/query';
+import { useMutation } from '@apollo/client';
 
 const Demo = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
@@ -21,21 +22,36 @@ const Demo = styled('div')(({ theme }) => ({
 }));
 
 const ListOfRequest = ({ content, title, status }) => {
-    const { user, admin, dataLoading } = useAuth();
-    const { Services } = useServices();
+    const { user, admin, dataLoading, token } = useAuth();
+
+    const API = {
+        'delete_book': DELETE_BOOK,
+        'delete_question': DELETE_QUESTION,
+        'delete_syllabus': DELETE_SYLLABUS,
+        'update_status_book': UPDATE_STATUS_BOOK,
+        'update_status_question': UPDATE_STATUS_QUESTION,
+        'update_status_syllabus': UPDATE_STATUS_SYLLABUS,
+    }
+
+    const [updateStatus, { loading: updateStatusloading }] = useMutation(API[`update_status_${title.toLowerCase()}`] || UPDATE_STATUS_SYLLABUS)
+    const [deleteContent, { data, loading: deleteLoading }] = useMutation(API[`delete_${title.toLowerCase()}`] || DELETE_SYLLABUS)
+
+    console.log(data)
+    console.log(deleteLoading)
 
     const deleteRequest = (title, item) => {
         if (window.confirm("Are you sure want to delete?")) {
-            Services("DELETE_CONTENT", title.toLowerCase(), item)
+            deleteContent({ variables: { token, _id: item?._id } })
         }
     }
 
     const handleStatus = (_id, status) => {
-        Services("UPDATE_STATUS", title.toLowerCase(), { _id, status })
+        updateStatus({ variables: { _id, status, token } })
     }
 
     return (
         <Demo>
+            {(updateStatusloading || deleteLoading) && <LinearProgress />}
             <Typography variant='h6' sx={{ ml: 2 }}>{title}</Typography>
             {
                 dataLoading ? <CircularProgress color="info" /> :
