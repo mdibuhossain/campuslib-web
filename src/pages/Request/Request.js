@@ -1,15 +1,22 @@
+import { useMutation } from '@apollo/client';
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Button, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
-import useServices from '../../Hooks/useServices';
 import PageLayout from '../../Layout/PageLayout';
+import { POST_BOOK, POST_QUESTION, POST_SYLLABUS } from '../../queries/query';
 
 
 const Request = () => {
-    const { user } = useAuth()
-    const { Services } = useServices();
+    const { user, token } = useAuth()
     const [blink, setBlink] = useState(false);
+
+    const API = {
+        'post_book': POST_BOOK,
+        'post_question': POST_QUESTION,
+        'post_syllabus': POST_SYLLABUS,
+    }
 
     const submit_data_format = {
         book_name: '',
@@ -37,7 +44,7 @@ const Request = () => {
 
 
 
-    const handleSubmit = (e) => {
+    const handleFormFillUp = (e) => {
         setDataStruct({
             ...dataStruct,
             [e.target.name]: e.target.value.trim(),
@@ -45,9 +52,22 @@ const Request = () => {
         })
     }
 
+    const [postContent, { data, error, loading: postLoading }] = useMutation((API[`post_${dataStruct?.sub_categories}`] || POST_BOOK), {
+        variables: {
+            ...dataStruct,
+            token
+        }
+    })
+
+    useEffect(() => {
+        if (data?.addBook || data?.addSyllabus || data?.addQuestion) {
+            alert("Request submit successfully")
+        }
+    }, [data])
+
     const handlePost = (e) => {
         e.preventDefault()
-        Services("POST_REQUEST", dataStruct?.sub_categories, dataStruct)
+        postContent({ variables: { ...dataStruct, token } })
         e.target.reset()
     }
 
@@ -77,7 +97,7 @@ const Request = () => {
                                         name="sub_categories"
                                         value={dataStruct?.sub_categories}
                                         label="Category"
-                                        onChange={handleSubmit}
+                                        onChange={handleFormFillUp}
                                         required
                                         disabled={!user?.email}
                                     >
@@ -93,7 +113,7 @@ const Request = () => {
                                     label="Title"
                                     name="book_name"
                                     variant="outlined"
-                                    onChange={handleSubmit}
+                                    onChange={handleFormFillUp}
                                     fullWidth
                                     required
                                     disabled={!user?.email}
@@ -108,7 +128,7 @@ const Request = () => {
                                                 label="Author"
                                                 name="author"
                                                 variant="outlined"
-                                                onChange={handleSubmit}
+                                                onChange={handleFormFillUp}
                                                 fullWidth
                                                 disabled={!user?.email}
                                             />
@@ -121,7 +141,7 @@ const Request = () => {
                                                 name="edition"
                                                 variant="outlined"
                                                 type="number"
-                                                onChange={handleSubmit}
+                                                onChange={handleFormFillUp}
                                                 fullWidth
                                                 disabled={!user?.email}
                                             />
@@ -137,7 +157,7 @@ const Request = () => {
                                         value={dataStruct.categories}
                                         label="Department"
                                         name="categories"
-                                        onChange={handleSubmit}
+                                        onChange={handleFormFillUp}
                                         required
                                         disabled={!user?.email}
                                     >
@@ -156,19 +176,24 @@ const Request = () => {
                                     label="Download link"
                                     name="download_link"
                                     variant="outlined"
-                                    onChange={handleSubmit}
+                                    onChange={handleFormFillUp}
                                     fullWidth
                                     required
                                     disabled={!user?.email}
                                 />
-                                <Button
-                                    type='submit'
-                                    sx={{ width: "100%" }}
-                                    variant="contained"
-                                    disabled={!(dataStruct.sub_categories && dataStruct.book_name && dataStruct.categories && dataStruct.download_link)}
-                                >
-                                    UPLOAD
-                                </Button>
+                                {
+                                    postLoading ?
+                                        <LoadingButton sx={{ width: "100%" }} loading variant="contained">Loading</LoadingButton>
+                                        :
+                                        <Button
+                                            type='submit'
+                                            sx={{ width: "100%" }}
+                                            variant="contained"
+                                            disabled={!(dataStruct.sub_categories && dataStruct.book_name && dataStruct.categories && dataStruct.download_link)}
+                                        >
+                                            UPLOAD
+                                        </Button>
+                                }
                             </form>
                         </Box>
                     </Grid>

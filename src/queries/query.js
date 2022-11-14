@@ -85,7 +85,7 @@ const POST_BOOK = gql`
     $added_by: String
     $status: Boolean
     $author: String
-    $edition: Number
+    $edition: String
     $token: String
   ) {
     addBook(

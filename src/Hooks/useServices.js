@@ -1,9 +1,21 @@
 import axios from "axios";
+import { DELETE_BOOK, DELETE_QUESTION, DELETE_SYLLABUS, POST_BOOK, POST_QUESTION, POST_SYLLABUS, UPDATE_BOOK, UPDATE_QUESTION, UPDATE_SYLLABUS } from "../queries/query";
 import { useAuth } from "./useAuth";
 
 const useServices = () => {
     const { setUpdate, update, token } = useAuth()
     const URL = process.env.REACT_APP_BACKEND
+    const API = {
+        'delete_book': DELETE_BOOK,
+        'delete_question': DELETE_QUESTION,
+        'delete_syllabus': DELETE_SYLLABUS,
+        'update_book': UPDATE_BOOK,
+        'update_question': UPDATE_QUESTION,
+        'update_syllabus': UPDATE_SYLLABUS,
+        'post_book': POST_BOOK,
+        'post_question': POST_QUESTION,
+        'post_syllabus': POST_SYLLABUS,
+    }
     const Services = (action, type, data) => {
         switch (action) {
             case "POST_REQUEST":
