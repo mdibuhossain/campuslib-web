@@ -133,6 +133,14 @@ const POST_BOOK = gql`
       token: $token
     ) {
       _id
+      book_name
+      download_link
+      categories
+      sub_categories
+      added_by
+      status
+      author
+      edition
     }
   }
 `;
@@ -156,6 +164,12 @@ const POST_QUESTION = gql`
       token: $token
     ) {
       _id
+      book_name
+      download_link
+      categories
+      sub_categories
+      added_by
+      status
     }
   }
 `;
@@ -179,6 +193,12 @@ const POST_SYLLABUS = gql`
       token: $token
     ) {
       _id
+      book_name
+      download_link
+      categories
+      sub_categories
+      added_by
+      status
     }
   }
 `;

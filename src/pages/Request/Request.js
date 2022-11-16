@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 import PageLayout from '../../Layout/PageLayout';
-import { POST_BOOK, POST_QUESTION, POST_SYLLABUS } from '../../queries/query';
+import { POST_BOOK, POST_QUESTION, POST_SYLLABUS, GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS } from '../../queries/query';
 
 
 const Request = () => {
@@ -52,22 +52,64 @@ const Request = () => {
         })
     }
 
-    const [postContent, { data, loading: postLoading }] = useMutation((API[`post_${dataStruct?.sub_categories}`] || POST_BOOK), {
-        variables: {
-            ...dataStruct,
-            token
+    const postContentInCache = (arg, comp) => {
+        return [...arg, comp]
+    }
+
+    const [postContentBook, { data: data1, loading: postBookLoading }] = useMutation(POST_BOOK, {
+        update(cache, { data: { addBook } }) {
+            const { getBooks } = cache.readQuery({
+                query: GET_BOOKS
+            })
+            cache.writeQuery({
+                query: GET_BOOKS,
+                data: {
+                    getBooks: postContentInCache(getBooks, addBook)
+                }
+            })
+        }
+    })
+    const [postContentQuestion, { data: data2, loading: postQuestionLoading }] = useMutation(POST_QUESTION, {
+        update(cache, { data: { addQuestion } }) {
+            const { getQuestions } = cache.readQuery({
+                query: GET_QUESTIONS
+            })
+            cache.writeQuery({
+                query: GET_QUESTIONS,
+                data: {
+                    getQuestions: postContentInCache(getQuestions, addQuestion)
+                }
+            })
+        }
+    })
+    const [postContentSyllabus, { data: data3, loading: postSyllabusLoading }] = useMutation(POST_SYLLABUS, {
+        update(cache, { data: { addSyllabus } }) {
+            const { getAllSyllabus } = cache.readQuery({
+                query: GET_SYLLABUS
+            })
+            cache.writeQuery({
+                query: GET_SYLLABUS,
+                data: {
+                    getAllSyllabus: postContentInCache(getAllSyllabus, addSyllabus)
+                }
+            })
         }
     })
 
     useEffect(() => {
-        if (data?.addBook || data?.addSyllabus || data?.addQuestion) {
+        if (data1?.addBook || data2?.addQuestion || data3?.addSyllabus) {
             alert("Request submit successfully")
         }
-    }, [data])
+    }, [data1, data2, data3])
 
     const handlePost = (e) => {
         e.preventDefault()
-        postContent({ variables: { ...dataStruct, token } })
+        if (dataStruct === 'book')
+            postContentBook({ variables: { ...dataStruct, token } })
+        else if (dataStruct?.sub_categories === 'question')
+            postContentQuestion({ variables: { ...dataStruct, token } })
+        else if (dataStruct?.sub_categories === 'syllabus')
+            postContentSyllabus({ variables: { ...dataStruct, token } })
         e.target.reset()
     }
 
@@ -182,7 +224,7 @@ const Request = () => {
                                     disabled={!user?.email}
                                 />
                                 {
-                                    postLoading ?
+                                    (postSyllabusLoading || postQuestionLoading || postBookLoading) ?
                                         <LoadingButton sx={{ width: "100%" }} loading variant="contained">Loading</LoadingButton>
                                         :
                                         <Button
