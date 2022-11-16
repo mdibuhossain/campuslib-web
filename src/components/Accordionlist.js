@@ -60,6 +60,7 @@ export default function Accordionlist({ title, contents }) {
         };
         return activeDataHandler();
     }, [contents]);
+
     if (showData?.length) {
         return (
             <Accordion onChange={handleChange("panel1")}>
@@ -84,7 +85,7 @@ export default function Accordionlist({ title, contents }) {
                 </AccordionDetails>
             </Accordion>
         );
-    } else if (dataLoading && !showData) {
+    } else if (dataLoading) {
         return (
             <div>
                 <CircularProgress color="inherit" />

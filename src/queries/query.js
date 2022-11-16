@@ -1,8 +1,41 @@
 import { gql } from "@apollo/client";
 
 // get data
+const GET_ALL_DATA = gql`
+  query GetAllData {
+    getBooks {
+      _id
+      book_name
+      download_link
+      categories
+      sub_categories
+      added_by
+      status
+      author
+      edition
+    }
+    getQuestions {
+      _id
+      book_name
+      download_link
+      categories
+      sub_categories
+      added_by
+      status
+    }
+    getAllSyllabus {
+      _id
+      book_name
+      download_link
+      categories
+      sub_categories
+      added_by
+      status
+    }
+  }
+`;
 const GET_BOOKS = gql`
-  query {
+  query GetBooks {
     getBooks {
       _id
       book_name
@@ -17,7 +50,7 @@ const GET_BOOKS = gql`
   }
 `;
 const GET_QUESTIONS = gql`
-  query {
+  query GetQuestions {
     getQuestions {
       _id
       book_name
@@ -30,7 +63,7 @@ const GET_QUESTIONS = gql`
   }
 `;
 const GET_SYLLABUS = gql`
-  query {
+  query GetAllSyllabus {
     getAllSyllabus {
       _id
       book_name
@@ -43,8 +76,8 @@ const GET_SYLLABUS = gql`
   }
 `;
 const GET_USER = gql`
-  query {
-    getUser(email: email) {
+  query GetUser($email: String) {
+    getUser(email: $email) {
       _id
       displayName
       email
@@ -254,46 +287,22 @@ const MAKE_ADMIN = gql`
 
 // update status
 const UPDATE_STATUS_BOOK = gql`
-  mutation EditBookStatus(
-    $_id: ID
-    $token: String
-    $status: Boolean
-  ) {
-    editBookStatus(
-      _id: $_id
-      token: $token
-      status: $status
-    ) {
+  mutation EditBookStatus($_id: ID, $token: String, $status: Boolean) {
+    editBookStatus(_id: $_id, token: $token, status: $status) {
       _id
     }
   }
 `;
 const UPDATE_STATUS_QUESTION = gql`
-  mutation EditQuestionStatus(
-    $_id: ID
-    $token: String
-    $status: Boolean
-  ) {
-    editQuestionStatus(
-      _id: $_id
-      token: $token
-      status: $status
-    ) {
+  mutation EditQuestionStatus($_id: ID, $token: String, $status: Boolean) {
+    editQuestionStatus(_id: $_id, token: $token, status: $status) {
       _id
     }
   }
 `;
 const UPDATE_STATUS_SYLLABUS = gql`
-  mutation EditSyllabusStatus(
-    $_id: ID
-    $token: String
-    $status: Boolean
-  ) {
-    editSyllabusStatus(
-      _id: $_id
-      token: $token
-      status: $status
-    ) {
+  mutation EditSyllabusStatus($_id: ID, $token: String, $status: Boolean) {
+    editSyllabusStatus(_id: $_id, token: $token, status: $status) {
       _id
     }
   }
@@ -327,8 +336,9 @@ export {
   GET_BOOKS,
   GET_ADMIN,
   GET_USERS,
-  GET_QUESTIONS,
+  GET_ALL_DATA,
   GET_SYLLABUS,
+  GET_QUESTIONS,
   POST_USER,
   POST_BOOK,
   POST_QUESTION,
