@@ -1,6 +1,11 @@
 import { gql } from "@apollo/client";
 
 // get data
+const GET_DEPARTMENTS = gql`
+  query GetDepartments {
+    getDepartments
+  }
+`;
 const GET_ALL_DATA = gql`
   query GetAllData {
     getBooks {
@@ -359,6 +364,7 @@ export {
   GET_ALL_DATA,
   GET_SYLLABUS,
   GET_QUESTIONS,
+  GET_DEPARTMENTS,
   POST_USER,
   POST_BOOK,
   POST_QUESTION,
