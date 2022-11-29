@@ -15,17 +15,20 @@ const Departments = () => {
       >
         departments
       </Typography>
-      <div className="flex flex-wrap justify-evenly">
+      <div className="flex flex-wrap justify-center">
         {deptLoading ? (
           <CircularProgress color="info" />
         ) : (
-          getDepartments?.map((item) => (
-            <NavLink to={`/${item}`}>
-              <div key={item} className="rounded-xl m-5 cursor-pointer">
-                <Department tag={item} />
-              </div>
-            </NavLink>
-          ))
+          getDepartments?.map(
+            (item) =>
+              item && (
+                <NavLink to={`/${item}`}>
+                  <div key={item} className="rounded-xl m-5 cursor-pointer">
+                    <Department tag={item} />
+                  </div>
+                </NavLink>
+              )
+          )
         )}
       </div>
     </div>
