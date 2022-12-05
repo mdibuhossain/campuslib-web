@@ -12,12 +12,6 @@ const Request = () => {
     const { user, token } = useAuth()
     const [blink, setBlink] = useState(false);
 
-    const API = {
-        'post_book': POST_BOOK,
-        'post_question': POST_QUESTION,
-        'post_syllabus': POST_SYLLABUS,
-    }
-
     const submit_data_format = {
         book_name: '',
         author: '',

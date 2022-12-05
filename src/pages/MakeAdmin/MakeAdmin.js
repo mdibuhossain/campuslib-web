@@ -44,7 +44,7 @@ const MakeAdmin = () => {
             >
                 MAKE ADMIN
             </Typography>
-            <div className="flex flex-col 2xl:w-6/12 xl:w-7/12 lg:w-8/12 md:w-9/12 w-11/12 mx-auto mt-10 mb-10 bg-white p-5 rounded-lg">
+            <div className="flex flex-col 2xl:w-6/12 xl:w-7/12 lg:w-8/12 md:w-9/12 w-11/12 mx-auto mt-10 mb-10 bg-white p-5 rounded-lg shadow-lg">
                 {adminLoading && <LinearProgress />}
                 {usersLoading ? (
                     <div className=" flex justify-center items-center">
