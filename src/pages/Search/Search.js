@@ -4,11 +4,11 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box } from '@mui/system';
 import { Button, CircularProgress } from '@mui/material';
-import { useAuth } from '../../Hooks/useAuth';
 import PageLayout from '../../Layout/PageLayout';
+import useUtility from '../../Hooks/useUtility';
 
 const Search = () => {
-    const { allData, dataLoading } = useAuth();
+    const { allData, dataLoading } = useUtility();
     const [search_text, setSearch_Text] = useState('')
     const [searchData, setSearchData] = useState([])
 

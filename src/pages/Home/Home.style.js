@@ -1,9 +1,11 @@
 import styled from '@emotion/styled'
+import { tagTitle } from '../../utility/tagTitle';
 
+const publicImage = window.location.origin;
 
 const Banner = styled.section`
     height: calc(100vh - 64px);
-    background-image: url(${(props) => props.src});
+    background-image: url(${(props) => publicImage + `/assets/images/${props.src}.webp`});
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -15,7 +17,7 @@ const Banner = styled.section`
     filter: contrast(0.9);
     font-family: 'Secular One', sans-serif;
     &:after{
-        content: "${(props) => props.title}";
+        content: "${(props) => tagTitle[props.title] || props.title}";
         color: #bfff00;
         display: flex;
         justify-content: center;

@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import { useAuth } from '../Hooks/useAuth';
 import { DELETE_BOOK, DELETE_QUESTION, DELETE_SYLLABUS, GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, UPDATE_STATUS_BOOK, UPDATE_STATUS_QUESTION, UPDATE_STATUS_SYLLABUS } from '../queries/query';
 import { useMutation } from '@apollo/client';
+import useUtility from '../Hooks/useUtility';
 
 const Demo = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
@@ -22,7 +23,8 @@ const Demo = styled('div')(({ theme }) => ({
 }));
 
 const ListOfRequest = ({ content, title, status }) => {
-    const { user, admin, dataLoading, token } = useAuth();
+    const { user, admin, token } = useAuth();
+    const { dataLoading } = useUtility();
 
     const updateContentStatusFromCache = (arg, comp) => {
         const res = [...arg]

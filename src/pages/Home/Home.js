@@ -6,7 +6,7 @@ import Banner from './Home.style';
 const Home = () => {
     return (
         <PageLayout>
-            <Banner src="assets/images/home.webp" title="CAMPUS LIBRARY" />
+            <Banner src="home" title="CAMPUS LIBRARY" />
             <Departments />
         </PageLayout>
     );

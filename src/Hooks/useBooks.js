@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useAuth } from "./useAuth"
+import useUtility from "./useUtility";
 
 export const useBooks = (setData, department, cat) => {
-    const { books, questions, syllabus, setDataLoading } = useAuth();
+    const { books, questions, syllabus } = useUtility();
 
     useEffect(() => {
         switch (cat) {
@@ -22,5 +22,5 @@ export const useBooks = (setData, department, cat) => {
                 setData([])
                 break
         }
-    }, [books, questions, syllabus, cat, setData, department, setDataLoading])
+    }, [books, questions, syllabus, cat, setData, department])
 }

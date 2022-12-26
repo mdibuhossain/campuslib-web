@@ -6,47 +6,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useAuth } from '../Hooks/useAuth';
 import { CircularProgress } from '@mui/material';
 import DownloadButtonWithAnimate from './Download_Button/DownloadButtonWithAnimate';
+import useUtility from '../Hooks/useUtility';
 
-const navigation = [
-    {
-        name: 'Home',
-        to: '/'
-    },
-    {
-        name: 'Department ↓',
-        list: [
-            {
-                name: 'CSE',
-                to: '/cse'
-            },
-            {
-                name: 'EEE',
-                to: '/eee'
-            },
-            {
-                name: 'MATH',
-                to: '/math'
-            },
-            {
-                name: 'STATISTICS',
-                to: '/sta'
-            },
-            {
-                name: 'NON ACADEMIC',
-                to: '/nonacademic'
-            }
-        ]
-    },
-    {
-        name: 'Upload',
-        to: '/request'
-    },
-    {
-        name: '',
-        icon: <SearchIcon />,
-        to: '/search'
-    }
-]
+
 
 const usersRoute = [
     {
@@ -238,6 +200,26 @@ const DrowdownList = (prop) => {
 
 export default function Navigation() {
     const { user, isLoading } = useAuth();
+    const { deptNavList, deptLoading } = useUtility()
+    const navigation = [
+        {
+            name: 'Home',
+            to: '/'
+        },
+        {
+            name: 'Department ↓',
+            list: deptNavList
+        },
+        {
+            name: 'Upload',
+            to: '/request'
+        },
+        {
+            name: '',
+            icon: <SearchIcon />,
+            to: '/search'
+        }
+    ]
     return (
         <>
             <div className="w-full z-50">
@@ -265,7 +247,7 @@ export default function Navigation() {
                                             <div className="ml-10 flex items-center space-x-4">
                                                 {navigation.map((item) => {
                                                     if (item?.list?.length) {
-                                                        return DrowdownList(item)
+                                                        return (!deptLoading ? DrowdownList(item) : null)
                                                     }
                                                     else
                                                         return LinkTitle(item)
@@ -296,7 +278,7 @@ export default function Navigation() {
                                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                                     {navigation.map((item) => {
                                         if (item?.list?.length) {
-                                            return DrowdownList(item)
+                                            return (!deptLoading ? DrowdownList(item) : null)
                                         }
                                         else
                                             return LinkTitle(item)

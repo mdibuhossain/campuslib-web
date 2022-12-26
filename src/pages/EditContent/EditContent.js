@@ -5,13 +5,15 @@ import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
+import useUtility from '../../Hooks/useUtility';
 import PageLayout from '../../Layout/PageLayout';
 import { GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, UPDATE_BOOK, UPDATE_QUESTION, UPDATE_SYLLABUS } from '../../queries/query';
 
 const EditContent = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-    const { books, questions, syllabus, token } = useAuth()
+    const { token } = useAuth()
+    const { books, questions, syllabus } = useUtility()
     let product = books?.find(item => item?._id === id)
     if (!product?._id)
         product = questions?.find(item => item?._id === id)

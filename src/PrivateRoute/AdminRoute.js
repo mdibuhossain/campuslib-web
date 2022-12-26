@@ -5,7 +5,6 @@ import { useAuth } from '../Hooks/useAuth';
 
 const AdminRoute = ({ children }) => {
     const { admin, user, isLoading, adminLoading } = useAuth()
-    console.log(adminLoading)
     const location = useLocation();
     if (isLoading || adminLoading)
         return <Typography variant='h4'>Wait babu</Typography>

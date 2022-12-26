@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Typography } from '@mui/material';
-import { useAuth } from '../../Hooks/useAuth';
 import PageLayout from '../../Layout/PageLayout';
 import ListOfRequest from '../../components/ListOfRequest';
+import useUtility from '../../Hooks/useUtility';
 
 const TabActive = () => {
     const activeList = {
@@ -25,7 +25,7 @@ const TabActive = () => {
 
 const ContentManagement = ({ isMyContent = false, pageTitle }) => {
     const { _isActive, activeHandler } = TabActive();
-    const { books, questions, syllabus } = useAuth()
+    const { books, questions, syllabus } = useUtility()
     return (
         <PageLayout>
             <Typography variant='h5' sx={{ fontWeight: 600, textAlign: 'center', my: 4 }}>{pageTitle}</Typography>

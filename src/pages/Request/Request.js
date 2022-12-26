@@ -201,6 +201,14 @@ const Request = () => {
                                         <MenuItem value="eee">EEE</MenuItem>
                                         <MenuItem value="math">MATH</MenuItem>
                                         <MenuItem value="sta">STATISTICS</MenuItem>
+                                        {/* <MenuItem value="acce">ACCE</MenuItem>
+                                        <MenuItem value="ce">CE</MenuItem>
+                                        <MenuItem value="arch">ARCHITECTURE</MenuItem>
+                                        <MenuItem value="che">CHEMISTRY</MenuItem>
+                                        <MenuItem value="phy">PHYSICS</MenuItem>
+                                        <MenuItem value="phar">PHARMACY</MenuItem>
+                                        <MenuItem value="botany">BOTANY</MenuItem>
+                                        <MenuItem value="psy">PSYCHOLOGY</MenuItem> */}
                                         <MenuItem value="others">OTHERS</MenuItem>
                                         <MenuItem value="islamic">ISLAMIC</MenuItem>
                                         <MenuItem value="nonacademic">NON ACADEMIC</MenuItem>

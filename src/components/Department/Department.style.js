@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { tagTitle } from "../../utility/tagTitle";
 
-const Department = styled.section`
+const DepartmentStyle = styled.section`
   width: min(15rem, 90vw);
   height: min(15rem, 100vh);
   background-image: url(${(props) => `assets/images/${props.tag}.webp`});
@@ -22,6 +22,7 @@ const Department = styled.section`
   }
   &:after {
     content: "${(props) => tagTitle[props.tag] || props.tag}";
+    text-transform: uppercase;
     color: white;
     display: flex;
     justify-content: center;
@@ -41,4 +42,4 @@ const Department = styled.section`
   }
 `;
 
-export default Department;
+export default DepartmentStyle;

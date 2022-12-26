@@ -5,9 +5,9 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import { useAuth } from "../Hooks/useAuth";
 import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
+import useUtility from "../Hooks/useUtility";
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -46,7 +46,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function Accordionlist({ title, contents }) {
-    const { dataLoading } = useAuth();
+    const { dataLoading } = useUtility();
     const [showData, setShowData] = useState(null);
     const [expanded, setExpanded] = React.useState(null);
 

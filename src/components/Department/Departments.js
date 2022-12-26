@@ -1,12 +1,12 @@
 import { useQuery } from "@apollo/client";
 import { CircularProgress, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import useUtility from "../../Hooks/useUtility";
 import { GET_DEPARTMENTS } from "../../queries/query";
-import Department from "./Department.style";
+import DepartmentStyle from "./Department.style";
 
 const Departments = () => {
-  const { data: { getDepartments = [] } = {}, loading: deptLoading } =
-    useQuery(GET_DEPARTMENTS);
+  const { getDepartments, deptLoading } = useUtility()
   return (
     <div className="w-full m-auto mb-5">
       <Typography
@@ -22,9 +22,9 @@ const Departments = () => {
           getDepartments?.map(
             (item) =>
               item && (
-                <NavLink key={item} to={`/${item}`}>
+                <NavLink key={item} to={`/department/${item}`}>
                   <div className="rounded-xl m-5 cursor-pointer">
-                    <Department tag={item} />
+                    <DepartmentStyle tag={item} />
                   </div>
                 </NavLink>
               )
