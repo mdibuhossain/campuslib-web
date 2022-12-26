@@ -201,6 +201,7 @@ const Request = () => {
                                         <MenuItem value="eee">EEE</MenuItem>
                                         <MenuItem value="math">MATH</MenuItem>
                                         <MenuItem value="sta">STATISTICS</MenuItem>
+                                        <MenuItem value="others">OTHERS</MenuItem>
                                         <MenuItem value="islamic">ISLAMIC</MenuItem>
                                         <MenuItem value="nonacademic">NON ACADEMIC</MenuItem>
                                     </Select>
