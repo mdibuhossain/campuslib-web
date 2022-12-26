@@ -4,9 +4,10 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../Hooks/useAuth';
 
 const AdminRoute = ({ children }) => {
-    const { admin, user, isLoading } = useAuth();
+    const { admin, user, isLoading, adminLoading } = useAuth()
+    console.log(adminLoading)
     const location = useLocation();
-    if (isLoading)
+    if (isLoading || adminLoading)
         return <Typography variant='h4'>Wait babu</Typography>
     if (!((user?.email || user?.displayName) && admin))
         return <Navigate to="/" state={{ from: location }} />

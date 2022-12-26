@@ -32,12 +32,13 @@ const useFirebase = () => {
         setPassword('')
     }
 
-    useEffect(() => {
-        if (location?.pathname === '/')
-            logEvent(analytics, `Homepage_visited`)
-        else
-            logEvent(analytics, `${location?.pathname?.split("/")[1]}_visited`)
-    }, [location?.pathname])
+    // Google Analitics
+    // useEffect(() => {
+    //     if (location?.pathname === '/')
+    //         logEvent(analytics, `Homepage_visited`)
+    //     else
+    //         logEvent(analytics, `${location?.pathname?.split("/")[1]}_visited`)
+    // }, [location?.pathname])
 
     const redirect = () => {
         const { state } = location;
@@ -51,7 +52,7 @@ const useFirebase = () => {
     const [saveUser] = useMutation(POST_USER)
 
     // Check is User admin or Not
-    const { data: { isAdmin: { isAdmin: admin = false } = {} } = [] } = useQuery(GET_ADMIN, {
+    const { data: { isAdmin: { isAdmin: admin = false } = {} } = [], loading: adminLoading = true } = useQuery(GET_ADMIN, {
         variables: { email: user?.email }
     })
 
@@ -178,6 +179,7 @@ const useFirebase = () => {
         password,
         isLoading,
         setPassword,
+        adminLoading,
         uploadAvatar,
         signWithGoogle,
         signInWithEmail,
