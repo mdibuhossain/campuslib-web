@@ -22,8 +22,8 @@ const Departments = () => {
           getDepartments?.map(
             (item) =>
               item && (
-                <NavLink to={`/${item}`}>
-                  <div key={item} className="rounded-xl m-5 cursor-pointer">
+                <NavLink key={item} to={`/${item}`}>
+                  <div className="rounded-xl m-5 cursor-pointer">
                     <Department tag={item} />
                   </div>
                 </NavLink>

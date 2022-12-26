@@ -8,6 +8,7 @@ const Department = styled.section`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-color: yellow;
   -webkit-filter: contrast(0.9);
   -moz-filter: contrast(0.9);
   -ms-filter: contrast(0.9);
@@ -20,7 +21,7 @@ const Department = styled.section`
     transition: 0.21s ease-in-out;
   }
   &:after {
-    content: "${(props) => tagTitle[props.tag]}";
+    content: "${(props) => tagTitle[props.tag] || props.tag}";
     color: white;
     display: flex;
     justify-content: center;
