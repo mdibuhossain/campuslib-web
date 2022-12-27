@@ -1,16 +1,21 @@
 import { useMutation } from '@apollo/client';
-import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Button, Typography } from '@mui/material';
+import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Button, Typography, Tooltip } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 import PageLayout from '../../Layout/PageLayout';
 import { POST_BOOK, POST_QUESTION, POST_SYLLABUS, GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS } from '../../queries/query';
+import useUtility from '../../Hooks/useUtility';
+import { tagTitle } from '../../utility/tagTitle';
 
 
 const Request = () => {
     const { user, token } = useAuth()
-    const [blink, setBlink] = useState(false);
+    const { getDepartments, deptLoading } = useUtility()
+    const [blink, setBlink] = useState(false)
+    const [specialDept, setSpecialDept] = useState(false)
+    const [deptName, setDeptName] = useState('');
 
     const submit_data_format = {
         book_name: '',
@@ -44,6 +49,18 @@ const Request = () => {
             [e.target.name]: e.target.value.trim(),
             "added_by": user?.email
         })
+    }
+
+    const specialDeptCaseHandler = (e) => {
+        console.log(e.target.value)
+        if (e.target.value.trim() === 'others') {
+            setSpecialDept(true)
+        }
+        else {
+            handleFormFillUp(e)
+            setSpecialDept(false)
+        }
+        setDeptName(e.target.value.trim())
     }
 
     const postContentInCache = (arg, comp) => {
@@ -98,7 +115,7 @@ const Request = () => {
 
     const handlePost = (e) => {
         e.preventDefault()
-        if (dataStruct === 'book')
+        if (dataStruct?.sub_categories === 'book')
             postContentBook({ variables: { ...dataStruct, token } })
         else if (dataStruct?.sub_categories === 'question')
             postContentQuestion({ variables: { ...dataStruct, token } })
@@ -190,30 +207,38 @@ const Request = () => {
                                     <Select
                                         labelId="department-selection"
                                         id="department-selection"
-                                        value={dataStruct.categories}
+                                        value={deptName}
                                         label="Department"
                                         name="categories"
-                                        onChange={handleFormFillUp}
+                                        onChange={specialDeptCaseHandler}
                                         required
                                         disabled={!user?.email}
                                     >
-                                        <MenuItem value="cse">CSE</MenuItem>
-                                        <MenuItem value="eee">EEE</MenuItem>
-                                        <MenuItem value="math">MATH</MenuItem>
-                                        <MenuItem value="sta">STATISTICS</MenuItem>
-                                        {/* <MenuItem value="acce">ACCE</MenuItem>
-                                        <MenuItem value="ce">CE</MenuItem>
-                                        <MenuItem value="arch">ARCHITECTURE</MenuItem>
-                                        <MenuItem value="che">CHEMISTRY</MenuItem>
-                                        <MenuItem value="phy">PHYSICS</MenuItem>
-                                        <MenuItem value="phar">PHARMACY</MenuItem>
-                                        <MenuItem value="botany">BOTANY</MenuItem>
-                                        <MenuItem value="psy">PSYCHOLOGY</MenuItem> */}
+                                        {!deptLoading && getDepartments.map((item, index) => (
+                                            item &&
+                                            <MenuItem key={index} value={item}>
+                                                <Tooltip title={tagTitle[item] || ''} placement="top-start" arrow>
+                                                    <div className="w-full">{item.toUpperCase()}</div>
+                                                </Tooltip>
+                                            </MenuItem>
+                                        ))}
                                         <MenuItem value="others">OTHERS</MenuItem>
-                                        <MenuItem value="islamic">ISLAMIC</MenuItem>
-                                        <MenuItem value="nonacademic">NON ACADEMIC</MenuItem>
                                     </Select>
                                 </FormControl>
+
+                                {
+                                    specialDept ? <TextField
+                                        sx={{ mb: 2 }}
+                                        id="outlined-basic"
+                                        label="Unknown Department Name"
+                                        name="categories"
+                                        variant="outlined"
+                                        onChange={handleFormFillUp}
+                                        fullWidth
+                                        required
+                                        disabled={!user?.email}
+                                    /> : null
+                                }
 
                                 <TextField
                                     sx={{ mb: 2 }}

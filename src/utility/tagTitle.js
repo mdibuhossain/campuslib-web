@@ -4,4 +4,5 @@ export const tagTitle = {
   math: "Mathematics",
   sta: "Statistics",
   nonacademic: "Non Academic",
+  islamic: "Islamic",
 };

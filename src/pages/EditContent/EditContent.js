@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import { LoadingButton } from '@mui/lab';
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 import useUtility from '../../Hooks/useUtility';
@@ -10,15 +10,27 @@ import PageLayout from '../../Layout/PageLayout';
 import { GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, UPDATE_BOOK, UPDATE_QUESTION, UPDATE_SYLLABUS } from '../../queries/query';
 
 const EditContent = () => {
+    const [specialDept, setSpecialDept] = useState(false);
+    const [deptName, setDeptName] = useState('');
     const { id } = useParams()
     const navigate = useNavigate()
     const { token } = useAuth()
-    const { books, questions, syllabus } = useUtility()
+    const { books, questions, syllabus, deptLoading, getDepartments } = useUtility()
     let product = books?.find(item => item?._id === id)
     if (!product?._id)
         product = questions?.find(item => item?._id === id)
     if (!product?._id)
         product = syllabus?.find(item => item?._id === id)
+
+    useEffect(() => {
+        setDeptName(product?.categories)
+        if (getDepartments.length > 0 && product?.categories) {
+            if (!(getDepartments?.includes(product?.categories))) {
+                setDeptName('others')
+                setSpecialDept(true)
+            }
+        }
+    }, [deptLoading])
 
     const [dataStruct, setDataStruct] = useState(product)
 
@@ -76,6 +88,18 @@ const EditContent = () => {
             ...dataStruct,
             [e.target.name]: e.target.value
         })
+    }
+
+    const specialDeptCaseHandler = (e) => {
+        console.log(e.target.value)
+        if (e.target.value.trim() === 'others') {
+            setSpecialDept(true)
+        }
+        else {
+            handleSubmit(e)
+            setSpecialDept(false)
+        }
+        setDeptName(e.target.value.trim())
     }
 
     const handlePost = (e) => {
@@ -162,10 +186,10 @@ const EditContent = () => {
                         <Select
                             labelId="department-selection"
                             id="department-selection"
-                            value={dataStruct?.categories}
+                            value={deptName}
                             label="Department"
                             name="categories"
-                            onChange={handleSubmit}
+                            onChange={specialDeptCaseHandler}
                             required
                         >
                             <MenuItem value="cse">CSE</MenuItem>
@@ -176,6 +200,20 @@ const EditContent = () => {
                             <MenuItem value="others">Others</MenuItem>
                         </Select>
                     </FormControl>
+
+                    {
+                        specialDept ? <TextField
+                            sx={{ mb: 2 }}
+                            id="outlined-basic"
+                            defaultValue={dataStruct?.categories}
+                            label="Unknown Department Name"
+                            name="categories"
+                            variant="outlined"
+                            onChange={handleSubmit}
+                            fullWidth
+                            required
+                        /> : null
+                    }
 
                     <TextField
                         sx={{ mb: 2 }}
