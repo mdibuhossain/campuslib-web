@@ -46,21 +46,20 @@ const Request = () => {
     const handleFormFillUp = (e) => {
         setDataStruct({
             ...dataStruct,
-            [e.target.name]: e.target.value.trim(),
+            [e.target.name]: e.target.value.trim().toLowerCase(),
             "added_by": user?.email
         })
     }
 
     const specialDeptCaseHandler = (e) => {
-        console.log(e.target.value)
-        if (e.target.value.trim() === 'others') {
+        if (e.target.value.trim().toLowerCase() === 'others') {
             setSpecialDept(true)
         }
         else {
             handleFormFillUp(e)
             setSpecialDept(false)
         }
-        setDeptName(e.target.value.trim())
+        setDeptName(e.target.value.trim().toLowerCase())
     }
 
     const postContentInCache = (arg, comp) => {
