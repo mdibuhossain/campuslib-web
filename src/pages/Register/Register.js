@@ -99,7 +99,7 @@ const Register = () => {
                             disabled={!(!name || passwordWarning || emailWarning) ? false : true}
                             onClick={signUpWithEmail}
                         >
-                            {isLoading ? <CircularProgress color="inherit" /> : 'SIGN UP'}
+                            {isLoading ? <CircularProgress disableShrink={true} size={25} color="inherit" /> : 'SIGN UP'}
                         </Button>
                         <hr />
                         <Button
@@ -109,7 +109,7 @@ const Register = () => {
                             sx={{ mt: 3, mb: 2, bgcolor: 'red' }}
                             onClick={signWithGoogle}
                         >
-                            SIGN UP WITH GOOGLE
+                            {isLoading ? <CircularProgress disableShrink={true} size={25} color="inherit" /> : 'SIGN UP WITH GOOGLE'}
                         </Button>
                         <Grid container>
                             <Grid item>

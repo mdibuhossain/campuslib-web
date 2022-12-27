@@ -11,7 +11,7 @@ const Department = () => {
     const { dept } = useParams()
     const { dataLoading, allData } = useUtility()
     if (!dataLoading) {
-        const check = allData.find(it => it.categories === dept.trim().toLowerCase())
+        const check = allData.find(it => it.categories.trim().toLowerCase() === dept.trim().toLowerCase())
         if (check) {
             return (
                 <PageLayout>

@@ -174,7 +174,7 @@ const ListOfRequest = ({ content, title, status }) => {
                                         <Typography variant='caption'>
                                             {admin && (!item?.status ? <button onClick={() => handleStatus(item?._id, true)} className="bg-blue-500 hover:bg-blue-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs mr-2">allow</button> : <button onClick={() => handleStatus(item?._id, false)} className="bg-red-500 hover:bg-red-400 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs mr-2">hide</button>)}
 
-                                            {(admin || !item?.status) && <NavLink to={`/edit/${item?._id}`} className="bg-green-500 hover:bg-green-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs mr-2">edit</NavLink>}
+                                            {(admin || !item?.status || status) && <NavLink to={`/edit/${item?._id}`} className="bg-green-500 hover:bg-green-600 rounded-full px-2 py-0.5 font-semibold text-gray-50 hover:text-gray-50 text-xs mr-2">edit</NavLink>}
 
                                             <span className="mr-2 inline-block">( {item?.categories} )</span>
 

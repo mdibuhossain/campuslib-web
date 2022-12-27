@@ -75,7 +75,7 @@ const Login = () => {
                             disabled={(email && password) ? false : true}
                             onClick={signInWithEmail}
                         >
-                            {isLoading ? <CircularProgress color="inherit" /> : 'Sign In'}
+                            {isLoading ? <CircularProgress disableShrink={true} size={25} color="inherit" /> : 'Sign In'}
                         </Button>
                         <hr />
                         <Button
@@ -85,7 +85,7 @@ const Login = () => {
                             sx={{ mt: 3, mb: 2, bgcolor: 'red' }}
                             onClick={signWithGoogle}
                         >
-                            Sign In with Google
+                            {isLoading ? <CircularProgress disableShrink={true} size={25} color="inherit" /> : 'Sign In with Google'}
                         </Button>
                         <Grid container>
                             <Grid item>
