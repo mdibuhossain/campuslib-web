@@ -41,12 +41,10 @@ const Request = () => {
         return () => clearInterval(interval)
     }, [blink, user])
 
-
-
     const handleFormFillUp = (e) => {
         setDataStruct({
             ...dataStruct,
-            [e.target.name]: e.target.value.trim().toLowerCase(),
+            [e.target.name]: (e.target.name === 'categories') ? e.target.value.trim().toLowerCase() : e.target.value.trim(),
             "added_by": user?.email
         })
     }

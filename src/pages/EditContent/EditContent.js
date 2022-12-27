@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { LoadingButton } from '@mui/lab';
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Tooltip, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { useAuth } from '../../Hooks/useAuth';
 import useUtility from '../../Hooks/useUtility';
 import PageLayout from '../../Layout/PageLayout';
 import { GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, UPDATE_BOOK, UPDATE_QUESTION, UPDATE_SYLLABUS } from '../../queries/query';
+import { tagTitle } from '../../utility/tagTitle';
 
 const EditContent = () => {
     const [specialDept, setSpecialDept] = useState(false);
@@ -192,12 +193,15 @@ const EditContent = () => {
                             onChange={specialDeptCaseHandler}
                             required
                         >
-                            <MenuItem value="cse">CSE</MenuItem>
-                            <MenuItem value="eee">EEE</MenuItem>
-                            <MenuItem value="math">MATH</MenuItem>
-                            <MenuItem value="sta">STATISTICS</MenuItem>
-                            <MenuItem value="islamic">Islamic</MenuItem>
-                            <MenuItem value="others">Others</MenuItem>
+                            {!deptLoading && getDepartments.map((item, index) => (
+                                item &&
+                                <MenuItem key={index} value={item}>
+                                    <Tooltip title={tagTitle[item] || ''} placement="top-start" arrow>
+                                        <div className="w-full">{item.toUpperCase()}</div>
+                                    </Tooltip>
+                                </MenuItem>
+                            ))}
+                            <MenuItem value="others">OTHERS</MenuItem>
                         </Select>
                     </FormControl>
 
