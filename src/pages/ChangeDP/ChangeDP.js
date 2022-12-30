@@ -61,7 +61,7 @@ const ChangeDP = () => {
                         <h1 className="text-4xl font-bold my-3">{user.displayName}</h1>
                     </div>
 
-                    {/* test-start */}
+                    {/* Modal Start */}
 
                     {showModal ? (
                         <>
@@ -92,7 +92,7 @@ const ChangeDP = () => {
                                             width={250}
                                             height={250}
                                             border={35}
-                                            borderRadius={0}
+                                            borderRadius={200}
                                             rotate={rotate}
                                             scale={scale}
                                             color={[89, 72, 72, 0.8]}
@@ -159,7 +159,7 @@ const ChangeDP = () => {
                         </>
                     ) : null}
 
-                    {/* test-end */}
+                    {/* Modal End */}
 
                 </div >
             </div >
