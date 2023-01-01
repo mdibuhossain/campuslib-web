@@ -1,8 +1,6 @@
-import { useQuery } from "@apollo/client";
 import { CircularProgress, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import useUtility from "../../Hooks/useUtility";
-import { GET_DEPARTMENTS } from "../../queries/query";
 import DepartmentStyle from "./Department.style";
 
 const Departments = () => {

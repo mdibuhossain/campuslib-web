@@ -176,6 +176,7 @@ const useFirebase = () => {
         logOut,
         setName,
         setEmail,
+        setError,
         password,
         isLoading,
         setPassword,

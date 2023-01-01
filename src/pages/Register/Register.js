@@ -10,11 +10,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
-import { CircularProgress } from '@mui/material';
+import { Alert, CircularProgress, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import PageLayout from '../../Layout/PageLayout';
 
 const Register = () => {
-    const { signWithGoogle, name, setName, setEmail, setPassword, signUpWithEmail, isLoading } = useAuth();
+    const { signWithGoogle, name, setName, setEmail, setPassword, signUpWithEmail, isLoading, error, setError } = useAuth();
     const [emailWarning, setEmailWarning] = React.useState(" ");
     const [passwordWarning, setPasswordWarning] = React.useState(" ");
 
@@ -58,6 +59,33 @@ const Register = () => {
                     <Typography component="h1" variant="h5">
                         REGISTRATION
                     </Typography>
+
+                    {/* Error message component start */}
+                    {
+                        error ? <Box sx={{ width: '100%' }}>
+                            <Alert
+                                variant="filled"
+                                severity="error"
+                                action={
+                                    <IconButton
+                                        aria-label="close"
+                                        color="inherit"
+                                        size="small"
+                                        onClick={() => {
+                                            setError('');
+                                        }}
+                                    >
+                                        <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                }
+                                sx={{ mt: 2 }}
+                            >
+                                {error}
+                            </Alert>
+                        </Box> : null
+                    }
+                    {/* Error message component end */}
+
                     <Box component="form" onChange={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
