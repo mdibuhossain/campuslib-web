@@ -296,8 +296,12 @@ const UPDATE_SYLLABUS = gql`
   }
 `;
 const UPDATE_PROFILE = gql`
-  mutation EditProfile($photoURL: String, $token: String!) {
-    editProfile(photoURL: $photoURL, token: $token) {
+  mutation EditProfile(
+    $photoURL: String
+    $displayName: String
+    $token: String!
+  ) {
+    editProfile(photoURL: $photoURL, displayName: $displayName, token: $token) {
       _id
     }
   }

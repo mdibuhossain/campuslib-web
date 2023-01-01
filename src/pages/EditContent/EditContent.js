@@ -92,7 +92,6 @@ const EditContent = () => {
     }
 
     const specialDeptCaseHandler = (e) => {
-        console.log(e.target.value)
         if (e.target.value.trim() === 'others') {
             setSpecialDept(true)
         }

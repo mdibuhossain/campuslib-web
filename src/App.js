@@ -93,7 +93,7 @@ function App() {
                   <Route exact path="/request" element={<Request />} />
                   <Route
                     exact
-                    path="/changedp"
+                    path="/settings"
                     element={
                       <RequireAuth>
                         <ChangeDP />

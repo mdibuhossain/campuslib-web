@@ -27,17 +27,17 @@ const usersRoute = [
 
 const adminRoute = [
     {
-        name: 'Change DP',
-        to: '/changedp'
-    },
-    {
         name: 'Manage Content',
         to: '/manage'
     },
     {
         name: 'Make Admin',
         to: '/makeadmin'
-    }
+    },
+    {
+        name: 'Settings',
+        to: '/settings'
+    },
 ]
 
 function classNames(...classes) {

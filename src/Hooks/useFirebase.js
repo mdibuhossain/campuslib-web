@@ -46,7 +46,7 @@ const useFirebase = () => {
     }
 
     // Change Profile photo
-    const [changePhoto] = useMutation(UPDATE_PROFILE)
+    const [changePhoto,{ loading: updateProfileLoading } ] = useMutation(UPDATE_PROFILE)
 
     // new user entry in DB
     const [saveUser] = useMutation(POST_USER)
@@ -69,6 +69,15 @@ const useFirebase = () => {
                 setUser({ ...user, photoURL })
             })
         setIsLoading(false);
+    }
+
+    const updateProfileSettings = (updateData) => {
+        updateProfile(auth?.currentUser, { displayName: updateData?.displayName })
+            .then(() => {
+                setUser({ ...user, displayName: updateData?.displayName })
+                changePhoto({ variables: { token, ...user } })
+            })
+            .catch(e => { setError(e.message) })
     }
 
     const signWithGoogle = (e) => {
@@ -184,7 +193,9 @@ const useFirebase = () => {
         uploadAvatar,
         signWithGoogle,
         signInWithEmail,
-        signUpWithEmail
+        signUpWithEmail,
+        updateProfileLoading,
+        updateProfileSettings,
     }
 }
 
