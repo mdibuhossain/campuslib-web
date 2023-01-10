@@ -39,7 +39,7 @@ const useData = () => {
 
     useEffect(() => {
         if (getDepartments.length > 0) {
-            const tmpNav = new Array();
+            const tmpNav = [];
             getDepartments.map(item => {
                 if (item) {
                     tmpNav.push({ name: item?.toUpperCase(), to: `/department/${item?.toLowerCase()}` })
