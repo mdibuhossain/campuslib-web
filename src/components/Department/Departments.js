@@ -8,10 +8,10 @@ const Departments = () => {
   return (
     <div className="w-full m-auto mb-5">
       <Typography
-        variant="h5"
-        sx={{ fontWeight: 600, textAlign: "center", p: 2, color: "#707af4" }}
+        variant="h4"
+        sx={{ fontWeight: 600, textAlign: "center", py: 5, color: "#707af4" }}
       >
-        departments
+        Departments
       </Typography>
       <div className="flex flex-wrap justify-center">
         {deptLoading ? (
@@ -21,7 +21,7 @@ const Departments = () => {
             (item) =>
               item && (
                 <NavLink key={item} to={`/department/${item}`}>
-                  <div className="rounded-xl m-5 cursor-pointer">
+                  <div className="rounded-xl m-5 mt-0 cursor-pointer">
                     <DepartmentStyle tag={item} />
                   </div>
                 </NavLink>

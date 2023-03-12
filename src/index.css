@@ -21,6 +21,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background-color: #f0f2f5; */
-  background-image: url("../public/assets/images/feather.webp");
+  background-image: url("../public/assets/images/bg_pattern.jpg");
   background-repeat: repeat;
 }
