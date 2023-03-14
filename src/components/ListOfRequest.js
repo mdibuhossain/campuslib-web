@@ -139,12 +139,14 @@ const ListOfRequest = ({ content, title, status }) => {
 
     return (
         <Demo>
-            {((updateStatusSyllabusloading ||
-                updateStatusQuestionloading ||
-                updateStatusBookloading ||
-                deleteSyllabusLoading ||
-                deleteQuestionLoading ||
-                deleteBookLoading) && !dataLoading) && <LinearProgress />}
+            <Box sx={{ height: 5 }}>
+                {((updateStatusSyllabusloading ||
+                    updateStatusQuestionloading ||
+                    updateStatusBookloading ||
+                    deleteSyllabusLoading ||
+                    deleteQuestionLoading ||
+                    deleteBookLoading) && !dataLoading) && <LinearProgress />}
+            </Box>
             <Typography variant='h6' sx={{ ml: 2 }}>{title}</Typography>
             {
                 dataLoading ? <CircularProgress color="info" /> :
@@ -187,6 +189,14 @@ const ListOfRequest = ({ content, title, status }) => {
                         }
                     </List >
             }
+            <Box sx={{ height: 5 }}>
+                {((updateStatusSyllabusloading ||
+                    updateStatusQuestionloading ||
+                    updateStatusBookloading ||
+                    deleteSyllabusLoading ||
+                    deleteQuestionLoading ||
+                    deleteBookLoading) && !dataLoading) && <LinearProgress />}
+            </Box>
         </Demo >
     )
 }
