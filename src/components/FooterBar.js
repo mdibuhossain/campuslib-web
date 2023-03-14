@@ -1,11 +1,16 @@
 import React from 'react';
 
 const FooterBar = () => {
+    const [date, setDate] = React.useState('');
+    React.useEffect(() => {
+        const dt = new Date();
+        setDate(dt.toDateString().split(' ')[3])
+    }, [])
     return (
         <footer className="p-4 mt-10 sm:p-6 bg-gray-900 sticky top-[100vh]">
             {/* <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" /> */}
             <div className="sm:flex sm:items-center text-center sm:justify-between">
-                <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <a href="https://www.linkedin.com/in/mdibuhossain/" className="hover:underline" target="_blank" rel="noreferrer">MD. Ibrahim Hossain</a>. All Rights Reserved.
+                <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© {date} <a href="https://www.linkedin.com/in/mdibuhossain/" className="hover:underline" target="_blank" rel="noreferrer">MD. Ibrahim Hossain</a>. All Rights Reserved.
                 </span>
                 <div className="flex mt-4 space-x-6 justify-center sm:mt-0">
                     <a href="https://www.facebook.com/mdibuhossain" className="text-gray-500 hover:text-gray-300 dark:hover:text-white" rel="noreferrer" target="_blank">
