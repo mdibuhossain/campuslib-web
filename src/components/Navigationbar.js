@@ -26,6 +26,10 @@ const usersRoute = [
 ]
 
 const adminRoute = [
+    // {
+    //     name: 'Test File upload',
+    //     to: '/test'
+    // },
     {
         name: 'Manage Content',
         to: '/manage'

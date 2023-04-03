@@ -2,11 +2,13 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { createUploadLink } from "apollo-upload-client";
 import "./App.css";
 import { AuthProvider } from "./context/AuthProvider";
 import CircularLoading from "./components/Circular_Loading/CircularLoading";
 import NotFound from "./components/NotFound/NotFound";
 import { UtilityProvider } from "./context/UtilityProvider";
+import Test from "./pages/Test/Test";
 const Department = lazy(() => import("./pages/Department"));
 const Navigation = lazy(() => import("./components/Navigationbar"));
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -60,7 +62,9 @@ const cache = new InMemoryCache({
 });
 
 const client = new ApolloClient({
-  uri: process.env.REACT_APP_BACKEND,
+  link: createUploadLink({
+    uri: process.env.REACT_APP_BACKEND
+  }),
   cache,
 });
 
@@ -91,6 +95,7 @@ function App() {
                   <Route exact path="/" element={<Home />} />
                   <Route exact path="/search" element={<Search />} />
                   <Route exact path="/request" element={<Request />} />
+                  <Route exact path="/test" element={<Test />} />
                   <Route
                     exact
                     path="/settings"
