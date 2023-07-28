@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { tagTitle } from "../../utility/tagTitle";
 
-const DepartmentStyle = styled.section`
+const DepartmentStyle = styled.div`
   width: min(15rem, 90vw);
   height: min(15rem, 100vh);
   background-image: url(${(props) => `assets/images/${props.tag}.webp`});
@@ -15,11 +15,6 @@ const DepartmentStyle = styled.section`
   -o-filter: contrast(0.9);
   filter: contrast(0.9);
   font-family: "Secular One", sans-serif;
-  transition: 0.21s ease-out;
-  &:hover {
-    box-shadow: 1px 1px 20px #707af4;
-    transition: 0.21s ease-in-out;
-  }
   &:after {
     content: "${(props) => tagTitle[props.tag] || props.tag}";
     text-transform: uppercase;
@@ -40,6 +35,26 @@ const DepartmentStyle = styled.section`
     inset: 0 0 0 0;
     background: rgba(16, 22, 50, 0.75);
   }
+  @media (max-width: 580px) {
+    width: 90vw;
+    height: min(8rem, 100vh);
+    font-size: 75%;
+  }
 `;
 
-export default DepartmentStyle;
+const DepartmentCard = styled.section`
+  border-radius: 30px;
+  margin: 25px;
+  overflow: hidden;
+  transition: 0.21s ease-in;
+  &:hover {
+    ${'' /* box-shadow: 1px 1px 5px #707af4; */}
+    transform: scale(1.05);
+    transition: 0.21s ease-out;
+  }
+  @media(max-width: 580px){
+    margin-top: 0px;
+  }
+`;
+
+export { DepartmentStyle, DepartmentCard };

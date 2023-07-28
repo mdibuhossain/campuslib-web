@@ -1,7 +1,7 @@
 import { CircularProgress, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import useUtility from "../../Hooks/useUtility";
-import DepartmentStyle from "./Department.style";
+import { DepartmentCard, DepartmentStyle } from "./Department.style";
 
 const Departments = () => {
   const { getDepartments, deptLoading } = useUtility()
@@ -11,7 +11,7 @@ const Departments = () => {
         variant="h4"
         sx={{ fontWeight: 600, textAlign: "center", py: 5, color: "#707af4" }}
       >
-        Departments
+        departments
       </Typography>
       <div className="flex flex-wrap justify-center">
         {deptLoading ? (
@@ -20,11 +20,11 @@ const Departments = () => {
           getDepartments?.map(
             (item) =>
               item && (
-                <NavLink key={item} to={`/department/${item}`}>
-                  <div className="rounded-xl m-5 mt-0 cursor-pointer">
+                <DepartmentCard>
+                  <NavLink key={item} to={`/department/${item}`}>
                     <DepartmentStyle tag={item} />
-                  </div>
-                </NavLink>
+                  </NavLink>
+                </DepartmentCard>
               )
           )
         )}

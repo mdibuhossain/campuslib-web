@@ -6,12 +6,15 @@ import PageLayout from '../Layout/PageLayout';
 import Banner from './Home/Home.style';
 import LinearLoadin from '../components/Linear_Loading/LinearLoadin'
 import NotFound from '../components/NotFound/NotFound';
+import { tagTitle } from '../utility/tagTitle';
 
 const Department = () => {
     const { dept } = useParams()
     const { dataLoading, allData } = useUtility()
     if (!dataLoading) {
-        const check = allData.find(it => it.categories.trim().toLowerCase() === dept.trim().toLowerCase())
+        // for testing purpose
+        // const check = allData.find(it => it.categories.trim().toLowerCase() === dept.trim().toLowerCase())
+        const check = tagTitle[dept]
         if (check) {
             return (
                 <PageLayout>

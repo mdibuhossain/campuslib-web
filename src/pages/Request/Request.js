@@ -132,7 +132,7 @@ const Request = () => {
                     </Grid>
                     <Grid item md={6} sx={{ m: "auto" }}>
                         <Box sx={{ fontWeight: 600, textAlign: 'center', mb: 4 }}>
-                            <Typography variant='h5'>UPLOAD YOUR CONTENT</Typography>
+                            <Typography variant='h5' sx={{ fontWeight: 600 }}>UPLOAD YOUR RESOURCE</Typography>
                             {!user?.email &&
                                 <NavLink to='/login' style={{ color: blink ? 'powderblue' : 'limegreen', textDecoration: 'underline' }}>→ require sign-in ←</NavLink>
                             }

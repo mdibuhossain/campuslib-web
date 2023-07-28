@@ -4,7 +4,7 @@ import { tagTitle } from '../../utility/tagTitle';
 const publicImage = window.location.origin;
 
 const Banner = styled.section`
-    height: calc(100vh - 64px);
+    height: calc(100vh - 64px); ${'' /* -64px */}
     background-image: url(${(props) => publicImage + `/assets/images/${props.src}.webp`});
     background-repeat: no-repeat;
     background-size: cover;

@@ -26,11 +26,11 @@ const TabActive = () => {
 const TabSection = ({ activeHandler, _isActive }) => (
     <section className="px-2 my-10">
         <nav className="flex justify-center w-full md:w-5/12 m-auto p-0">
-            <Button name="_books" onClick={activeHandler} variant="outlined" style={{ borderRadius: '0px', borderTopLeftRadius: "0.375rem", borderBottomLeftRadius: "0.375rem", color: "inherit", backgroundColor: _isActive["_books"] ? "rgb(56 189 248)" : "inherit" }} className="flex-1">BOOKS</Button>
+            <Button name="_books" onClick={activeHandler} variant="outlined" style={{ borderRadius: '0px', borderTopLeftRadius: "0.375rem", borderBottomLeftRadius: "0.375rem", color: "inherit", backgroundColor: _isActive["_books"] ? "rgb(56 189 248)" : "white" }} className="flex-1">BOOKS</Button>
 
-            <Button name="_questions" onClick={activeHandler} variant="outlined" style={{ borderRadius: '0px', color: "inherit", backgroundColor: _isActive["_questions"] ? "rgb(56 189 248)" : "inherit" }} className="flex-1">QUESTIONS</Button>
+            <Button name="_questions" onClick={activeHandler} variant="outlined" style={{ borderRadius: '0px', color: "inherit", backgroundColor: _isActive["_questions"] ? "rgb(56 189 248)" : "white" }} className="flex-1">QUESTIONS</Button>
 
-            <Button name="_syllabus" onClick={activeHandler} variant="outlined" style={{ borderRadius: '0px', borderTopRightRadius: "0.375rem", borderBottomRightRadius: "0.375rem", color: "inherit", backgroundColor: _isActive["_syllabus"] ? "rgb(56 189 248)" : "inherit" }} className="flex-1">SYLLABUS</Button>
+            <Button name="_syllabus" onClick={activeHandler} variant="outlined" style={{ borderRadius: '0px', borderTopRightRadius: "0.375rem", borderBottomRightRadius: "0.375rem", color: "inherit", backgroundColor: _isActive["_syllabus"] ? "rgb(56 189 248)" : "white" }} className="flex-1">SYLLABUS</Button>
         </nav>
     </section>
 )
