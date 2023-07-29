@@ -148,7 +148,7 @@ const useData = () => {
         loading: dataLoading,
     } = useQuery(GET_ALL_DATA)
 
-    
+
     // for testing purpose
     const [deptLoading, setDeptLoading] = useState(true);
     const [getDepartments, setGetDepartments] = useState([]);
@@ -156,12 +156,11 @@ const useData = () => {
         setDeptLoading(true);
         setGetDepartments(Object.keys(tagTitle));
         setDeptLoading(false);
-        console.log(getDepartments)
-    }, [getDepartments])
-    
+    }, [])
+
     // const { data: { getDepartments = [] } = {}, loading: deptLoading } =
     //     useQuery(GET_DEPARTMENTS);
-    
+
     // useEffect(() => {
     //     if (getDepartments.length > 0) {
     //         const tmpNav = [...initNav];

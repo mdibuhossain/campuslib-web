@@ -1,7 +1,8 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
+import { onError } from '@apollo/client/link/error';
 import { createUploadLink } from "apollo-upload-client";
 import "./App.css";
 import { AuthProvider } from "./context/AuthProvider";
@@ -61,9 +62,21 @@ const cache = new InMemoryCache({
   },
 });
 
+// backup server [if main server get failed] -------------
+const primaryServerEndpoint = process.env.REACT_APP_BACKEND;
+const backupServerEndpoint = process.env.REACT_APP_BACKEND_BACKUP;
+
+const errorLink = (uri, options) => {
+  return fetch(uri, options).catch(() => {
+    return fetch(backupServerEndpoint, options);
+  });
+};
+// <---------------------------------
+
 const client = new ApolloClient({
   link: createUploadLink({
-    uri: process.env.REACT_APP_BACKEND
+    uri: primaryServerEndpoint,
+    fetch: errorLink,
   }),
   cache,
 });
