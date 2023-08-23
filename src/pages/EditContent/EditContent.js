@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { LoadingButton } from '@mui/lab';
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Tooltip, Typography } from '@mui/material';
+import { Button, Chip, FormControl, Grid, InputLabel, ListSubheader, MenuItem, Select, TextField, Tooltip, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,6 +9,7 @@ import useUtility from '../../Hooks/useUtility';
 import PageLayout from '../../Layout/PageLayout';
 import { GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS, UPDATE_BOOK, UPDATE_QUESTION, UPDATE_SYLLABUS } from '../../queries/query';
 import { tagTitle } from '../../utility/tagTitle';
+import { semesterList } from '../../utility/semesterList';
 
 const EditContent = () => {
     const [specialDept, setSpecialDept] = useState(false);
@@ -34,6 +35,7 @@ const EditContent = () => {
     }, [deptLoading])
 
     const [dataStruct, setDataStruct] = useState(product)
+    const [semester, setSemester] = React.useState(product?.semester)
 
     const updateContentFromCache = (arg, comp) => {
         const res = [...arg]
@@ -83,6 +85,12 @@ const EditContent = () => {
             });
         },
     })
+
+    const handleSemester = (event) => {
+        const { target: { value } } = event;
+        setSemester(value)
+        handleSubmit(event);
+    }
 
     const handleSubmit = (e) => {
         setDataStruct({
@@ -217,6 +225,38 @@ const EditContent = () => {
                             required
                         /> : null
                     }
+
+                    <FormControl fullWidth sx={{ mb: 2 }}>
+                        <InputLabel htmlFor="semester-select">Semester</InputLabel>
+                        <Select
+                            value={semester ?? []}
+                            multiple
+                            id="semester-select"
+                            label="Semester"
+                            name="semester"
+                            onChange={handleSemester}
+                            renderValue={(selected) => (
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                    {selected.map((value) => (
+                                        <Chip key={value} label={value} />
+                                    ))}
+                                </Box>
+                            )}
+                        >
+                            {
+                                semesterList.map((sem) => {
+                                    if (sem?.title) {
+                                        return (
+                                            <ListSubheader key={sem.title} sx={{ fontWeight: "700" }}>{sem.title}</ListSubheader>
+                                        )
+                                    }
+                                    return (
+                                        <MenuItem key={sem} value={sem} sx={{ ml: 1 }}>{sem}</MenuItem>
+                                    )
+                                })
+                            }
+                        </Select>
+                    </FormControl>
 
                     <TextField
                         sx={{ mb: 2 }}

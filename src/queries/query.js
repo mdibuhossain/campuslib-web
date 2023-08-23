@@ -18,6 +18,7 @@ const GET_ALL_DATA = gql`
       status
       author
       edition
+      semester
     }
     getQuestions {
       _id
@@ -51,6 +52,7 @@ const GET_BOOKS = gql`
       status
       author
       edition
+      semester
     }
   }
 `;
@@ -124,6 +126,7 @@ const POST_BOOK = gql`
     $status: Boolean
     $author: String
     $edition: String
+    $semester: [String]
     $token: String
   ) {
     addBook(
@@ -135,6 +138,7 @@ const POST_BOOK = gql`
       status: $status
       author: $author
       edition: $edition
+      semester: $semester
       token: $token
     ) {
       _id
@@ -146,6 +150,7 @@ const POST_BOOK = gql`
       status
       author
       edition
+      semester
     }
   }
 `;

@@ -1,8 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
-import { onError } from '@apollo/client/link/error';
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 import "./App.css";
 import { AuthProvider } from "./context/AuthProvider";

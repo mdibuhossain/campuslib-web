@@ -138,7 +138,7 @@ const ListOfRequest = ({ content, title, status }) => {
     }
 
     return (
-        <Demo>
+        <Demo className='shadow-2xl'>
             <Box sx={{ height: 5 }}>
                 {((updateStatusSyllabusloading ||
                     updateStatusQuestionloading ||
@@ -197,7 +197,7 @@ const ListOfRequest = ({ content, title, status }) => {
                     deleteQuestionLoading ||
                     deleteBookLoading) && !dataLoading) && <LinearProgress />}
             </Box>
-        </Demo >
+        </Demo>
     )
 }
 

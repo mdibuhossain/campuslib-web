@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Button, Typography, Tooltip } from '@mui/material';
+import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Button, Typography, Tooltip, Checkbox, ListItemText, Chip, ListSubheader } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -8,6 +8,7 @@ import PageLayout from '../../Layout/PageLayout';
 import { POST_BOOK, POST_QUESTION, POST_SYLLABUS, GET_BOOKS, GET_QUESTIONS, GET_SYLLABUS } from '../../queries/query';
 import useUtility from '../../Hooks/useUtility';
 import { tagTitle } from '../../utility/tagTitle';
+import { semesterList } from '../../utility/semesterList';
 
 
 const Request = () => {
@@ -16,7 +17,6 @@ const Request = () => {
     const [blink, setBlink] = useState(false)
     const [specialDept, setSpecialDept] = useState(false)
     const [deptName, setDeptName] = useState('');
-
     const submit_data_format = {
         book_name: '',
         author: '',
@@ -24,11 +24,12 @@ const Request = () => {
         download_link: '',
         categories: '',
         sub_categories: '',
+        semester: [],
         status: false,
         added_by: user?.email
     }
     const [dataStruct, setDataStruct] = React.useState(submit_data_format)
-
+    const [semester, setSemester] = React.useState([])
     useEffect(() => {
         const handleBlink = () => {
             if (!user?.email) {
@@ -41,10 +42,15 @@ const Request = () => {
         return () => clearInterval(interval)
     }, [blink, user])
 
+    const handleSemester = (event) => {
+        const { target: { value } } = event;
+        setSemester(value)
+        handleFormFillUp(event);
+    }
     const handleFormFillUp = (e) => {
         setDataStruct({
             ...dataStruct,
-            [e.target.name]: (e.target.name === 'categories') ? e.target.value.trim().toLowerCase() : e.target.value.trim(),
+            [e.target.name]: (e.target.name === 'categories') ? e.target.value.trim().toLowerCase() : ((e.target.name === 'semester') ? e.target.value : e.target.value.trim()),
             "added_by": user?.email
         })
     }
@@ -219,7 +225,11 @@ const Request = () => {
                                                 </Tooltip>
                                             </MenuItem>
                                         ))}
-                                        <MenuItem value="others">OTHERS</MenuItem>
+                                        <MenuItem value="others" sx={{ bgcolor: "orange", ":hover": { bgcolor: "skyblue" } }}>
+                                            <Tooltip title="If not sure." placement="top-start" arrow>
+                                                <div className="w-full">OTHERS</div>
+                                            </Tooltip>
+                                        </MenuItem>
                                     </Select>
                                 </FormControl>
 
@@ -235,6 +245,43 @@ const Request = () => {
                                         required
                                         disabled={!user?.email}
                                     /> : null
+                                }
+
+                                {
+                                    (dataStruct?.sub_categories === 'book') &&
+                                    <Tooltip title="only select if applicable" placement="top-end" arrow>
+                                        <FormControl fullWidth sx={{ mb: 2 }}>
+                                            <InputLabel htmlFor="semester-select">Semester</InputLabel>
+                                            <Select
+                                                value={semester ?? []}
+                                                multiple
+                                                id="semester-select"
+                                                label="Semester"
+                                                name="semester"
+                                                onChange={handleSemester}
+                                                renderValue={(selected) => (
+                                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                                        {selected.map((value) => (
+                                                            <Chip key={value} label={value} />
+                                                        ))}
+                                                    </Box>
+                                                )}
+                                            >
+                                                {
+                                                    semesterList.map((sem) => {
+                                                        if (sem?.title) {
+                                                            return (
+                                                                <ListSubheader key={sem.title} sx={{ fontWeight: "700" }}>{sem.title}</ListSubheader>
+                                                            )
+                                                        }
+                                                        return (
+                                                            <MenuItem key={sem} value={sem} sx={{ ml: 1 }}>{sem}</MenuItem>
+                                                        )
+                                                    })
+                                                }
+                                            </Select>
+                                        </FormControl>
+                                    </Tooltip>
                                 }
 
                                 <TextField
