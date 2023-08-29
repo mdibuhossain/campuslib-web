@@ -85,7 +85,7 @@ export default function Accordionlist({ title, contents }) {
         }
         return filter()
     }, [showData])
-    console.log(data_4_2)
+    
     if (showData?.length) {
         if (title === 'Books') {
             return (

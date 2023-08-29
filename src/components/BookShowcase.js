@@ -23,7 +23,7 @@ const BookShowcase = ({ department }) => {
     const handleChangeIndex = (index) => {
         setValue(index);
     };
-    console.log(academic)
+    
     return (
         <Suspense fallback={<LinearLoadin />}>
             <div className='md:w-3/5 w-full m-auto my-10 md:shadow-2xl md:rounded-lg xs:px-10 px-2 sm:px-10 pt-5 pb-8 bg-white'>

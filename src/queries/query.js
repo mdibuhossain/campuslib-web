@@ -241,6 +241,7 @@ const UPDATE_BOOK = gql`
     $categories: String
     $sub_categories: String
     $author: String
+    $semester: [String]
     $edition: String
     $token: String
   ) {
@@ -251,6 +252,7 @@ const UPDATE_BOOK = gql`
       categories: $categories
       sub_categories: $sub_categories
       author: $author
+      semester: $semester
       edition: $edition
       token: $token
     ) {
