@@ -4,7 +4,7 @@ import useUtility from "../../Hooks/useUtility";
 import { DepartmentCard, DepartmentStyle } from "./Department.style";
 
 const Departments = () => {
-  const { getDepartments, deptLoading } = useUtility()
+  const { getDepartments, deptLoading } = useUtility();
   return (
     <div className="w-full m-auto mb-5">
       <Typography
@@ -20,8 +20,8 @@ const Departments = () => {
           getDepartments?.map(
             (item) =>
               item && (
-                <DepartmentCard>
-                  <NavLink key={item} to={`/department/${item}`}>
+                <DepartmentCard key={item}>
+                  <NavLink to={`/department/${item}`}>
                     <DepartmentStyle tag={item} />
                   </NavLink>
                 </DepartmentCard>

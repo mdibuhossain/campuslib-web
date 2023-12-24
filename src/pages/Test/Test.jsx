@@ -6,7 +6,7 @@ const Test = () => {
     const submitHandler = async (e) => {
         e.preventDefault()
         let formData = new FormData(e.currentTarget)
-        axios.post(`${process.env.REACT_APP_BACKEND_WITHOUT_GQL}/test`, formData, {
+        axios.post(`${import.meta.env.VITE_APP_BACKEND_WITHOUT_GQL}/test`, formData, {
             headers: {
                 'Content-type': 'multipart/form-data'
             }

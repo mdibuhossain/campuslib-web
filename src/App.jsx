@@ -12,12 +12,6 @@ import Test from "./pages/Test/Test";
 const Department = lazy(() => import("./pages/Department"));
 const Navigation = lazy(() => import("./components/Navigationbar"));
 const Home = lazy(() => import("./pages/Home/Home"));
-// const CSE = lazy(() => import("./pages/CSE/CSE"));
-// const EEE = lazy(() => import("./pages/EEE/EEE"));
-// const MAT = lazy(() => import("./pages/MAT/MAT"));
-// const STA = lazy(() => import("./pages/STA/STA"));
-// const Islamic = lazy(() => import("./pages/Islamic/Islamic"));
-// const NonAcademic = lazy(() => import("./pages/NonAcademic/NonAcademic"));
 const Search = lazy(() => import("./pages/Search/Search"));
 const Request = lazy(() => import("./pages/Request/Request"));
 const Login = lazy(() => import("./pages/Login/Login"));
@@ -30,7 +24,6 @@ const ChangeDP = lazy(() => import("./pages/ChangeDP/ChangeDP"));
 const ContentManagement = lazy(() =>
   import("./pages/ContentManagement/ContentManagement")
 );
-// import Ads from './components/Ads';
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -62,8 +55,8 @@ const cache = new InMemoryCache({
 });
 
 // backup server [if main server get failed] -------------
-const primaryServerEndpoint = process.env.REACT_APP_BACKEND;
-const backupServerEndpoint = process.env.REACT_APP_BACKEND_BACKUP;
+const primaryServerEndpoint = import.meta.env.VITE_APP_BACKEND;
+const backupServerEndpoint = import.meta.env.VITE_APP_BACKEND_BACKUP;
 
 const errorLink = (uri, options) => {
   return fetch(uri, options).catch(() => {
@@ -99,7 +92,6 @@ function App() {
           <Suspense fallback={<CircularLoading />}>
             <UtilityProvider>
               <AuthProvider>
-                {/* <Ads /> */}
                 <Navigation />
                 <Routes>
                   <Route path="*" element={<NotFound />} />
@@ -170,12 +162,6 @@ function App() {
                   />
                   <Route exact path="/login" element={<Login />} />
                   <Route exact path="/signup" element={<Register />} />
-                  {/* <Route exact path="/cse" element={<CSE />} />
-                <Route exact path="/eee" element={<EEE />} />
-                <Route exact path="/math" element={<MAT />} />
-                <Route exact path="/sta" element={<STA />} />
-                <Route exact path="/islamic" element={<Islamic />} />
-                <Route exact path="/nonacademic" element={<NonAcademic />} /> */}
                   <Route exact path="/department/:dept" element={<Department />} />
                 </Routes>
               </AuthProvider>

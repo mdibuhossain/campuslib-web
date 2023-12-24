@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { logEvent } from 'firebase/analytics'
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, getIdToken } from 'firebase/auth'
 import { getDownloadURL, getStorage, ref, uploadString } from 'firebase/storage';
 import { useEffect, useState } from 'react'
@@ -9,7 +8,7 @@ import { POST_USER, GET_ADMIN, UPDATE_PROFILE } from '../queries/query';
 
 
 
-const { analytics } = initAuth()
+initAuth()
 
 const useFirebase = () => {
     const [user, setUser] = useState({});
@@ -31,14 +30,6 @@ const useFirebase = () => {
         setEmail('')
         setPassword('')
     }
-
-    // Google Analitics
-    // useEffect(() => {
-    //     if (location?.pathname === '/')
-    //         logEvent(analytics, `Homepage_visited`)
-    //     else
-    //         logEvent(analytics, `${location?.pathname?.split("/")[1]}_visited`)
-    // }, [location?.pathname])
 
     const redirect = () => {
         const { state } = location;
