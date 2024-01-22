@@ -1,0 +1,1 @@
+import{g as s,E as e}from"./index-wJGs2Dyv.js";import{c as o}from"./createBox-E7Kn1Nho.js";const a=s("MuiBox",["root"]),t=a,r=o({defaultClassName:t.root,generateClassName:e.generate}),m=r;export{m as B};

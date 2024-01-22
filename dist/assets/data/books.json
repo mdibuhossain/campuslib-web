@@ -1,0 +1,272 @@
+{
+    "syllabus": [
+        {
+            "book_name": "SEASON 19-20",
+            "author": "",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/14qdwzAREpor3pJZd-wD1k6GgdiwYuWBW/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "academic"
+        }
+    ],
+    "books": [
+        {
+            "book_name": "ANSI C",
+            "author": "E. BALAGURUSAMY",
+            "edition": "6",
+            "download_link": "https://drive.google.com/file/d/1Yqz4SRtJGZpHvZgwKQGssf1-JEJehJiq/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Fundamentals Of Computers",
+            "author": "E. BALAGURUSAMY",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1BmYGeOi5nGL6mQvUP90BtFdUkDzwt4pU/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Computer Fundamentals",
+            "author": "PK. SINHA",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1AEueixi4y1v7Dq-v-FC1mY49k7v1HZC0/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Discrete Mathematics And Its Applications",
+            "author": "Kenneth Rosen",
+            "edition": "7",
+            "download_link": "https://drive.google.com/file/d/1KPyJN5j33PuqEy0jjdD-K70pWscPoyBk/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Discrete Mathematical Structures",
+            "author": "Kolman, Busby, Ross",
+            "edition": "6",
+            "download_link": "https://drive.google.com/file/d/1Ori5Q8CQ0pSz8Us_BrITfWfyVoVw7dz9/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Solution of Discrete Mathematics And Its Applications",
+            "author": "Kenneth Rosen",
+            "edition": "7",
+            "download_link": "https://onedrive.live.com/?authkey=%21AJNJ4cOWZ%5FieIbk&cid=1ACDA53AC1A8E50E&id=1ACDA53AC1A8E50E%214293&parId=1ACDA53AC1A8E50E%214292&o=OneUp",
+            "categories": "cse",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "C++ The Complete Reference",
+            "author": "Herbert Schildt",
+            "edition": "4",
+            "download_link": "https://drive.google.com/file/d/1yxprwXNYYEOhglpnP0jNafPCc0rGxyMa/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Head First C",
+            "author": "David Griffiths, Dawn Griffiths",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/14z-UBZoD9c5lzJpOds1Ns5mT5fCRl2Ye/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Head First Object-Oriented Analysis and Design",
+            "author": "Brett D. McLaughlin, Gary Pollice, Dave West",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1hf7xJ2diWqpYrUAMrs49EPQ8jpgnt9dR/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Computer Programming",
+            "author": "TAMIM SHAHARIAR SUBEEN",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1fFi7VUyeY9zc1TeDqFcJBGngDbKFU8P4/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "others"
+        },
+        {
+            "book_name": "Dawn Of Programming Contest March 2015",
+            "author": "MD MAHBUBUL HASAN",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1DXpv5hg966Z7eI_Z1hbgWzqVuT9OnORh/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "others"
+        },
+        {
+            "book_name": "ডাটা স্ট্রাকচার এবং অ্যালগরিদম",
+            "author": "শাহরিয়ার সুবিন",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/18UztO6ysZN_HkQIEtV4LNb01WCvQOtef/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "others"
+        },
+        {
+            "book_name": "Competitive Programming (2011)",
+            "author": "Steven Halim",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1LgyhmBRmQ2fRfDYwv31Xx7dVoKpMkMDj/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "others"
+        },
+        {
+            "book_name": "Fundamentals Of Electric Circuits",
+            "author": "Alexander Sadiku",
+            "edition": "4",
+            "download_link": "https://drive.google.com/file/d/1g1xAmkzhxGyTBbcdctipEBnP4S0K9SU7/view?usp=sharing",
+            "categories": "eee",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Fundamentals Of Electric Circuits",
+            "author": "Alexander Sadiku",
+            "edition": "5",
+            "download_link": "https://drive.google.com/file/d/18pTexxzkFO4Kf10HFMCw5yAIKVTiNb08/view?usp=sharing",
+            "categories": "eee",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Fundamentals Of Electric Circuits Practice Problem Solution",
+            "author": "Alexander Sadiku",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1cAPnnadGyfTAFECRPH7pVXMy_rCcH2tO/view?usp=sharing",
+            "categories": "eee",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Fundamentals Of Electric Circuits Solution",
+            "author": "Alexander Sadiku",
+            "edition": "4",
+            "download_link": "https://drive.google.com/file/d/1fXNKdGLH-FiBCDKam4yCXRmR74Tf-Xz-/view?usp=sharing",
+            "categories": "eee",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Fundamentals Of Electric Circuits Solution",
+            "author": "Alexander Sadiku",
+            "edition": "5",
+            "download_link": "https://drive.google.com/file/d/1w8ESGZ13LYOBvgTz2HGGZY2Y5MJhYm82/view?usp=sharing",
+            "categories": "eee",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Electronic Devices And Circuits Theory",
+            "author": "Robert Boylestad and Louis Nashelsky",
+            "edition": "7",
+            "download_link": "https://drive.google.com/file/d/1uU5yODrjBot0yyonUuCOfOJ-FRP9LtkV/view?usp=sharing",
+            "categories": "eee",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Calculus",
+            "author": "H. ANTON",
+            "edition": "10",
+            "download_link": "https://drive.google.com/file/d/1Z01niceeYUbqNJnWFlgSmtmM2OTkRxbg/view?usp=sharing",
+            "categories": "math",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Calculus Students Solution Manual",
+            "author": "Tamas Wiandt - H. ANTON",
+            "edition": "10",
+            "download_link": "https://drive.google.com/file/d/1rP-eC7duQmN1BiD79MtXFfqDZwgtkeI0/view?usp=sharing",
+            "categories": "math",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Ordinary and Partial Differential Equations",
+            "author": "Dr M. D. Raisinghania",
+            "edition": "15",
+            "download_link": "https://drive.google.com/file/d/1KqIVJJR9NbOzUfJ2gmrSkh9dy2BkN7ob/view?usp=sharing",
+            "categories": "math",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "The Numerical Solution of Ordinary and Partial Differential Equations",
+            "author": "Granville Sewell",
+            "edition": "2",
+            "download_link": "https://drive.google.com/file/d/1HKwwuryW3Z-Kf2Ikg_iu6OK9TNSiOfJu/view?usp=sharing",
+            "categories": "math",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Linear Algebra Theory Of Matrices",
+            "author": "Professor Abdur Rahman",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1qh5Dc8wrlmTjLavBD5pvu_zfEtfFsINd/view?usp=sharing",
+            "categories": "math",
+            "subcategories": "academic"
+        },
+        {
+            "book_name": "Vector Analysis Schaum",
+            "author": "",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1uyncVks2Ii_G6Utwcb-zcflAOzbD-olP/view?usp=sharing",
+            "categories": "math",
+            "subcategories": "academic"
+        }
+    ],
+    "questions": [
+        {
+            "book_name": "1-2 Semester Final - 2017",
+            "author": "",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1vHfnCz4mzMW_lL3FY7RsszAcpxlSIoN5/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "questions"
+        },
+        {
+            "book_name": "1-2 Semester Final - 2018",
+            "author": "",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1xrRJBVvE_WSzxXLsB5OCiU1brOX0--z0/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "questions"
+        },
+        {
+            "book_name": "1-2 Semester Final - 2019",
+            "author": "",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/11AHQtXQyVRqHbaFwRKyLf27hQ8F9AV4V/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "questions"
+        },
+        {
+            "book_name": "1-2 midTerm and Semester Final - 2018",
+            "author": "",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/145Sn8nPxLha5zHIaGm_dPShgJ24_3kBL/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "questions"
+        },
+        {
+            "book_name": "1-1 Semester Final - 2018",
+            "author": "",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/142Pq9IQX3q0N2qOoIawZbWRDhbs9-oVj/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "questions"
+        },
+        {
+            "book_name": "1-1 midTerm and Semester Final - 2019",
+            "author": "",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1552R4FpJ7Xb_ykIiiv89jwLoH396DDeI/view?usp=sharing",
+            "categories": "cse",
+            "subcategories": "questions"
+        },
+        {
+            "book_name": "MAT111 1-1 semester final question",
+            "author": "",
+            "edition": "",
+            "download_link": "https://drive.google.com/file/d/1RZeyvRJ-zU5jkQBDObZOLNItdoZY1cQI/view?usp=sharing",
+            "categories": "math",
+            "subcategories": "questions"
+        }
+    ]
+}

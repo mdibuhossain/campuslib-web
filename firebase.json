@@ -2,7 +2,7 @@
   "hosting": [
     {
       "site": "campuslb",
-      "public": "build",
+      "public": "dist",
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -17,7 +17,7 @@
     },
     {
       "site": "campuslib",
-      "public": "build",
+      "public": "dist",
       "ignore": [
         "firebase.json",
         "**/.*",
