@@ -61,6 +61,15 @@ const Departments = () => {
               if (value === "") return true;
               return option === value;
             }}
+            sx={{
+              "&.MuiAutocomplete-root": {
+                maxWidth: "32rem",
+                transition: "0.2s ease-in-out",
+                "&.Mui-focused": {
+                  maxWidth: "100%",
+                },
+              },
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -86,21 +95,7 @@ const Departments = () => {
                       </IconButton>
                     </InputAdornment>
                   ),
-                }}
-                sx={{
-                  "& .MuiInputBase-root": {
-                    borderRadius: "100px",
-                    maxWidth: "32rem",
-                    margin: "auto",
-                  },
-                  "& .MuiOutlinedInput-root": {
-                    fontWeight: 600,
-                    transition: "0.2s ease-in-out",
-                    boxShadow: "0px 0px 10px 0px rgba(184, 185, 190, 0.25)",
-                    "&.Mui-focused": {
-                      maxWidth: "100% !important",
-                    },
-                  },
+                  style: { borderRadius: "100px", width: "100%" },
                 }}
               />
             )}
