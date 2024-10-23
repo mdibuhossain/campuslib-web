@@ -11,6 +11,7 @@ import { DepartmentCard, DepartmentStyle } from "./Department.style";
 import { NavLink } from "react-router-dom";
 import useUtility from "../../Hooks/useUtility";
 import { tagTitle } from "../../utility/tagTitle";
+import { useState } from "react";
 
 const Departments = () => {
   const {
@@ -20,6 +21,7 @@ const Departments = () => {
     setSearchedValue,
     deptLoading,
   } = useUtility();
+  const [inputValue, setInputValue] = useState("");
 
   const handleChange = (event, newValue) => {
     if (newValue?.trim() === "" || newValue === null) {
@@ -37,8 +39,13 @@ const Departments = () => {
   };
 
   const handleResetSearch = (e) => {
+    setInputValue(() => "");
     setSearchedValue(() => "");
     setGetDepartments(() => Object.keys(tagTitle));
+  };
+
+  const handleInputValueChange = (e, newValue) => {
+    setInputValue(newValue);
   };
 
   return (
@@ -54,8 +61,9 @@ const Departments = () => {
               (option) => `${option.toUpperCase()} - ${tagTitle[option]}`
             )}
             value={searchedValue}
-            inputValue={searchedValue}
-            onInputChange={handleChange}
+            inputValue={inputValue}
+            onChange={handleChange}
+            onInputChange={handleInputValueChange}
             isOptionEqualToValue={(option, value) => {
               // Show all options when input is empty
               if (value === "") return true;
