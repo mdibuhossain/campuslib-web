@@ -46,13 +46,18 @@ const DepartmentCard = styled.section`
   border-radius: 30px;
   margin: 25px;
   overflow: hidden;
-  transition: 0.21s ease-in;
+  transition: 0.21s ease-in-out;
+
+  // Neumorphism Shadow for 3D effect
+  box-shadow: 5px 5px 15px #b8b9be, -5px -5px 15px #ffffff;
+
   &:hover {
-    ${'' /* box-shadow: 1px 1px 5px #707af4; */}
+    box-shadow: 8px 8px 20px #b8b9be, -8px -8px 20px #ffffff;
     transform: scale(1.05);
-    transition: 0.21s ease-out;
+    transition: 0.21s ease-in-out;
   }
-  @media(max-width: 580px){
+
+  @media (max-width: 580px) {
     margin-top: 0px;
   }
 `;
