@@ -76,10 +76,11 @@ const client = new ApolloClient({
 const theme = createTheme({
   typography: {
     fontFamily: [
-      "'Encode Sans SC'",
-      "sans-serif",
-      "'Secular One'",
+      "'Outfit'",
       "'Poppins'",
+      "'Secular One'",
+      "sans-serif",
+      "'Encode Sans SC'",
     ].join(","),
   },
 });
@@ -162,7 +163,11 @@ function App() {
                   />
                   <Route exact path="/login" element={<Login />} />
                   <Route exact path="/signup" element={<Register />} />
-                  <Route exact path="/department/:dept" element={<Department />} />
+                  <Route
+                    exact
+                    path="/department/:dept"
+                    element={<Department />}
+                  />
                 </Routes>
               </AuthProvider>
             </UtilityProvider>
