@@ -30,7 +30,7 @@ const Banner = styled.section`
         transform: translate(-50%,-50%);
         border: 2px solid white;
         padding: 0.75em 1.75em;
-        -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.75) 30%, #000 50%, rgba(0,0,0,.75) 70%);
+        -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.75) 40%, #000 50%, rgba(0,0,0,.75) 70%);
         -webkit-mask-size: 200%;
         animation: shine 1.85s linear infinite;
         @keyframes shine {
