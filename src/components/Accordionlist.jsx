@@ -131,7 +131,8 @@ const IndividualAccordion = (title, showData, handleChange) => (
 const InnerList = (showData) => (
     <ol>
         {showData?.map((item, index) => (
-            <li key={index} className="list-decimal ml-6 my-5">
+            <li key={index} className="my-5 px-3">
+                <span className="font-rubik_doodle font-bold">{index+1} . </span>
                 <a href={item?.download_link} target="_blank" rel="noreferrer">
                     <strong>
                         {item?.book_name} {item?.edition ? item?.edition + "E" : ""}
