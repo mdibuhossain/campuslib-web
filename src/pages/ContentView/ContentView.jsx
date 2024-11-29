@@ -10,7 +10,6 @@ const ContentView = () => {
   const {
     location: { state },
   } = useAuth();
-  console.log(allData);
 
   if (state) {
     return MainView(state);
@@ -36,7 +35,6 @@ const IFrame = ({ src }) => {
   const processedSrc = src.includes("drive.google.com")
     ? src.replace("/view", "/preview")
     : src;
-  console.log(processedSrc);
 
   return (
     <div className="h-[calc(100vh-64px)]">
