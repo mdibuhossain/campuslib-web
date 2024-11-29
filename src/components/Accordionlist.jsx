@@ -139,7 +139,7 @@ const InnerList = (showData) => {
       {showData?.map((item, index) => (
         <li
           key={index}
-          className="flex flex-row items-center justify-between gap-5 px-3"
+          className="flex flex-row items-center justify-between gap-5 my-2 px-3"
         >
           <div>
             <span className="font-rubik_doodle font-bold">{index + 1} . </span>
