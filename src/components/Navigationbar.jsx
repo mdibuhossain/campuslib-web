@@ -251,8 +251,8 @@ export default function Navigation() {
                       >
                         <img
                           className="w-14"
-                          src="assets/images/logo.webp"
-                          alt="campuslib logo"
+                          src="/assets/images/logo.webp"
+                          alt="logo"
                         />
                         <span className="hidden lg:block">CAMPUS LIBRARY</span>
                       </NavLink>
