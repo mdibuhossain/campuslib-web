@@ -8,7 +8,8 @@ import { AuthProvider } from "./context/AuthProvider";
 import CircularLoading from "./components/Circular_Loading/CircularLoading";
 import NotFound from "./components/NotFound/NotFound";
 import { UtilityProvider } from "./context/UtilityProvider";
-import Test from "./pages/Test/Test";
+// import Test from "./pages/Test/Test";
+const ContentView = lazy(() => import("./pages/ContentView/ContentView"));
 const Department = lazy(() => import("./pages/Department"));
 const Navigation = lazy(() => import("./components/Navigationbar"));
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -100,7 +101,8 @@ function App() {
                   <Route exact path="/" element={<Home />} />
                   <Route exact path="/search" element={<Search />} />
                   <Route exact path="/request" element={<Request />} />
-                  <Route exact path="/test" element={<Test />} />
+                  <Route exact path="/content/:id" element={<ContentView />} />
+                  {/* <Route exact path="/test" element={<Test />} /> */}
                   <Route
                     exact
                     path="/settings"
