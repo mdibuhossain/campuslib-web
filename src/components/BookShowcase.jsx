@@ -20,7 +20,7 @@ const BookShowcase = ({ department }) => {
 
   const handleChange = (event, newValue) => {
     setTabIndex(newValue);
-    swiperRef.current.slideTo(newValue, 800);
+    swiperRef.current.slideTo(newValue);
   };
   const handleChangeIndex = (sw) => {
     swiperRef.current = sw;
