@@ -4,6 +4,7 @@ import useUtility from "../../Hooks/useUtility";
 import NotFound from "../../components/NotFound/NotFound";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton } from "@mui/material";
+import { Helmet } from "react-helmet";
 
 const ContentView = () => {
   const { id } = useParams();
@@ -25,6 +26,17 @@ const ContentView = () => {
 const MainView = (item) => {
   return (
     <>
+      <Helmet>
+        <title>{item?.book_name} | Campus Library</title>
+        <meta
+          name="description"
+          content={`${item?.book_name} by ${item?.author}`}
+        />
+        <meta
+          name="keywords"
+          content={`${item?.categories}, ${item?.sub_categories}, online-library, library, BSMRSTU`}
+        />
+      </Helmet>
       <IFrame src={item?.download_link} />
     </>
   );

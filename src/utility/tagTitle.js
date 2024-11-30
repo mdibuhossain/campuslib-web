@@ -1,5 +1,5 @@
 export const tagTitle = {
-  cse: "Computer Science & Engineering",
+  cse: "Computer Science and Engineering",
   eee: "Electrical and Electronics Engineering",
   math: "Mathematics",
   sta: "Statistics",

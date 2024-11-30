@@ -8,6 +8,7 @@ import { AuthProvider } from "./context/AuthProvider";
 import CircularLoading from "./components/Circular_Loading/CircularLoading";
 import NotFound from "./components/NotFound/NotFound";
 import { UtilityProvider } from "./context/UtilityProvider";
+import { Helmet } from "react-helmet";
 // import Test from "./pages/Test/Test";
 const ContentView = lazy(() => import("./pages/ContentView/ContentView"));
 const Department = lazy(() => import("./pages/Department"));
@@ -91,6 +92,14 @@ function App() {
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
         <BrowserRouter>
+          <Helmet>
+            <title>Campus Library</title>
+            <meta
+              name="description"
+              content="Campus Library is an online library for BSMRSTU students."
+            />
+            <meta name="keywords" content="online-library, library, BSMRSTU" />
+          </Helmet>
           <Suspense fallback={<CircularLoading />}>
             <UtilityProvider>
               <AuthProvider>
