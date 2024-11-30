@@ -109,7 +109,11 @@ export default function Accordionlist({ title, contents }) {
         </div>
       );
     } else {
-      return InnerList(showData, handleViewRoute);
+      return (
+        <div className="bg-white">
+          <InnerList showData={showData} handleViewRoute={handleViewRoute}/>
+        </div>
+      )
     }
   } else if (dataLoading) {
     return (
@@ -129,17 +133,19 @@ const IndividualAccordion = (title, showData, handleChange, handleViewRoute) => 
         {title} - ({showData?.length})
       </Typography>
     </AccordionSummary>
-    <AccordionDetails>{InnerList(showData, handleViewRoute)}</AccordionDetails>
+    <AccordionDetails>
+      <InnerList showData={showData} handleViewRoute={handleViewRoute}/>
+    </AccordionDetails>
   </Accordion>
 );
 
-const InnerList = (showData, handleViewRoute) => {
+const InnerList = ({ showData, handleViewRoute }) => {
   return (
     <ol>
       {showData?.map((item, index) => (
         <li
           key={index}
-          className="flex flex-row items-center justify-between gap-5 my-2 px-3"
+          className="flex flex-row items-center justify-between gap-5 px-3"
         >
           <div>
             <span className="font-rubik_doodle font-bold">{index + 1} . </span>
