@@ -61,9 +61,10 @@ const Banner = styled.section`
     border-radius: 16px;
     background-attachment: scroll;
     &:after {
-      width: 90%;
+      width: 100%;
       border: none;
-      font-size: 1.8rem;
+      padding: 2rem 1rem;
+      font-size: min(1.5rem, 10vw);
     }
   }
 `;
