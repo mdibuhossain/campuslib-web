@@ -1,15 +1,14 @@
 import React from "react";
-import { useAuth } from "../../Hooks/useAuth";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import useUtility from "../../Hooks/useUtility";
 import NotFound from "../../components/NotFound/NotFound";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { IconButton } from "@mui/material";
 
 const ContentView = () => {
   const { id } = useParams();
   const { allData } = useUtility();
-  const {
-    location: { state },
-  } = useAuth();
+  const { state } = useLocation();
 
   if (state) {
     return MainView(state);
