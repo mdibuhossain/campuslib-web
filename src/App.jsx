@@ -92,14 +92,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
         <BrowserRouter>
-          <Helmet>
-            <title>Campus Library</title>
-            <meta
-              name="description"
-              content="Campus Library is an online library for BSMRSTU students."
-            />
-            <meta name="keywords" content="online-library, library, BSMRSTU" />
-          </Helmet>
           <Suspense fallback={<CircularLoading />}>
             <UtilityProvider>
               <AuthProvider>

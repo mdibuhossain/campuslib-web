@@ -18,7 +18,7 @@ const Department = () => {
     const check = tagTitle[dept];
     if (check) {
       return (
-        <PageLayout>
+        <>
           <Helmet>
             <title>{tagTitle[dept]} | Campus Library</title>
             <meta
@@ -30,9 +30,11 @@ const Department = () => {
               content={`${tagTitle[dept]}, books, questions, syllabus`}
             />
           </Helmet>
-          <Banner title={dept} src={dept} />
-          <BookShowcase department={dept} />
-        </PageLayout>
+          <PageLayout>
+            <Banner title={dept} src={dept} />
+            <BookShowcase department={dept} />
+          </PageLayout>
+        </>
       );
     } else {
       return <NotFound />;
