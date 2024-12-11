@@ -13,6 +13,7 @@ import { Helmet } from "react-helmet";
 const ContentView = lazy(() => import("./pages/ContentView/ContentView"));
 const Department = lazy(() => import("./pages/Department"));
 const Navigation = lazy(() => import("./components/Navigationbar"));
+const Reader = lazy(() => import("./pages/Reader/Reader"));
 const Home = lazy(() => import("./pages/Home/Home"));
 const Search = lazy(() => import("./pages/Search/Search"));
 const Request = lazy(() => import("./pages/Request/Request"));
@@ -100,6 +101,7 @@ function App() {
                   <Route path="*" element={<NotFound />} />
                   <Route exact path="" element={<Home />} />
                   <Route exact path="/" element={<Home />} />
+                  <Route exact path="/reader" element={<Reader />} />
                   <Route exact path="/search" element={<Search />} />
                   <Route exact path="/request" element={<Request />} />
                   <Route exact path="/content/:id" element={<ContentView />} />
