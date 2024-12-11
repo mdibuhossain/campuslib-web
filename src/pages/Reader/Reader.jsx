@@ -10,10 +10,14 @@ function Reader() {
     setFiles((prevFiles) => [...prevFiles, ...droppedFiles]);
   };
 
-  const handleDragOverDropBox = (event) => {
+  const handleDragEnterDropBox = (event) => {
     event.preventDefault();
-    console.log("dragging over");
-    
+    console.log("dragging Enter");
+  };
+
+  const handleDragLeaveDropBox = (event) => {
+    event.preventDefault();
+    console.log("dragging left");
   };
 
   const handleFileChange = (event) => {
@@ -25,8 +29,9 @@ function Reader() {
     <PageLayout>
       <div className="h-full flex justify-center items-center">
         <div
-          onDragOver={handleDragOverDropBox}
-          onDragLeave={handleDragOverDropBox}
+          onDragOver={(e) => e.preventDefault()}
+          onDragEnter={handleDragEnterDropBox}
+          onDragLeave={handleDragLeaveDropBox}
           className="bg-gray-100 rounded-lg p-8 max-w-sm border-dotted border-2 border-gray-600"
         >
           <h2 className="text-xl font-semibold mb-4">Drop Your File Here</h2>
