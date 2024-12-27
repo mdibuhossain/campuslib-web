@@ -2,67 +2,72 @@ import React, { useState } from "react";
 import PageLayout from "../../Layout/PageLayout";
 
 function Reader() {
-  const [files, setFiles] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
+  const [file, setFile] = useState(null);
 
-  const handleDrop = (event) => {
-    event.preventDefault();
-    const droppedFiles = Array.from(event.dataTransfer.files);
-    setFiles((prevFiles) => [...prevFiles, ...droppedFiles]);
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
   };
 
-  const handleDragEnterDropBox = (event) => {
-    event.preventDefault();
-    console.log("dragging Enter");
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
   };
 
-  const handleDragLeaveDropBox = (event) => {
-    event.preventDefault();
-    console.log("dragging left");
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
   };
 
-  const handleFileChange = (event) => {
-    const selectedFiles = Array.from(event.target.files);
-    setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      setFile(e.dataTransfer.files[0]);
+      e.dataTransfer.clearData();
+    }
+  };
+
+  const handleFileSelect = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setFile(e.target.files[0]);
+    }
   };
 
   return (
     <PageLayout>
-      <div className="h-full flex justify-center items-center">
+      <div className="flex flex-col items-center justify-center h-full">
         <div
-          onDragOver={(e) => e.preventDefault()}
-          onDragEnter={handleDragEnterDropBox}
-          onDragLeave={handleDragLeaveDropBox}
-          className="bg-gray-100 rounded-lg p-8 max-w-sm border-dotted border-2 border-gray-600"
+          className={`relative min-w-[450px] border-4 border-dashed p-10 rounded-lg transition-colors duration-300 ${
+            isDragging ? "border-blue-500 bg-blue-100/20" : "border-gray-300"
+          }`}
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          onClick={() => document.getElementById("fileInput").click()}
         >
-          <h2 className="text-xl font-semibold mb-4">Drop Your File Here</h2>
-          <div
-            className="bg-gray-200 rounded-lg p-4 cursor-pointer"
-            onDrop={handleDrop}
-            onDragOver={(event) => event.preventDefault()}
-          >
-            Drag files here
-          </div>
-
-          {files.length > 0 && (
-            <ul className="mt-4">
-              {files.map((file, index) => (
-                <li key={index} className="mb-2 flex items-center">
-                  <span className="mr-2">{file.name}</span>
-                  <button
-                    onClick={() => setFiles(files.filter((f) => f !== file))}
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {!files.length && (
-            <p className="mt-4 text-gray-600">No files uploaded yet</p>
+          {file ? (
+            <div>
+              <p className="text-lg font-semibold">File Selected:</p>
+              <p>{file.name}</p>
+            </div>
+          ) : (
+            <p className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 -z-50 w-full text-center text-lg font-semibold text-gray-500">
+              Drag & Drop your file here or click to select
+            </p>
           )}
         </div>
+        <input
+          id="fileInput"
+          type="file"
+          className="hidden"
+          onChange={handleFileSelect}
+        />
       </div>
     </PageLayout>
   );
