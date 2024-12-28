@@ -8,13 +8,13 @@ function Reader() {
   const handleDragEnter = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsDragging(true);
+    setIsDragging(() => true);
   };
 
   const handleDragLeave = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsDragging(false);
+    setIsDragging(() => false);
   };
 
   const handleDragOver = (e) => {
@@ -25,7 +25,7 @@ function Reader() {
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsDragging(false);
+    setIsDragging(() => false);
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       setFile(e.dataTransfer.files[0]);
       e.dataTransfer.clearData();
@@ -42,9 +42,9 @@ function Reader() {
     <PageLayout>
       <div className="flex flex-col items-center justify-center h-full">
         <div
-          className={`relative min-w-[450px] border-4 border-dashed p-10 rounded-lg transition-colors duration-300 ${
+          className={`border-4 border-dashed p-10 mx-5 rounded-lg transition-all duration-300 ${
             isDragging ? "border-blue-500 bg-blue-100/20" : "border-gray-300"
-          }`}
+          } hover:border-[rgba(59,130,246,0.5)] hover:shadow-[0_0_15px_5px_rgba(59,130,246,0.5)]`}
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}
           onDragOver={handleDragOver}
@@ -57,9 +57,9 @@ function Reader() {
               <p>{file.name}</p>
             </div>
           ) : (
-            <p className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 -z-50 w-full text-center text-lg font-semibold text-gray-500">
+            <div className="w-full text-center text-lg font-semibold text-gray-500 pointer-events-none">
               Drag & Drop your file here or click to select
-            </p>
+            </div>
           )}
         </div>
         <input
